@@ -1,0 +1,90 @@
+.TH "Various macros module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Various macros module \- 
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBGDSL_MAX\fP(X, Y)   (X>Y?X:Y)"
+.br
+.RI "\fIGive the greatest number of two numbers\&. \fP"
+.ti -1c
+.RI "#define \fBGDSL_MIN\fP(X, Y)   (X>Y?Y:X)"
+.br
+.RI "\fIGive the lowest number of two numbers\&. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define \fBGDSL_MAX\fP(X, Y)   (X>Y?X:Y)"
+.PP
+Give the greatest number of two numbers\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+X & Y must be basic scalar C types 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIX\fP First scalar variable 
+.br
+\fIY\fP Second scalar variable 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+X if X is greather than Y\&. 
+.PP
+Y if Y is greather than X\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBGDSL_MIN()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 56 of file gdsl_macros\&.h\&.
+.SS "#define \fBGDSL_MIN\fP(X, Y)   (X>Y?Y:X)"
+.PP
+Give the lowest number of two numbers\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+X & Y must be basic scalar C types 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIX\fP First scalar variable 
+.br
+\fIY\fP Second scalar variable 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Y if Y is lower than X\&. 
+.PP
+X if X is lower than Y\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBGDSL_MAX()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 73 of file gdsl_macros\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

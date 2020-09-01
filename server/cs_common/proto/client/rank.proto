@@ -1,0 +1,65 @@
+
+message C2GSGetRankInfo {
+    optional uint32 idx  = 1;       //排行榜导表索引
+    optional uint32 page = 2;       //排行榜当前页数
+    optional uint32 key = 3;        //小榜索引，单榜可不传
+    optional uint32 subtype = 4; //0-普通榜，1-限时榜
+}
+
+message C2GSGetOrgRankInfo{
+    optional uint32 idx  = 1;       //排行榜导表索引
+    optional uint32 page = 2;       //排行榜当前页数
+    optional uint32 orgid = 3;
+}
+
+message C2GSGetRankTop3 {
+    optional uint32 idx  = 1;       //排行榜导表索引
+}
+
+message C2GSMyRank {
+    optional uint32 idx = 1;       //排行榜导表索引
+    optional uint32 key = 2;        //小榜索引，单榜可不传
+    optional uint32 subtype = 3; //0-普通榜，1-限时榜
+}
+
+message C2GSMyOrgRank {
+    optional uint32 idx = 1;       //排行榜导表索引
+    optional uint32 orgid = 2;  //对应公会ID
+}
+
+message C2GSRankUpvoteInfo {
+    optional uint32 idx = 1;    //排行榜导表索引
+    optional uint32 page = 2;   //排行榜当前页数
+}
+
+message C2GSOpenRankUI {
+    optional uint32 idx = 1; //排行榜导表索引
+    optional uint32 page =2; //页数
+    repeated string query = 3; //rank_info, my_rank, upvote_info
+    optional uint32 key = 4; //伙伴导表id，其他排行榜不传
+    optional uint32 subtype = 5; //0-普通榜，1-限时榜
+}
+
+//获取伙伴排行伙伴具体信息
+message C2GSGetRankParInfo {
+    optional uint32 idx = 1; //排行榜导表索引
+    optional uint32 partype = 2; //伙伴id
+    optional uint32 owner = 3; //拥有者玩家id
+}
+
+//获取怪物攻城排行榜信息
+message C2GSGetRankMsattack {
+    optional uint32 type = 1;
+    optional uint32 istart = 2;
+    optional uint32 iend = 3;
+}
+
+//获取同类榜第一名伙伴
+message C2GSGetRankFirstInfo {
+    optional uint32 idx = 1; //排行榜导表索引
+}
+
+//玩家伙伴排行信息
+message C2GSPartnerRank {
+    optional uint32 subtype = 1; //0-普通榜，1-限时榜
+}

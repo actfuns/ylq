@@ -1,0 +1,481 @@
+
+  GDSL - Generic Data Structures Library 
+  $Id: ChangeLog,v 1.101 2013/06/12 16:36:13 ndarnis Exp $        
+  ______________________________________________________________________________
+
+2015.02.12	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (gdsl_interval_heap.c): removed unused code that caused warning at
+	compilation time.
+	* FIX (gdsl_rbtree.c): fixed wrong stop test.
+        ******************
+        * REL: gdsl-v1.8
+        * TAG: RELEASE-1-8
+        ******************
+	
+	
+2013.06.12	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (gdsl_interval_heap.c): memory leak.	
+        ******************
+        * REL: gdsl-v1.7
+        * TAG: RELEASE-1-7
+        ******************
+	
+2012.08.21	Nicolas Darnis <ndarnis@free.fr>
+	* ADD: gdsl_interval_heap module.
+        ******************
+        * REL: gdsl-v1.6
+        * TAG: RELEASE-1-6
+        ******************
+
+
+2011.06.15	Nicolas Darnis <ndarnis@free.fr>
+	******************
+	* REL: gdsl-v1.5
+	* TAG: RELEASE-1-5
+	******************
+
+2011.06.15	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (gdsl_heap.c): memory leak fixed in gdsl_heap_free.
+
+2011.01.21	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (gdsl_types.h): patch to compile under Android OS.
+
+2007.04.23	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (gdsl-config): added backward compatibility with previous
+	options.
+	* CHG (configure.ac): removed brackets around config.h that seems to
+	cause some problems.
+	* CHG (configure.{in.ac}): version number increased.
+	* CHG (Makefile.am): added autogen.sh to package.
+
+2006.07.07	Nicolas Darnis <ndarnis@free.fr>
+	**********************
+        * REL: gdsl-v1.4-pl1
+        * TAG: RELEASE-1-4-pl1
+        **********************
+
+2006.07.07	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (src/gdsl.h): missing include.
+
+2006.07.06	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (src/gdsl_hash.c): missing != 0 test.
+
+2006.06.22      Nicolas Darnis <ndarnis@free.fr>
+        ******************
+        * REL: gdsl-v1.4
+        * TAG: RELEASE-1-4
+        ******************
+
+2006.06.21	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (configure.*, doc/*): 
+	documentation is now on CVS repository to avoid make problems in
+	case no doc has been previously generated in checkout dir.
+	
+2006.03.07	Nicolas Darnis <ndarnis@free.fr>
+	* ADD (configure.ac): file added.
+	* CHG (src/{gdsl_heap.c, example/main_heap.c}): remove_top method finished.
+
+2006.03.01	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (src/gdsl_perm.c): gdsl_perm_canonical_cycles_count returned wrong
+        number of cycles.
+	
+2006.02.27      Nicolas Darnis <ndarnis@free.fr>
+        * FIX (src/gdsl_types.h): compiles now under OSX with the patch from
+        Martin Pichlmair.
+        * CHG (src/*): all high-level modules are now using same gdsl_map_func_t and
+        gdsl_write_func_t with the new argument gdsl_position_t.
+
+2006.01.18      Nicolas Darnis <ndarnis@free.fr>
+        * FIX (src/{gdsl_types.h, gdsl_stack.[c|h]}): replaced ubyte by
+	ulong to avoid compilation problem under FreeBSD and to avoid an
+	additional typedef.
+
+2005.07.01	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (configure.in): removed autogen.sh from EXTRA_DIST.
+	* FIX (src/examples/_integers.c): removed compilation warning.
+	
+2005.04.15	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (src/gdsl_stack.c): wrong test in gdsl_stack_insert function.
+
+2005.04.11	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (configure.in): typo fix.
+	* CHG (doc/man3/Makefile.am): files renamed.
+	* FIX (src/{gdsl_bstree.c, gdsl_rbtree.c}): types fixed.
+
+2005.03.17	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (src/gdsl_heap.c): module continued...
+
+2005.03.08	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (src/gdsl_list.c): a '>' was missing in dump and write_xml functions.
+	* CHG (src/gdsl_list[c|h]): prototype changed for sort function.
+	
+2005.03.07	Nicolas Darnis <ndarnis@free.fr>
+	* ADD (src/gdsl_heap.[c|h]): files added.
+	* ADD (src/examples/main_heap.c): file added.
+	* FIX (src/examples/_integers.c): comparison function was wrong.
+	
+2005.02.18	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (gdsl-config.in, README, NEWS): typo.
+	* REM (doc/latex/refman.*): removed usefull cvs files.
+
+2005.01.05	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (README): typo.
+	
+2004.10.09	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (README): file updated for documentation paragraph.
+	* CHG: doc/Makefile.am is now good for latex doc generation.
+	
+2004.10.04	Nicolas Darnis <ndarnis@free.fr>
+	******************
+	* REL: gdsl-v1.3
+	* TAG: RELEASE-1-3
+	******************
+	
+2004.10.01	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: up-to-date doxygen-generated documentation (in html, man,
+	latex formats)
+	* CHG (src/gdsl_hash): module finished.
+	* CHG (src/gdsl_stack.[c|h]): new gdsl_get|get_growing_factor functions.
+
+2004.09.30	Nicolas Darnis <ndarnis@free.fr>
+	* ADD (src/gdsl_queue.[c|h]): added gdsl_queue_search_by_position function.
+	* ADD (src/gdsl_stack.[c|h]): added gdsl_stack_search_by_position function.
+	* CHG: finished commenting all modules for doc-generation.
+	* CHG: finished rewritting all needed functions names.
+	
+2004.09.12	Nicolas Darnis <ndarnis@free.fr>
+	* ADD (src/gdsl_2darray.[c|h]): new function added.
+	* ADD (src/gdsl_hash.[c|h]: new function added.
+	* CHG (src/gdsl_hash.h): comments finished.
+
+2004.09.10	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (src/_gdsl_perm.c, src/gdsl_list.c): two compilation warning 
+	fixes.
+
+2004.09.07	Nicolas Darnis <ndarnis@free.fr>
+	* REM (doc/man/*.3, manify): removed obsolete man pages.
+	* REM (doc/main/*): removed all these obsolete files.
+	
+2004.08.24	Nicolas Darnis <ndarnis@free.fr>
+	* ADD (src/_gdsl_perm.[c|h]): write, dump and write_xml functions added.
+	* CHG (src/gdsl_bstree.[c|h]): comments terminated.
+	* CHG (src/_gdsl_bstree.[c|h]): changed proto of _gdsl_bstree_insert.
+	* CHG: typo.
+	
+2004.08.16	Nicolas Darnis <ndarnis@free.fr>
+	* FIX: some warnings removed in example subdir when compiled with gcc
+	* CHG: new modules comments finished.
+
+2004.08.13	Nicolas Darnis <ndarnis@free.fr>
+	* FIX: some warnings removed when compiled with gcc.
+	* CHG (src/{gdsl_2darray.c, gdsl_perm.c}): removed usefull 
+	initializations since calloc is used instead of malloc.
+	
+2004.08.08	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: typo and _perm module finished.
+	* CHG (gdsl_2darray.[c|h]): changed proto of gdsl_2darray_write
+	function.
+
+2004.08.06	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (_gdsl_list.c): code simplified.
+	* REM (_gdsl_mem.[c|h]): removed usefull internal memory module.
+	
+2004.07.06	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: hash module continued.
+
+2004.07.01	Nicolas Darnis <ndarnis@free.fr>
+	* FIX compilation problem solved (all library and examples works).
+
+2004.06.28	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: comments for documentation continued.
+
+2004.05.30	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: typo for Doxygen documentation generation.
+	
+2004.05.15	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: typo.
+
+2004.05.13	Nicolas Darnis <ndarnis@free.fr>
+	* FIX (src/gdsl_hash.c): wrong returned value in gdsl_hash_search
+        functions.
+
+2004.05.06	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (src/examples/*): minor changes.
+	* CHG (src/gdsl_hash.c): moved stat hash_func to extern gdsl_hash.
+	
+2004.04.04	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (src/gdsl_hash.*): finished hashtable module.
+	
+2004.03.29	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (src/gdsl_hash.*): improved hash function, modified interface.
+	
+2004.03.24	Nicolas Darnis <ndarnis@free.fr>
+	* ADD (src/gdsl_sort.*): file added.
+
+2004.03.21	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: the main gdsl.h header file does not goes into PREFIX/gdsl anymore.
+	* FIX: examples programms compiles now even if GDSL is not installed.
+	
+2004.02.18	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (configure.in): removed assert option and added debug option.
+
+2004.02.17	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (src/*): a lot of protos have been changed (see NEWS file).
+	
+2003.09.04	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (src/gdsl_list.c): search_by_function() optimized: when pointers
+	  are crossing over, only one comparison is necessary.
+	
+2003.08.28	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (configure.in): removed obsolete autoconf macros.
+
+2003.07.29	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (*): typo fixes.
+
+2003.05.27	Nicolas Darnis <ndarnis@free.fr>
+	* FIX: bug in gdsl_rbtree_set_name function.
+	* FIX: bug in gdsl_bstree_insert function.
+	
+2003.05.26	Nicolas Darnis <ndarnis@free.fr>
+	* ADD: insert_if_not_found function is _bstree module.
+	* REM: removed unusefull 1D array module.
+
+2003.05.15	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: changed names of search functions in stack, queue and
+	hash modules.
+	
+2003.05.14	Nicolas Darnis <ndarnis@free.fr>
+	* FIX: wrong XML output for _gdsl_bstree module.
+	* ADD: main_llbstree source example.
+	* FIX: the new _GDSL_ERR_DUPLICATE_ENTRY value is now returned
+	by functions that can not insert a value already present. 
+	* ADD: insert_if_not_found function into rbtree module.
+	* ADD: insert_if_not_found function into bstree module.
+	
+2003.05.13	Nicolas Darnis <ndarnis@free.fr>
+	* CHG (src/_bintree/*): some macros are now functions.
+	* CHG (src/_perm/*): assert added for next and prev functions.
+	* CHG (src/_perm/*): some comments in the header.
+	* CHG (src/_list/*): assert added in some functions.
+	* REM (src/queue/*): map macro.
+	* REM (src/stack/*): map macro.
+	* FIX (src/_bstree/*): changed incorrect function name.
+	* REM: insert_if_not_found functions removed from trees modules.
+	
+2003.05.12	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: protos of gdsl_hash_map() and gdsl_hash_create().
+	* CHG: comments in gdsl_hash.h quite finished.
+	* ADD: gdsl_hash_get_size().
+	
+2003.04.17	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: the new permutation module has been renamed _gdsl_perm
+	to make appear that is a lower level than gdsl_perm.
+	* CHG gdsl_perm is now based on the top of _gdsl_perm to
+	ensure backward compatibility and to take advantage of high
+	level routines already written in gdsl_perm.
+	
+2003.04.16	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: old gdsl_perm module has been kept back for backward
+	compatibility.
+	* ADD: the new gdsl_permutation module replaces the old one.
+	The old one is not compiled into GDSL but is kept back in CVS 
+	in case of user needs (just tell it to me).
+	* CHG: comments now OK in gdsl_permutation module for doc
+	generation.
+
+2003.04.11	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: fixed protos of gdsl_stack_map_xx functions in 
+	gdsl_stack.h.
+	* CHG: permuted protos of _gdsl_bintree_make and
+        _gdsl_bintree_create.
+ 	* CHG: protos have been highly changed in module gdsl_perm.
+	
+2003.04.03	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: comments in gdsl_queue.h and gdsl_stack.h.
+
+2003.03.28	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: destination dir of html documentation is now standard.
+	* CHG: automake and autoconf files are more standard.
+
+2003.03.21	Nicolas Darnis <ndarnis@free.fr>
+	* ADD: gdsl_queue_map_forward, gdsl_queue_map_backward functions.
+	* ADD: gdsl_queue_map as a define macro that call
+	gdsl_queue_map_forward.
+	* CHG: comments OK for gdsl_queue module.
+	
+2003.03.14	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: improved RPM packages generation.
+	* CHG: comments OK for gdsl_array module.
+	
+2003.03.13	Nicolas Darnis <ndarnis@free.fr>
+	* CHG: gdsl_list_merge_sort was renamed gdsl_list_sort.
+	* CHG: renamed module gdsl_heap to gdsl_array and the 
+	       associated gdsl_heap_sort function and example source too.
+	* CHG: doc/ref/html/*.html files regenerated.
+	
+2003.02.24	Nicolas Darnis <ndarnis@free.fr>
+	* ADD: file gdsl.spec.in for RPM package generation.
+
+2003.02.06	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_list.h: comments OK for man and ref manual.
+	* Ref-manual and man pages regenerated.
+	
+2002.10.11	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_hash.*: protos modified and minor other changes.
+
+2002.10.12	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_macros.h: comments OK for documentation generation.
+	
+2002.09.09	Nicolas Darnis <ndarnis@free.fr>
+	* autogen.sh, configure.in: minor changes
+	
+2002.09.06	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_bstree.h: comments OK for documentation generation.
+	
+2002.08.30	Nicolas Darnis <ndarnis@free.fr>
+	* configure.in: added disable-asserts option
+	* src/config.h: moved to top level directory
+	* doc/ref/: doc OK for gdsl and for gdsl_2darray modules
+	
+2002.08.26	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_list.c: bug fixed in gdsl_list_merge_sort()
+	
+2002.08.25	Nicolas Darnis <ndarnis@free.fr>
+	* src/_gdsl_bintree.*: root's parent is now pointing to itself
+	instead of pointing to NULL (that modification has no impact 
+	for users programms)
+	* src/_gdsl_bstree.*: added _gdsl_bstree_search_next() function.
+	
+2002.08.11	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_bstree.*: added gdsl_bstree_insert_if_not_found()
+	function
+	* src/gdsl_rbtree.*: added gdsl_rbtree_insert_if_not_found()
+	function
+	
+2002.07.16	Nicolas Darnis <ndarnis@free.fr>
+	* Write and dump functions for ordered trees are now in infixed
+	order
+	
+2002.07.02	Nicolas Darnis <ndarnis@free.fr>
+	* Improved man pages and ref manual generation by a script
+
+2002.07.01	Nicolas Darnis <ndarnis@free.fr>
+	* src/_gdsl_list.*: changed gdsl_list_map_funct_t by 
+	_gdsl_list_map_funct_t
+	
+2002.06.28	Nicolas Darnis <ndarnis@free.fr>
+	* src/_gdsl_mem.h: removed trailing / in a comment
+
+2002.06.27	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_perm.c: improved speed of some functions and
+	canonical form changed to Knuth's one
+		
+2002.06.26	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_perm.*: modified functions names
+	* doc/ref/: doc OK for _gdsl_list, _gdsl_mem, _gdsl_node modules
+	* *.in, *.am: modification to generate header and footer into
+	doc/ref/html/
+	* doc/man/*: updated man pages and Makefile.am
+	doc/ref/html subdir
+
+2002.05.28	Nicolas Darnis <ndarnis@free.fr>
+	* doc/ref/: doc OK for _gdsl_bstree module
+	
+2002.05.24	Nicolas Darnis <ndarnis@free.fr>
+	* configure.in: removed --enable-memdebug feature
+	* src/examples/*.c: modified strings from french to english
+	* doc/*: big changes in directory structure
+	* doc/ref/: doc OK for _gdsl_bintree module
+	
+2002.05.23	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_types.h: modified to be compiled by c++
+	* doc/en/: directory moved to doc/texi/
+	* doc/fr/: directory removed (no more french doc)
+
+2002.05.22	Nicolas Darnis <ndarnis@free.fr>
+	* doc/man/*.3: updated man pages
+	* THANKS file added
+	
+2002.05.20	Nicolas Darnis <ndarnis@free.fr>
+	* configure.in: modified to be more standard
+	* src/*.h: updated comments
+	* doc/en/*.texi: updated documentation
+
+2002.04.26	Nicolas Darnis <ndarnis@free.fr>
+	* src/Makefile.am: updated man pages generation
+	* doc/man/Makefile.am: updated man pages generation
+	* doc/man/*.3: updated man pages
+
+2002.04.22	Nicolas Darnis <ndarnis@free.fr>
+	* configure.in: fixed to remove doc/fr and doc/en Makefile
+	* src/gdsl_heap.c: fixed to include config.h
+	* src/gdsl_types.h: fixed
+	
+2002.04.11	Nicolas Darnis <ndarnis@free.fr>
+	* src/_gdsl_list.h: fixed incorrect proto
+	* doc/man/*.3: added man pages
+	* doc/man/Makefile.am: added man pages
+
+2002.04.10	Nicolas Darnis <ndarnis@free.fr>
+	* configure.in: removed --enable-gfxdebug feature
+	* doc/*: moved man pages to doc/man
+	* src/mem.*: removed internal mem module
+	* src/_gdsl_bintree.c: fixed wrong output XML format
+	* src/_gdsl_bintree.* changed type _gdsl_bintree_node to 
+	_gdsl_bintree
+	* src/_gdsl_bstree.c: fixed wrong output XML format
+	* src/_gdsl_list_node.*: moved to _gdsl_node.*
+	* src/_gdsl_list.c: fixed backward parse function
+	* src/_gdsl_list.*: moved _gdsl_list_link and _gdsl_list_unlink
+	to src/_gdsl_node.* _gdsl_node_link and _gdsl_node_unlink
+
+2002.02.21	Nicolas Darnis <ndarnis@free.fr>
+	**************************************
+	* RELEASE: gdsl-v1.0
+	**************************************
+	
+2002.02.17	Nicolas Darnis <ndarnis@free.fr>
+	* license changed from LGPL to GPL
+	* first stable version released on savannah: 1.0
+
+2002.02.11	Nicolas Darnis <ndarnis@free.fr>
+	* doc/*.3: updated man pages
+
+2002.02.06	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_list.c: fixed gdsl_list_map_backward()
+	* src/examples/_strings.h: added missing file
+	* src/examples/_integers.h: added missing file
+	
+2002.01.25	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_perm.*: removed gdsl_perm_create_ident() function
+	* src/gdsl_perm*: modified gdsl_perm_create() to make possible
+	the making of an identity permutation instead of using the
+	function gdsl_perm_create_ident()
+	* src/gdsl_perm*: added gdsl_perm_mul() function
+	* src/gdsl_perm.c: fixed wrong functions
+	* man pages updated for perm module
+
+2002.01.23	Nicolas Darnis <ndarnis@free.fr>
+	* src/_gdsl*: added asserts to respect contracts explicited in
+	the headers files
+	* src/gdsl_2darray: added output functions
+	* src/gdsl_2darray: modified 2 functions names
+	* updated man pages
+	
+2002.01.21	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_perm.*: added functions
+	
+2002.01.09	Nicolas Darnis <ndarnis@free.fr>
+	* src/gdsl_heap.c: added file
+	* src/gdsl_heap.h: added file
+	* src/Makefile.am: modified to compile the heap module
+	* src/gdsl_perm.c: modified to set the start indix to 0 from 1
+	* src/gdsl_perm.*: added gdsl_perm_get_prev() and 
+	gdsl_perm_get_next() functions
+
+2001.12.22	Nicolas Darnis <ndarnis@free.fr>
+	
+	* configure.in: modified LDFLAGS to add standard library path 
+	for X11
+	* src/*.c: modified files to include <config.h>
+	* src/examples/*.c: modified files to use real defines names

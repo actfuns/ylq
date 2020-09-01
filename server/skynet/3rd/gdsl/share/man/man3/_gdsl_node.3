@@ -1,0 +1,506 @@
+.TH "Low-level doubly-linked node manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Low-level doubly-linked node manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _gdsl_node * \fB_gdsl_node_t\fP"
+.br
+.RI "\fIGDSL low-level doubly linked node type\&. \fP"
+.ti -1c
+.RI "typedef int(* \fB_gdsl_node_map_func_t\fP )(const \fB_gdsl_node_t\fP NODE, void *USER_DATA)"
+.br
+.RI "\fIGDSL low-level doubly-linked node map function type\&. \fP"
+.ti -1c
+.RI "typedef void(* \fB_gdsl_node_write_func_t\fP )(const \fB_gdsl_node_t\fP NODE, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIGDSL low-level doubly-linked node write function type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB_gdsl_node_t\fP \fB_gdsl_node_alloc\fP (void)"
+.br
+.RI "\fICreate a new low-level node\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fB_gdsl_node_free\fP (\fB_gdsl_node_t\fP NODE)"
+.br
+.RI "\fIDestroy a low-level node\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_node_t\fP \fB_gdsl_node_get_succ\fP (const \fB_gdsl_node_t\fP NODE)"
+.br
+.RI "\fIGet the successor of a low-level node\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_node_t\fP \fB_gdsl_node_get_pred\fP (const \fB_gdsl_node_t\fP NODE)"
+.br
+.RI "\fIGet the predecessor of a low-level node\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fB_gdsl_node_get_content\fP (const \fB_gdsl_node_t\fP NODE)"
+.br
+.RI "\fIGet the content of a low-level node\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_node_set_succ\fP (\fB_gdsl_node_t\fP NODE, const \fB_gdsl_node_t\fP SUCC)"
+.br
+.RI "\fISet the successor of a low-level node\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_node_set_pred\fP (\fB_gdsl_node_t\fP NODE, const \fB_gdsl_node_t\fP PRED)"
+.br
+.RI "\fISet the predecessor of a low-level node\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_node_set_content\fP (\fB_gdsl_node_t\fP NODE, const \fBgdsl_element_t\fP CONTENT)"
+.br
+.RI "\fISet the content of a low-level node\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_node_link\fP (\fB_gdsl_node_t\fP NODE1, \fB_gdsl_node_t\fP NODE2)"
+.br
+.RI "\fILink two low-level nodes together\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_node_unlink\fP (\fB_gdsl_node_t\fP NODE1, \fB_gdsl_node_t\fP NODE2)"
+.br
+.RI "\fIUnlink two low-level nodes\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_node_write\fP (const \fB_gdsl_node_t\fP NODE, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite a low-level node to a file\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_node_write_xml\fP (const \fB_gdsl_node_t\fP NODE, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite a low-level node to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_node_dump\fP (const \fB_gdsl_node_t\fP NODE, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a low-level node to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct _gdsl_node* \fB_gdsl_node_t\fP"
+.PP
+GDSL low-level doubly linked node type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 53 of file _gdsl_node\&.h\&.
+.SS "typedef int(*  \fB_gdsl_node_map_func_t\fP)(const \fB_gdsl_node_t\fP NODE, void *USER_DATA)"
+.PP
+GDSL low-level doubly-linked node map function type\&. \fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node to map\&. 
+.br
+\fIUSER_DATA\fP The user datas to pass to this function\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+GDSL_MAP_STOP if the mapping must be stopped\&. 
+.PP
+GDSL_MAP_CONT if the mapping must be continued\&. 
+.RE
+.PP
+
+.PP
+Definition at line 62 of file _gdsl_node\&.h\&.
+.SS "typedef void(*  \fB_gdsl_node_write_func_t\fP)(const \fB_gdsl_node_t\fP NODE, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+GDSL low-level doubly-linked node write function type\&. \fBParameters:\fP
+.RS 4
+\fITREE\fP The low-level doubly-linked node to write\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write NODE\&. 
+.br
+\fIUSER_DATA\fP The user datas to pass to this function\&. 
+.RE
+.PP
+
+.PP
+Definition at line 72 of file _gdsl_node\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fB_gdsl_node_t\fP \fB_gdsl_node_alloc\fP (void)"
+.PP
+Create a new low-level node\&. Allocate a new low-level node data structure\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated low-level node in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_free()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fB_gdsl_node_free\fP (\fB_gdsl_node_t\fPNODE)"
+.PP
+Destroy a low-level node\&. Deallocate the low-level node NODE\&.
+.PP
+\fBNote:\fP
+.RS 4
+O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the content of NODE (without modification)\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_alloc()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_node_t\fP \fB_gdsl_node_get_succ\fP (const \fB_gdsl_node_t\fPNODE)"
+.PP
+Get the successor of a low-level node\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node which we want to get the successor from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the sucessor of the low-level node NODE if NODE has a successor\&. 
+.PP
+NULL if the low-level node NODE has no successor\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_get_pred()\fP 
+.PP
+\fB_gdsl_node_set_succ()\fP 
+.PP
+\fB_gdsl_node_set_pred()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_node_t\fP \fB_gdsl_node_get_pred\fP (const \fB_gdsl_node_t\fPNODE)"
+.PP
+Get the predecessor of a low-level node\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node which we want to get the predecessor from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the predecessor of the low-level node NODE if NODE has a predecessor\&. 
+.PP
+NULL if the low-level node NODE has no predecessor\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_get_succ()\fP 
+.PP
+\fB_gdsl_node_set_succ()\fP 
+.PP
+\fB_gdsl_node_set_pred()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fB_gdsl_node_get_content\fP (const \fB_gdsl_node_t\fPNODE)"
+.PP
+Get the content of a low-level node\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node which we want to get the content from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the content of the low-level node NODE if NODE has a content\&. 
+.PP
+NULL if the low-level node NODE has no content\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_set_content()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_node_set_succ\fP (\fB_gdsl_node_t\fPNODE, const \fB_gdsl_node_t\fPSUCC)"
+.PP
+Set the successor of a low-level node\&. Modifie the sucessor of the low-level node NODE to SUCC\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node which want to change the successor from\&. 
+.br
+\fISUCC\fP The new successor of NODE\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_get_succ()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_node_set_pred\fP (\fB_gdsl_node_t\fPNODE, const \fB_gdsl_node_t\fPPRED)"
+.PP
+Set the predecessor of a low-level node\&. Modifie the predecessor of the low-level node NODE to PRED\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node which want to change the predecessor from\&. 
+.br
+\fIPRED\fP The new predecessor of NODE\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_get_pred()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_node_set_content\fP (\fB_gdsl_node_t\fPNODE, const \fBgdsl_element_t\fPCONTENT)"
+.PP
+Set the content of a low-level node\&. Modifie the content of the low-level node NODE to CONTENT\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node which want to change the content from\&. 
+.br
+\fICONTENT\fP The new content of NODE\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_get_content()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_node_link\fP (\fB_gdsl_node_t\fPNODE1, \fB_gdsl_node_t\fPNODE2)"
+.PP
+Link two low-level nodes together\&. Link the two low-level nodes NODE1 and NODE2 together\&. After the link, NODE1's successor is NODE2 and NODE2's predecessor is NODE1\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE1 != NULL & NODE2 != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE1\fP The first low-level node to link to NODE2\&. 
+.br
+\fINODE2\fP The second low-level node to link from NODE1\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_unlink()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_node_unlink\fP (\fB_gdsl_node_t\fPNODE1, \fB_gdsl_node_t\fPNODE2)"
+.PP
+Unlink two low-level nodes\&. Unlink the two low-level nodes NODE1 and NODE2\&. After the unlink, NODE1's successor is NULL and NODE2's predecessor is NULL\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE1 != NULL & NODE2 != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE1\fP The first low-level node to unlink from NODE2\&. 
+.br
+\fINODE2\fP The second low-level node to unlink from NODE1\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_link()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_node_write\fP (const \fB_gdsl_node_t\fPNODE, const \fB_gdsl_node_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write a low-level node to a file\&. Write the low-level node NODE to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL & WRITE_F != NULL & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write NODE\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_write_xml()\fP 
+.PP
+\fB_gdsl_node_dump()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_node_write_xml\fP (const \fB_gdsl_node_t\fPNODE, const \fB_gdsl_node_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write a low-level node to a file into XML\&. Write the low-level node NODE to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F function to write NODE to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write NODE\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_write()\fP 
+.PP
+\fB_gdsl_node_dump()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_node_dump\fP (const \fB_gdsl_node_t\fPNODE, const \fB_gdsl_node_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a low-level node to a file\&. Dump the structure of the low-level node NODE to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F function to write NODE to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE != NULL & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node to dump\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write NODE\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_node_write()\fP 
+.PP
+\fB_gdsl_node_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

@@ -1,0 +1,134 @@
+.TH "gdsl_perm.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_perm.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct gdsl_perm * \fBgdsl_perm_t\fP"
+.br
+.RI "\fIGDSL permutation type\&. \fP"
+.ti -1c
+.RI "typedef void(* \fBgdsl_perm_write_func_t\fP )(\fBulong\fP E, FILE *OUTPUT_FILE, \fBgdsl_location_t\fP POSITION, void *USER_DATA)"
+.br
+.RI "\fIGDSL permutation write function type\&. \fP"
+.ti -1c
+.RI "typedef struct gdsl_perm_data * \fBgdsl_perm_data_t\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBgdsl_perm_position_t\fP { \fBGDSL_PERM_POSITION_FIRST\fP =  1, \fBGDSL_PERM_POSITION_LAST\fP =  2 }"
+.br
+.RI "\fIThis type is for gdsl_perm_write_func_t\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_alloc\fP (const char *NAME, const \fBulong\fP N)"
+.br
+.RI "\fICreate a new permutation\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_perm_free\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIDestroy a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_copy\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fICopy a permutation\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_perm_get_name\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the name of a permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_get_size\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the size of a permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_get_element\fP (const \fBgdsl_perm_t\fP P, const \fBulong\fP INDIX)"
+.br
+.RI "\fIGet the (INDIX+1)-th element from a permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP * \fBgdsl_perm_get_elements_array\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the array elements of a permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_linear_inversions_count\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fICount the inversions number into a linear permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_linear_cycles_count\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fICount the cycles number into a linear permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_canonical_cycles_count\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fICount the cycles number into a canonical permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_set_name\fP (\fBgdsl_perm_t\fP P, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_next\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the next permutation from a linear permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_prev\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the previous permutation from a linear permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_set_elements_array\fP (\fBgdsl_perm_t\fP P, const \fBulong\fP *ARRAY)"
+.br
+.RI "\fIInitialize a permutation with an array of values\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_multiply\fP (\fBgdsl_perm_t\fP RESULT, const \fBgdsl_perm_t\fP ALPHA, const \fBgdsl_perm_t\fP BETA)"
+.br
+.RI "\fIMultiply two permutations\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_to_canonical\fP (\fBgdsl_perm_t\fP Q, const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIConvert a linear permutation to its canonical form\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_canonical_to_linear\fP (\fBgdsl_perm_t\fP Q, const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIConvert a canonical permutation to its linear form\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_inverse\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIInverse in place a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_reverse\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIReverse in place a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_randomize\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIRandomize a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP * \fBgdsl_perm_apply_on_array\fP (\fBgdsl_element_t\fP *V, const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIApply a permutation on to a vector\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_perm_write\fP (const \fBgdsl_perm_t\fP P, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the elements of a permutation to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_perm_write_xml\fP (const \fBgdsl_perm_t\fP P, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the elements of a permutation to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_perm_dump\fP (const \fBgdsl_perm_t\fP P, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a permutation to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

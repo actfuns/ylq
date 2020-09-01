@@ -1,0 +1,287 @@
+import "base/common.proto";
+
+message StatusInfo{
+    optional uint32 status = 1;         //状态：1-已领取  2-可领取  3-失败 4-可提交
+    optional string note = 2;               //记录任务状态信息，如失败信息
+}
+
+message NeedItem {
+    optional uint32 itemid          = 1;                                    //物品id
+    optional uint32 amount        = 2;                                   //物品数目
+}
+
+message NeedSum {
+    optional uint32 sumid           =1;                                   //宠物id
+    optional uint32 amount        =2;                                  //宠物数目
+}
+
+message TaskItem {
+    optional uint32 itemid          = 1;                                //任务道具id
+    optional uint32 count        = 2;
+    optional uint32 bind             = 3;
+}
+
+message PickItem {
+    optional uint32 pickid = 1;
+    optional uint32 map_id = 2;
+    optional uint32 pos_x = 3;
+    optional uint32 pos_y = 4;
+}
+
+message PlaceInfo{
+    optional uint32 mapid = 1;
+    optional uint32 pos_x = 2;
+    optional uint32 pos_y = 3;
+}
+
+message AchieveInfo{
+    optional uint32 type = 1;       //达成类型
+    optional uint32 value_need = 2;      //数值要求
+    optional uint32 value_done = 3;   //已达成数值
+}
+
+message ShapeInfo{
+    optional uint32 shape = 1;
+}
+
+message Traceinfo{
+    optional uint32 npctype = 1;
+    optional uint32 mapid = 2;
+    optional uint32 pos_x = 3;
+    optional uint32 pos_y = 4;
+    optional uint32 cur_mapid = 5;
+    optional uint32 cur_posx = 6;
+    optional uint32 cur_posy = 7;
+    optional uint32 status = 8;     //0未开始护送，1开始护送
+}
+
+message ItemReward{
+    optional uint32 sid = 1;
+    optional uint32 amount = 2;
+    optional uint32 virtual = 3;
+    optional uint32 id = 4;
+}
+
+message RewardInfo{
+    optional uint32 exp = 1;
+    repeated ItemReward item = 2;
+}
+
+message LilianInfo{
+    optional uint32 left_time = 1;
+    optional uint32 max_time = 2;
+    optional RewardInfo reward_info = 3;
+}
+
+message ClientNpc {
+    optional uint32 npctype = 1;
+    optional uint32 npcid = 2;
+    optional string name = 3;
+    optional string title = 4;
+    optional uint32 map_id = 5;
+    optional base.PosInfo pos_info = 6;
+    optional base.ModelInfo model_info = 7;
+}
+
+message TeachInfo{
+    optional string title = 1;
+    optional string desc = 2;
+    optional uint32 needtime = 3;
+    optional uint32 progress = 4;
+}
+
+message PartnerTaskInfo{
+    optional uint32 parid = 1;
+    optional string name = 2;
+}
+
+message PatrolInfo{
+    optional uint32 mapid = 1;
+}
+
+message ShimenInfo{
+    optional uint32 cur_times = 1;
+    optional uint32 max_times = 2;
+}
+
+message TaskInfo {
+    optional uint32 taskid = 1;                                   //任务id
+    optional uint32 tasktype = 2;                                  //任务类型：找人，寻物等
+    optional string name = 3;                                  //任务名字
+    optional StatusInfo statusinfo = 4;
+    optional string targetdesc = 5;                                  //目标描述
+    optional string detaildesc = 6;                                 //任务描述
+    optional uint32 target = 7;                                //任务当前目标
+    optional uint32 acceptnpc = 8;
+    optional uint32 submitnpc = 9;
+    repeated NeedItem needitem = 10;                                //需求道具
+    repeated NeedSum needsum = 11;                                //需求宠物
+    repeated ClientNpc clientnpc = 12;                               //临时npc
+    optional uint32 isdone = 13;                               //是否完成
+    optional uint32 time = 14;                               //剩余时间
+    optional uint32 rewardinfo = 15;                               //奖励信息
+    optional TaskItem taskitem = 16;                               //任务道具信息
+    optional PlaceInfo placeinfo = 17;                          //目的地信息
+    optional AchieveInfo achieveinfo = 18;                  //达成类任务信息
+    optional ShapeInfo shapeinfo = 19;                      //变身类任务信息
+    optional Traceinfo traceinfo = 20;                          //跟踪类护送类任务NPC信息
+    optional PickItem pickiteminfo = 21;                    //采集类任务信息
+    optional uint32 acceptgrade = 22;                       //接受任务等级
+    optional uint32 accepttime = 23;                        //接受任务时间
+    optional LilianInfo lilianinfo = 24;                        //历练任务信息
+    optional TeachInfo teachinfo = 25;
+    optional uint32 playid = 26;
+    optional uint32 acceptcallplot = 27;
+    optional uint32 submitcallplot = 28;
+    optional uint32 type = 29;                              //任务大类
+    optional PartnerTaskInfo partnertaskinfo = 30;      //伙伴任务相关信息
+    optional PatrolInfo patrolinfo = 31;                //巡逻任务信息
+    optional ShimenInfo shimeninfo = 32;        //师门信息
+}
+
+//登录发送
+message GS2CLoginTask{
+    repeated TaskInfo taskdata                 =1;
+    optional uint32 shimen_status = 2;
+}
+
+//添加任务
+message GS2CAddTask{
+    optional TaskInfo taskdata                  = 1;
+}
+
+//删除任务
+message GS2CDelTask{
+    optional uint32 taskid                          = 1;
+    optional uint32 done  =2;
+}
+
+message DialogChoiceInfo{
+    optional string content                         = 1;
+    optional string event                            = 2;
+}
+
+message DialogInfo {
+    optional uint32 type                            = 1;                                //说话类型npc,type:1,玩家type:2,其他npc:3
+    optional string pre_id_list                           = 2;                               //npcid
+    optional string content                         = 3;                               //内容
+    optional uint32 voice                            = 4;                               //语音
+    repeated DialogChoiceInfo last_action = 5;
+    optional string next                                = 6;
+    optional uint32 ui_mode                        = 7;
+    optional uint32 status                           =8;
+    optional string sub_talker_list             = 9;
+    optional string finish_event                =10;
+    optional uint32 subid = 11;
+}
+
+message PlayBoyInfo{
+    optional uint32 endtime = 1;
+}
+
+message GS2CDialog{
+    optional string sessionidx                 = 1;                                //回调id,0不需要回调
+    repeated DialogInfo dialog                  = 2;                                //剧情对白列表
+    optional string npc_name                    =3;                                //当前npc名字
+    optional uint32 shape                           = 4 ;                              //当前npc外形
+    optional uint32 dialog_id                       = 5;                                //劇情對白Id
+    optional uint32 npc_id                          = 6;
+    optional PlayBoyInfo playboyinfo = 7;
+    repeated uint32 rewards = 9;                                             //奖励id列表
+    optional uint32 task_big_type = 10;
+    optional uint32 task_small_type = 11;
+}
+
+//刷新任务信息
+message GS2CRefreshTask {
+    optional uint32 taskid                           = 1;
+    optional uint32 target                           = 2;                                //任务当前目标
+    optional string name                            = 3;                                //刷新名字
+    optional StatusInfo statusinfo              = 4;                                //刷新任务状态
+    optional uint32 accepttime                  = 5;
+    optional TaskInfo taskdata                  = 6;
+}
+
+message GS2CRemoveTaskNpc {
+    optional uint32 taskid = 1;
+    optional uint32 npcid  = 2;
+    optional uint32 target = 3;                                                         //任务目标
+}
+
+message GS2CRefreshTaskInfo{
+    optional TaskInfo taskdata                  = 1;
+}
+
+message GS2CContinueClickTask{
+    optional uint32 taskid = 1;
+}
+
+message Barrage{
+    optional uint32 from_player = 1;    //是否来自玩家  0否1是
+    optional string msg = 2;
+    optional uint32 sender = 3;
+}
+
+message GS2CSendTaskBarrage{
+    repeated Barrage barrage = 1;
+    optional uint32 show_id = 2;
+}
+
+message PartnerTaskProgress{
+    optional uint32 parid = 1;              //  对应的伙伴
+    optional uint32 status = 2;             //总进度，0：为触发任务，1：已触发任务，2：已接取任务，3：已完成所有任务
+    optional uint32 taskid = 3;             //当前接取的任务id
+}
+
+message GS2CRefreshPartnerTask{
+    repeated PartnerTaskProgress partnertask_progress = 1;
+    optional uint32 refresh_id = 2;     //指定刷新某个伙伴的任务队列信息，则为1，全体刷新则为0，登陆的时候该字段发0
+}
+
+message AchieveTaskInfo{
+    optional uint32 taskid = 1;
+    optional string name = 2;
+    optional string describe = 3;
+    optional uint32 degree = 4;
+    optional uint32 target = 5;
+    optional uint32 achievetype = 6;
+}
+
+message GS2CAddAchieveTask{
+    optional AchieveTaskInfo info = 1;
+}
+
+message GS2CLoginAchieveTask{
+    repeated AchieveTaskInfo info = 1;
+}
+
+message GS2CRefreshAchieveTask{
+    optional AchieveTaskInfo info = 1;
+}
+
+message GS2CDelAchieveTask{
+    optional uint32 taskid = 1;
+}
+
+message GS2CStarPatrol{
+    optional uint32 taskid = 1;
+}
+
+
+message GS2CUpdateShimenStatus{
+    optional uint32 shimen_status = 1;
+}
+
+message GS2CStartEscort{
+    optional uint32 taskid = 1;
+}
+
+message GS2CFindTaskPath{
+    optional uint32 taskid = 1;
+}
+
+message GS2CRemoveTeamNpc{
+    optional uint32 taskid = 1;
+    optional uint32 npcid  = 2;
+    optional uint32 target = 3;                                                         //任务目标
+}

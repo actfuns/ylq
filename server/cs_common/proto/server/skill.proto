@@ -1,0 +1,26 @@
+
+message SkillInfo {
+    optional uint32 sk = 1;                               //技能编号
+    optional uint32 level = 2;                          //技能等级
+    optional uint32 type = 3;		     //消耗类型,1:技能点
+    optional uint32 needcost = 4;                   //学习消耗
+}
+
+message CulitivateSkillInfo {
+    optional uint32 sk = 1;
+    optional uint32 level = 2;
+    optional uint32 exp = 3;
+}
+
+message GS2CLoginSkill {
+    repeated SkillInfo school = 1;	         //门派技能
+    repeated CulitivateSkillInfo cultivate = 2;     //修炼技能
+}
+
+message GS2CRefreshSkill {
+    optional SkillInfo skill_info = 1;
+}
+
+message GS2CRefreshCultivateSKill {
+    optional CulitivateSkillInfo skill_info = 1;
+}

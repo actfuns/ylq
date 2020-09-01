@@ -1,0 +1,752 @@
+.TH "Binary search tree manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Binary search tree manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct gdsl_bstree * \fBgdsl_bstree_t\fP"
+.br
+.RI "\fIGDSL binary search tree type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_bstree_t\fP \fBgdsl_bstree_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fICreate a new binary search tree\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_bstree_free\fP (\fBgdsl_bstree_t\fP T)"
+.br
+.RI "\fIDestroy a binary search tree\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_bstree_flush\fP (\fBgdsl_bstree_t\fP T)"
+.br
+.RI "\fIFlush a binary search tree\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_bstree_get_name\fP (const \fBgdsl_bstree_t\fP T)"
+.br
+.RI "\fIGet the name of a binary search tree\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_bstree_is_empty\fP (const \fBgdsl_bstree_t\fP T)"
+.br
+.RI "\fICheck if a binary search tree is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_bstree_get_root\fP (const \fBgdsl_bstree_t\fP T)"
+.br
+.RI "\fIGet the root of a binary search tree\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_bstree_get_size\fP (const \fBgdsl_bstree_t\fP T)"
+.br
+.RI "\fIGet the size of a binary search tree\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_bstree_get_height\fP (const \fBgdsl_bstree_t\fP T)"
+.br
+.RI "\fIGet the height of a binary search tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_bstree_t\fP \fBgdsl_bstree_set_name\fP (\fBgdsl_bstree_t\fP T, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a binary search tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_bstree_insert\fP (\fBgdsl_bstree_t\fP T, void *VALUE, int *RESULT)"
+.br
+.RI "\fIInsert an element into a binary search tree if it's not found or return it\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_bstree_remove\fP (\fBgdsl_bstree_t\fP T, void *VALUE)"
+.br
+.RI "\fIRemove an element from a binary search tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_bstree_t\fP \fBgdsl_bstree_delete\fP (\fBgdsl_bstree_t\fP T, void *VALUE)"
+.br
+.RI "\fIDelete an element from a binary search tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_bstree_search\fP (const \fBgdsl_bstree_t\fP T, \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fISearch for a particular element into a binary search tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_bstree_map_prefix\fP (const \fBgdsl_bstree_t\fP T, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a binary search tree in prefixed order\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_bstree_map_infix\fP (const \fBgdsl_bstree_t\fP T, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a binary search tree in infixed order\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_bstree_map_postfix\fP (const \fBgdsl_bstree_t\fP T, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a binary search tree in postfixed order\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_bstree_write\fP (const \fBgdsl_bstree_t\fP T, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the element of each node of a binary search tree to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_bstree_write_xml\fP (const \fBgdsl_bstree_t\fP T, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a binary search tree to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_bstree_dump\fP (const \fBgdsl_bstree_t\fP T, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a binary search tree to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct gdsl_bstree* \fBgdsl_bstree_t\fP"
+.PP
+GDSL binary search tree type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 53 of file gdsl_bstree\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBgdsl_bstree_t\fP \fBgdsl_bstree_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fPALLOC_F, \fBgdsl_free_func_t\fPFREE_F, \fBgdsl_compare_func_t\fPCOMP_F)"
+.PP
+Create a new binary search tree\&. Allocate a new binary search tree data structure which name is set to a copy of NAME\&. The function pointers ALLOC_F, FREE_F and COMP_F could be used to respectively alloc, free and compares elements in the tree\&. These pointers could be set to NULL to use the default ones:
+.IP "\(bu" 2
+the default ALLOC_F simply returns its argument
+.IP "\(bu" 2
+the default FREE_F does nothing
+.IP "\(bu" 2
+the default COMP_F always returns 0
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINAME\fP The name of the new binary tree to create 
+.br
+\fIALLOC_F\fP Function to alloc element when inserting it in a binary tree 
+.br
+\fIFREE_F\fP Function to free element when removing it from a binary tree 
+.br
+\fICOMP_F\fP Function to compare elements into the binary tree 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated binary search tree in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_free()\fP 
+.PP
+\fBgdsl_bstree_flush()\fP 
+.PP
+\fBgdsl_alloc_func_t\fP 
+.PP
+\fBgdsl_free_func_t\fP 
+.PP
+\fBgdsl_compare_func_t\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_bstree_free\fP (\fBgdsl_bstree_t\fPT)"
+.PP
+Destroy a binary search tree\&. Deallocate all the elements of the binary search tree T by calling T's FREE_F function passed to \fBgdsl_bstree_alloc()\fP\&. The name of T is deallocated and T is deallocated itself too\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to deallocate 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_alloc()\fP 
+.PP
+\fBgdsl_bstree_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_bstree_flush\fP (\fBgdsl_bstree_t\fPT)"
+.PP
+Flush a binary search tree\&. Deallocate all the elements of the binary search tree T by calling T's FREE_F function passed to \fBgdsl_rbtree_alloc()\fP\&. The binary search tree T is not deallocated itself and its name is not modified\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to flush 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_alloc()\fP 
+.PP
+\fBgdsl_bstree_free()\fP 
+.RE
+.PP
+
+.SS "const char* \fBgdsl_bstree_get_name\fP (const \fBgdsl_bstree_t\fPT)"
+.PP
+Get the name of a binary search tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned string MUST NOT be freed\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to get the name from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the name of the binary search tree T\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_set_name\fP () 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_bstree_is_empty\fP (const \fBgdsl_bstree_t\fPT)"
+.PP
+Check if a binary search tree is empty\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the binary search tree T is empty\&. 
+.PP
+FALSE if the binary search tree T is not empty\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_bstree_get_root\fP (const \fBgdsl_bstree_t\fPT)"
+.PP
+Get the root of a binary search tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to get the root element from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element at the root of the binary search tree T\&. 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_bstree_get_size\fP (const \fBgdsl_bstree_t\fPT)"
+.PP
+Get the size of a binary search tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to get the size from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the size of the binary search tree T (noted |T|)\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_get_height()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_bstree_get_height\fP (const \fBgdsl_bstree_t\fPT)"
+.PP
+Get the height of a binary search tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to compute the height from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the height of the binary search tree T (noted h(T))\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_get_size()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_bstree_t\fP \fBgdsl_bstree_set_name\fP (\fBgdsl_bstree_t\fPT, const char *NEW_NAME)"
+.PP
+Set the name of a binary search tree\&. Change the previous name of the binary search tree T to a copy of NEW_NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to change the name 
+.br
+\fINEW_NAME\fP The new name of T 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified binary search tree in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_get_name()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_bstree_insert\fP (\fBgdsl_bstree_t\fPT, void *VALUE, int *RESULT)"
+.PP
+Insert an element into a binary search tree if it's not found or return it\&. Search for the first element E equal to VALUE into the binary search tree T, by using T's COMP_F function passed to gdsl_bstree_alloc to find it\&. If E is found, then it's returned\&. If E isn't found, then a new element E is allocated using T's ALLOC_F function passed to gdsl_bstree_alloc and is inserted and then returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( h(T) ), where log2(|T|) <= h(T) <= |T|-1 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t & RESULT != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to modify 
+.br
+\fIVALUE\fP The value used to make the new element to insert into T 
+.br
+\fIRESULT\fP The address where the result code will be stored\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element E and RESULT = GDSL_OK if E is inserted into T\&. 
+.PP
+the element E and RESULT = GDSL_ERR_DUPLICATE_ENTRY if E is already present in T\&. 
+.PP
+NULL and RESULT = GDSL_ERR_MEM_ALLOC in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_remove()\fP 
+.PP
+\fBgdsl_bstree_delete()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_bstree_remove\fP (\fBgdsl_bstree_t\fPT, void *VALUE)"
+.PP
+Remove an element from a binary search tree\&. Remove from the binary search tree T the first founded element E equal to VALUE, by using T's COMP_F function passed to \fBgdsl_bstree_alloc()\fP\&. If E is found, it is removed from T and then returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( h(T) ), where log2(|T|) <= h(T) <= |T|-1 
+.PP
+The resulting T is modified by examinating the left sub-tree from the founded E\&. 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to modify 
+.br
+\fIVALUE\fP The value used to find the element to remove 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first founded element equal to VALUE in T in case is found\&. 
+.PP
+NULL in case no element equal to VALUE is found in T\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_insert()\fP 
+.PP
+\fBgdsl_bstree_delete()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_bstree_t\fP \fBgdsl_bstree_delete\fP (\fBgdsl_bstree_t\fPT, void *VALUE)"
+.PP
+Delete an element from a binary search tree\&. Remove from the binary search tree the first founded element E equal to VALUE, by using T's COMP_F function passed to \fBgdsl_bstree_alloc()\fP\&. If E is found, it is removed from T and E is deallocated using T's FREE_F function passed to \fBgdsl_bstree_alloc()\fP, then T is returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( h(T) ), where log2(|T|) <= h(T) <= |T|-1 
+.PP
+the resulting T is modified by examinating the left sub-tree from the founded E\&. 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to remove an element from 
+.br
+\fIVALUE\fP The value used to find the element to remove 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified binary search tree after removal of E if E was found\&. 
+.PP
+NULL if no element equal to VALUE was found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_insert()\fP 
+.PP
+\fBgdsl_bstree_remove()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_bstree_search\fP (const \fBgdsl_bstree_t\fPT, \fBgdsl_compare_func_t\fPCOMP_F, void *VALUE)"
+.PP
+Search for a particular element into a binary search tree\&. Search the first element E equal to VALUE in the binary seach tree T, by using COMP_F function to find it\&. If COMP_F == NULL, then the COMP_F function passed to \fBgdsl_bstree_alloc()\fP is used\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( h(T) ), where log2(|T|) <= h(T) <= |T|-1 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to use\&. 
+.br
+\fICOMP_F\fP The comparison function to use to compare T's element with VALUE to find the element E (or NULL to use the default T's COMP_F) 
+.br
+\fIVALUE\fP The value that must be used by COMP_F to find the element E 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first founded element E equal to VALUE\&. 
+.PP
+NULL if VALUE is not found in T\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_insert()\fP 
+.PP
+\fBgdsl_bstree_remove()\fP 
+.PP
+\fBgdsl_bstree_delete()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_bstree_map_prefix\fP (const \fBgdsl_bstree_t\fPT, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a binary search tree in prefixed order\&. Parse all nodes of the binary search tree T in prefixed order\&. The MAP_F function is called on the element contained in each node with the USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fBgdsl_bstree_map_prefix()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to map\&. 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_map_infix()\fP 
+.PP
+\fBgdsl_bstree_map_postfix()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_bstree_map_infix\fP (const \fBgdsl_bstree_t\fPT, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a binary search tree in infixed order\&. Parse all nodes of the binary search tree T in infixed order\&. The MAP_F function is called on the element contained in each node with the USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fBgdsl_bstree_map_infix()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to map\&. 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_map_prefix()\fP 
+.PP
+\fBgdsl_bstree_map_postfix()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_bstree_map_postfix\fP (const \fBgdsl_bstree_t\fPT, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a binary search tree in postfixed order\&. Parse all nodes of the binary search tree T in postfixed order\&. The MAP_F function is called on the element contained in each node with the USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fBgdsl_bstree_map_postfix()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to map\&. 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_map_prefix()\fP 
+.PP
+\fBgdsl_bstree_map_infix()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_bstree_write\fP (const \fBgdsl_bstree_t\fPT, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the element of each node of a binary search tree to a file\&. Write the nodes elements of the binary search tree T to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t & WRITE_F != NULL & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write T's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_write_xml()\fP 
+.PP
+\fBgdsl_bstree_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_bstree_write_xml\fP (const \fBgdsl_bstree_t\fPT, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of a binary search tree to a file into XML\&. Write the nodes elements of the binary search tree T to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then use WRITE_F to write T's nodes elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write T's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_write()\fP 
+.PP
+\fBgdsl_bstree_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_bstree_dump\fP (const \fBgdsl_bstree_t\fPT, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a binary search tree to a file\&. Dump the structure of the binary search tree T to OUTPUT_FILE\&. If WRITE_F != NULL, then use WRITE_F to write T's nodes elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a valid gdsl_bstree_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The binary search tree to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write T's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_bstree_write()\fP 
+.PP
+\fBgdsl_bstree_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

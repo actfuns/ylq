@@ -1,0 +1,208 @@
+import "base/common.proto";
+
+//加成道具
+message TravelItem {
+    optional uint32 sid = 1; //导表id
+    optional uint32 start_time = 2; //加成开始时间戳
+    optional uint32 end_time = 3; //加成结束时间戳
+    optional uint32 server_time = 4; //服务器当前时间
+}
+
+//游历伙伴信息，pos=5表示寄存于好友，pos=6表示寄存于我
+message TravelPosPartner {
+    optional uint32 parid = 1; //伙伴id
+    optional uint32 pos = 2; //位置
+    optional string par_name = 3; //伙伴名称
+    optional uint32 par_grade = 4;
+    optional base.ModelInfo par_model = 5; //伙伴模型
+    optional uint32 par_star = 6; //星级
+    optional uint32 par_awake = 7; // 1-觉醒
+}
+
+//个人游历伙伴信息
+message TravelPartner {
+    optional uint32 status = 1; //0-游历结束，1-正在游历
+    optional uint32 reward = 2; //0-不可领,1-可领取
+    optional uint32 start_time = 3; //开始时间戳
+    optional uint32 end_time = 4; //结束时间戳
+    optional uint32 server_time = 5; //服务器当前时间
+}
+
+//好友寄存伙伴
+message FrdTravelPartner {
+    optional uint32 frd_pid = 1; //好友pid
+    optional TravelPosPartner parinfo =  2; //伙伴信息
+    optional uint32 start_time = 3; //寄存开始时间戳
+    optional uint32 end_time = 4; //寄存结束时间戳
+    optional uint32 server_time = 5; //服务器当前时间
+    optional uint32 frd_name = 6; //好友名
+}
+
+//游记
+message TravelContent {
+    optional uint32 travel_time = 1; //获得该游记的时间戳
+    optional string content = 2; //游记描述内容
+}
+
+//邀请信息
+message TravelInvite {
+    optional uint32 frd_pid = 1; //好友pid
+    optional string frd_name = 2; //好友名
+    optional uint32 frd_shape = 3; //好友头像
+    optional uint32 invite_time = 4; //邀请的时间戳
+    optional string invite_content = 5; //邀请内容
+    optional uint32 travel = 6; //1-正在游历，0-非游历
+    optional uint32 frd_travel = 7; //1-存在寄存，0-未有寄存
+    optional uint32 end_time = 8; //正游历-表示结束时间
+}
+
+//邀请好友
+message MineInvite {
+    optional uint32 frd_pid = 1; //好友pid
+    optional uint32 invite_time = 2; //邀请时间
+}
+
+//登录游历信息
+message GS2CLoginTravelPartner {
+    optional TravelPartner travel_partner = 1; //伙伴游历信息
+    repeated TravelPosPartner pos_info = 2; //位置信息
+    optional TravelItem item_info = 3; //加成道具
+    repeated TravelContent travel_content = 4; //前端根据时间排序
+    repeated MineInvite mine_invite = 5; //发出邀请
+}
+
+//游历伙伴信息
+message GS2CTravelPartnerInfo {
+    optional TravelPartner travel_partner = 1;
+}
+
+//上阵游历位置信息，同时刷新所有部位
+message GS2CTravelPartnerPos {
+    repeated TravelPosPartner pos_info = 1; //上阵信息
+}
+
+//加成道具信息
+message GS2CTravelItemInfo {
+    optional TravelItem item_info = 1;
+}
+
+//清除加成道具
+message GS2CDelTravelItem {
+
+}
+
+//新增游记
+message GS2CAddTravelContent {
+    repeated TravelContent travel_content = 1; //游记内容
+}
+
+//清空游记内容
+message GS2CClearTravelContent {
+
+}
+
+//添加邀请
+message GS2CAddTravelInvite {
+    optional TravelInvite travel_invite = 1;
+}
+
+//删除邀请
+message GS2CDelTravelInvite {
+    optional uint32 frd_pid = 1; //
+}
+
+//清空游历
+message GS2CClearTravelInvite {
+
+}
+
+//好友寄存伙伴信息
+message GS2CFrdTravelPartnerInfo {
+    optional FrdTravelPartner frd_partner = 1;
+}
+
+//删除好友寄存
+message GS2CDelFrdTravel {
+
+}
+
+//自己寄存伙伴信息
+message GS2CMineTravelPartnerInfo {
+    optional uint32 frd_pid = 1; //寄存好友的pid
+    optional TravelPosPartner parinfo = 2; //伙伴信息
+    optional uint32 start_time = 3; //
+    optional uint32 end_time = 4; //
+    optional uint32 recieve_status = 5; //0-正在游历,1-可领取
+    optional uint32 server_time = 6; //服务器当前时间
+}
+
+//删除自己寄存伙伴
+message GS2CDelMineTravel {
+
+}
+
+//好友游历界面
+message GS2CFrdTravelList {
+    optional TravelPartner travel_partner = 1; //伙伴游历信息
+    repeated TravelPosPartner pos_partner = 2; //位置信息
+    optional TravelItem item_info = 3; //加成道具
+    optional uint32 frd_pid = 4; //好友pid
+    optional FrdTravelPartner frd_partner = 5; //好友寄存的伙伴和4没什么关系
+}
+
+//邀请好友信息
+message GS2CRefreshMineInvite {
+    repeated MineInvite mine_invites = 1;
+}
+
+message GS2CInviteInfoList {
+    repeated TravelInvite invites = 1; //邀请信息列表
+}
+
+//更新游历伙伴信息
+message GS2CUpdateTravelPartner {
+    optional TravelPosPartner parinfo = 1; // 1~4普通伙伴，5-寄存于好友，6-好友寄存于我
+}
+
+
+//--------------------------翻牌-------------------
+//卡片格子信息
+message CardGrid {
+    optional uint32 pos = 1; //格子位置 1-16
+    optional uint32 shape = 2; //伙伴头像
+    optional uint32 status = 3; //格子状态 0-反面,1-正面
+}
+
+message ShowCardInfo {
+    optional uint32 status = 1; //0-未开始,1-观看,2-开始
+    optional uint32 play_count = 2; //已玩次数
+    optional uint32 watch_secs = 3; //可观看时间,单位秒
+    optional uint32 start_cost = 4; //开始游戏消耗金币
+    optional uint32 end_time = 5; //观看和开始的结束时间戳,0-为开始
+    optional uint32 server_time = 6; //服务器时间
+}
+
+//更新格子信息
+message GS2CRefreshTravelCardGrid {
+    repeated CardGrid card_grids = 1;
+}
+
+//翻牌结束同步
+message GS2CTravelShowCardInfo {
+    optional ShowCardInfo show_card = 1;
+}
+
+//翻牌结束
+message GS2CRemoveTravelGame {
+
+}
+
+//游戏结果
+message GS2CTravelGameResult {
+    optional bool result = 1; //true-成功,false-失败
+}
+
+//触发游历商人
+message GS2CFirstOpenTraderUI {
+    optional bool is_first = 1; //true-未打开过,false-已打开
+}

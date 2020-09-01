@@ -1,0 +1,71 @@
+.TH "gdsl_2darray.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_2darray.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct gdsl_2darray * \fBgdsl_2darray_t\fP"
+.br
+.RI "\fIGDSL 2D-array type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_2darray_t\fP \fBgdsl_2darray_alloc\fP (const char *NAME, const \fBulong\fP R, const \fBulong\fP C, const \fBgdsl_alloc_func_t\fP ALLOC_F, const \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fICreate a new 2D-array\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_2darray_free\fP (\fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIDestroy a 2D-array\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_2darray_get_name\fP (const \fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIGet the name of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_2darray_get_rows_number\fP (const \fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIGet the number of rows of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_2darray_get_columns_number\fP (const \fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIGet the number of columns of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_2darray_get_size\fP (const \fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIGet the size of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_2darray_get_content\fP (const \fBgdsl_2darray_t\fP A, const \fBulong\fP R, const \fBulong\fP C)"
+.br
+.RI "\fIGet an element from a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBgdsl_2darray_t\fP \fBgdsl_2darray_set_name\fP (\fBgdsl_2darray_t\fP A, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_2darray_set_content\fP (\fBgdsl_2darray_t\fP A, const \fBulong\fP R, const \fBulong\fP C, void *VALUE)"
+.br
+.RI "\fIModify an element in a 2D-array\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_2darray_write\fP (const \fBgdsl_2darray_t\fP A, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a 2D-array to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_2darray_write_xml\fP (const \fBgdsl_2darray_t\fP A, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a 2D array to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_2darray_dump\fP (const \fBgdsl_2darray_t\fP A, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a 2D array to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

@@ -1,0 +1,132 @@
+import "base/common.proto";
+
+//登录发送背包道具信息
+message GS2CLoginItem{
+    repeated base.ItemInfo itemdata  = 1;                                //背包道具信息
+    repeated base.ItemInfo buffitem = 2;                                  //正在使用buff道具
+}
+
+message GS2CAddItem {
+    optional base.ItemInfo itemdata   = 1;
+}
+
+//删除道具
+message GS2CDelItem {
+    optional uint32 id                  = 1;                                //服务的道具id
+}
+
+//刷新道具数目
+message GS2CItemAmount{
+    optional uint32 id = 1;
+    optional uint32 amount = 2;
+    optional uint32 create_time = 3;
+}
+
+//客户端快捷使用
+message GS2CItemQuickUse{
+    optional uint32 id                  = 1;
+}
+
+//背包扩展数目
+message GS2CItemExtendSize{
+    optional uint32 extsize        = 1;                                //扩展格子数目
+}
+
+//装备耐久
+message GS2CEquipLast {
+    optional uint32 itemid = 1;                           //装备ID
+    optional uint32 last = 2;                               //耐久度
+}
+
+message GS2CFuWenInfo {
+    optional uint32 itemid = 1;
+    optional uint32 cur_plan = 2; //当前使用方案
+    repeated base.FuWenInfo fuwen = 3; //符文
+}
+
+message ItemPrice {
+    optional uint32 sid = 1;
+    optional uint32 price = 2;
+}
+
+//材料价格
+message GS2CItemPrice {
+    repeated ItemPrice item_info = 1;
+}
+
+message GS2CRefreshPartnerEquipInfo {
+    optional uint32 itemid = 1;
+    optional base.PartnerEquipInfo partner_equip_info = 2;  //伙伴装备信息
+}
+
+message GS2CRefreshPartnerEquip {
+    optional uint32 itemid = 1;
+    optional base.PartnerEquip partner_equip = 2;  //伙伴装备信息
+}
+
+//伙伴装备合成
+message GS2CComposePartnerEquip {
+    optional uint32 itemid = 1;     //合成后id
+}
+
+message GS2CClientShowReward{
+    optional uint32 type = 1;       //类型，1物品，2货币
+    optional uint32 sid = 2;
+    optional uint32 value = 3;
+    optional uint32 bind = 4;
+}
+
+message GS2CFuWenPlanName {
+    repeated base.FuWenName fuwen_name = 1;
+}
+
+message GS2CCompoundSuccess{
+
+}
+
+message GS2CDeComposeSuccess{
+
+}
+
+message GS2CExchangeEquip{
+    optional uint32 itemid = 1; //道具id,弹窗用到，不存在不用弹
+}
+
+//移除buff道具
+message GS2CRemoveBuffItem {
+    optional uint32 itemid = 1; //绑定的buff道具id
+}
+
+//更新正在使用buff道具
+message GS2CUpdateBuffItem {
+    optional base.ItemInfo itemdata = 1; //道具信息
+}
+
+//新增buff道具
+message GS2CAddBuffItem{
+    optional base.ItemInfo itemdata = 1; //道具信息
+}
+
+//更新道具信息
+message GS2CRefreshItemApply {
+    optional uint32 itemid = 1; //道具id
+    repeated base.ApplyInfo apply_info = 2;
+}
+
+//
+message GS2CRefreshPartnerSoul {
+    optional uint32 itemid = 1;
+    optional base.PartnerSoul partner_soul = 2;
+}
+
+//道具上锁
+message GS2CLockItem {
+    optional uint32 itemid = 1;
+    optional uint32 lock = 2; //1-上锁，0-解锁
+}
+
+//宝石合成
+message GS2CGemCompose {
+    optional uint32 gem_sid = 1; //合成宝石的sid
+    optional uint32 amount = 2; //合成数量
+}

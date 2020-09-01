@@ -1,0 +1,16 @@
+
+message GameAction{
+    optional string key = 1;
+    optional string value = 2;
+}
+
+//小游戏操作
+message C2GSMiniGameOp{
+    optional string name = 1;
+    repeated GameAction cmds = 2;
+}
+
+//小游戏结束
+message C2GSGameCardEnd{
+    optional string name = 1;
+}

@@ -1,0 +1,272 @@
+import "base/common.proto";
+
+//设置单个伙伴参战
+message C2GSPartnerFight {
+    optional base.PartnerPosInfo fight_info = 1;
+}
+
+//交换伙伴的参战情况
+message C2GSPartnerSwitch{
+    repeated base.PartnerPosInfo fight_info = 1;
+}
+
+//抽取武灵卡
+message C2GSDrawWuLingCard {
+    optional uint32 card_cnt = 1;                           //抽取次数
+    optional bool dm_close = 2;                             //是否关闭弹幕 true-关闭 false-未关闭
+}
+
+//抽取武魂卡
+message C2GSDrawWuHunCard {
+    optional uint32 up = 1;
+    optional bool dm_close = 2;                             //是否关闭弹幕 true-关闭 false-未关闭
+    optional uint32 sp_item = 3;                              //是否使用特殊道具召唤
+    optional uint32 card_cnt = 4;                           //抽取次数
+}
+
+//打开抽卡
+message C2GSOpenDrawCardUI {
+
+}
+
+//关闭抽卡
+message C2GSCloseDrawCardUI {
+
+}
+
+//升星
+message C2GSUpgradePartnerStar {
+    optional uint32 partnerid = 1;
+}
+
+//设置锁
+message C2GSSetPartnerLock {
+    optional uint32 partnerid = 1;
+    optional uint32 lock = 2; // 0-取消，1-上锁
+}
+
+//改名
+message C2GSRenamePartner {
+    optional uint32 partnerid = 1;
+    optional string name = 2;
+}
+
+//碎片合成
+message C2GSComposePartner {
+    optional uint32 partner_chip_type = 1;      //碎片导表id
+    optional uint32 compose_amount = 2;     //合成的数量
+}
+
+//伙伴觉醒，R级以上可觉醒
+message C2GSAwakePartner {
+    optional uint32 partnerid = 1;
+}
+
+//觉醒道具合成
+message C2GSComposeAwakeItem {
+    optional uint32 sid = 1;
+    optional uint32 compose_amount = 2;
+}
+
+//保存改动方案
+message C2GSPartnerEquipPlanSave {
+    optional uint32 partnerid = 1;  //伙伴id
+    optional uint32 plan_id = 2;    //方案id
+    repeated uint32 equip_list = 3; //方案装备列表
+}
+
+//使用方案
+message C2GSPartnerEquipPlanUse {
+    optional uint32 partnerid = 1;  //伙伴id
+    optional uint32 plan_id =2 ; //方案id, 0-穿戴equip_list
+    repeated uint32 equip_list = 3; //方案装备列表
+}
+
+//添加伙伴评论
+message C2GSAddPartnerComment {
+    optional uint32 partner_type = 1;       //伙伴导表id
+    optional string  msg = 2;                   //评论内容
+}
+
+//获取伙伴评论内容
+message C2GSPartnerCommentInfo {
+    optional uint32 partner_type = 1;         //伙伴导表id
+}
+
+//点赞伙伴评论
+message C2GSUpVotePartnerComment {
+    optional uint32 partner_type = 1;
+    optional uint32 comment_id = 2;         //评论id
+    optional uint32 comment_type = 3;   //评论类型，0-普通，1-热评
+}
+
+message C2GSGetOuQi {
+    optional uint32 oid = 1 ; //欧气ID
+}
+
+message C2GSPartnerPictureSwitchPos {
+    repeated base.PartnerShapePos picture_pos = 1;
+}
+
+message C2GSUsePartnerItem {
+    optional uint32 itemid = 1;
+    optional uint32 target = 2;
+    optional uint32 amount = 3;
+}
+
+//合成伙伴装备
+message C2GSComposePartnerEquip {
+    repeated uint32 cost_list = 1;   //合成的装备id
+}
+
+//伙伴道具加锁
+message C2GSLockPartnerItem {
+    optional uint32 itemid = 1;
+}
+
+//设置跟随伙伴
+message C2GSSetFollowPartner {
+    optional uint32 partnerid = 1;
+    optional uint32 tid = 2; //跟随的称号id
+}
+
+//快速穿戴符文
+message C2GSQuickWearPartnerEquip {
+    optional uint32 partnerid = 1; //伙伴id
+    repeated uint32 wear_list = 12; //符文id列表，小于等于4
+}
+
+
+//---------------------------伙伴调整---------------------
+//伙伴升级
+message C2GSUpGradePartner {
+    optional uint32 partnerid = 1;
+    optional uint32 upgrade = 2; //升级次数（1次或5次）
+}
+
+//打开伙伴属性界面
+message C2GSOpenPartnerUI {
+    optional uint32 partnerid = 1;
+    optional uint32 type = 2; //1-升级界面，2-升星界面
+    optional uint32 md5 = 3; //md5相同表示无属性变动
+}
+
+
+//伙伴技能升级
+message C2GSAddPartnerSkill {
+    optional uint32 partnerid = 1;
+}
+
+
+//购买初始符文，达到格子上限不可购买
+message C2GSBuyPartnerBaseEquip {
+    optional uint32 pos = 1; //部位
+    optional uint32 parid = 2; //穿戴伙伴id，0-不穿戴
+}
+
+// 回收符文、一键回收
+message C2GSRecyclePartnerEquipList {
+    repeated uint32 equipids = 1; //回收id列表
+}
+
+//强化伙伴装备
+message C2GSStrengthPartnerEquip {
+    optional uint32 itemid = 1;         //强化符文id
+    optional uint32 one_key = 2;    //1-表示一键强化
+}
+
+//符文升星
+message C2GSUpstarPartnerEquip {
+    optional uint32 itemid = 1; //符文id
+}
+
+//符石吞食
+message C2GSInlayPartnerStone {
+    optional uint32 equipid = 1; //符文id
+    optional uint32 stoneid = 2; //符石id
+}
+
+//符石合成
+message C2GSComposePartnerStone {
+    optional uint32 stonesid = 1; //合成符石导表id
+    optional uint32 one_key = 2; //1-表示一键合成
+}
+
+//切换御灵核心
+message C2GSUsePartnerSoulType {
+    optional uint32 soul_type = 1; //核心类型,0-卸下原核心
+    repeated base.PartnerSoulPos soul_pos = 2; //快捷穿戴的御灵id列表
+    optional uint32 parid = 3; //伙伴id
+}
+
+//御灵升级
+message C2GSUpgradePartnerSoul {
+    optional uint32 soul_id = 1; // 御灵道具id
+    repeated uint32 cost_ids = 2; //被消耗id列表
+}
+
+//御灵穿戴，穿、卸都需传三个参数
+message C2GSUsePartnerSoul {
+    optional uint32 parid = 1 ;//伙伴id
+    optional uint32 soul_id = 2; //御灵id
+    optional uint32 pos = 3; //部位
+}
+
+//交换伙伴符文
+message C2GSSwapPartnerEquip {
+    optional uint32 src_parid = 1; //伙伴id
+    optional uint32 des_parid = 2;//目标伙伴id
+}
+
+//领取一发入魂碎片
+message C2GSReceivePartnerChip {
+
+}
+
+//重新招募一发入魂
+message C2GSReDrawPartner {
+
+}
+
+//交换伙伴御灵
+message C2GSSwapPartnerEquipByPos {
+    optional uint32 src_parid = 1; //伙伴id
+    optional uint32 des_parid = 2;//目标伙伴id
+    optional uint32 src_pos = 3; //御灵位置
+    optional uint32 des_pos = 4; //御灵位置
+}
+
+//御灵方案
+
+//添加新方案
+message C2GSAddParSoulPlan {
+    optional string name = 1; //方案名
+    optional uint32 soul_type = 2; //核心类型，不可空
+    repeated base.PartnerSoulPos souls = 3; //御灵id列表
+}
+
+//删除方案
+message C2GSDelParSoulPlan {
+    optional uint32 idx = 1; //方案id
+}
+
+//修改方案
+message C2GSModifyParSoulPlan {
+    optional uint32 idx = 1; //方案id
+    optional string  name = 2; //方案名，默认不修改
+    optional uint32  soul_type = 3;//核心类型,不传不修改
+    repeated base.PartnerSoulPos souls =4; //御灵id列表，不传soul_type会忽略这个字段
+}
+
+//使用方案
+message C2GSParSoulPlanUse {
+    optional uint32 idx =1; //方案id
+    optional uint32 parid = 2; //伙伴id
+}
+
+
+//碎片转换
+message C2GSExchangePartnerChip {
+    optional uint32 chip_sid = 1; //碎片导表id
+    optional uint32 amount = 2; //转换数量
+}

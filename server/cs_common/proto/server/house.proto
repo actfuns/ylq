@@ -1,0 +1,155 @@
+import "base/common.proto";
+
+//家具信息
+message HouseFurniture {
+    optional uint32 type = 1;               //家具类型
+    optional uint32 lock_status = 2;    //是否解锁,0:未解锁,1:解锁
+    optional uint32 level = 3;              //当前等级
+    optional uint32 secs = 4;               //升级时间
+}
+
+message HousePartner {
+    optional uint32 type = 1;               //伙伴类型
+    optional uint32 love_level = 2;      //亲密度等级
+    optional uint32 love_ship = 3;       //亲密度
+    optional uint32 train_type = 4;      //训练类型
+    optional uint32 train_time = 5;     //剩余训练时间
+    repeated uint32 unchain_level = 6;  //解锁伙伴对应的等级
+    optional uint32 coin = 7;   //随机金币数量
+}
+
+//茶艺道界面,工作台信息
+message WorkDesk {
+    optional uint32 pos = 1;                //工作台顺序,自己:1-3,好友:4
+    optional uint32 lock_status = 2;    //是否解锁,0:未解锁,1:解锁
+    optional uint32 status = 3; //  1:空闲状态,2:才艺展示中,3:可领取物品
+    optional uint32 talent_time = 4;    //才艺展示时间
+    optional uint32 frd_pid = 5;            //好友pid
+    optional uint32 item_sid = 6;      //结束奖励sid
+    optional uint32 speed_num = 7; //加速完成次数
+}
+
+//好友宅邸简要信息
+message FriendHouseProfile {
+    optional uint32 frd_pid = 1; //好友id
+    optional uint32 coin = 2; //随机金币数量,0表示无金币
+    optional uint32 talent_level = 3; //才艺等级
+    optional uint32 desk_empty = 4; //1-工作台空
+}
+
+//宅邸buff
+message HouseBuff {
+    optional uint32 stage = 1; //当前阶级
+    optional uint32 loveship = 2; //当前亲密度
+}
+
+message GS2CEnterHouse {
+    repeated HouseFurniture furniture_info = 1;         //家具信息
+    repeated HousePartner partner_info = 2;         //伙伴信息
+    repeated base.ItemInfo item_info  = 3;             //道具信息
+    optional uint32 warm_degree = 4;                      //温馨度
+    optional uint32 max_warm_degree = 5;            //温馨度上限
+    optional uint32 max_train = 6;          //训练次数上限
+    optional uint32 owner_pid = 7;     //目标宅邸玩家id
+    optional uint32 talent_level = 8; //才艺等级
+    optional uint32 handle_type = 9; //1-登录,0-客户端请求
+    optional HouseBuff buff_info = 10; //总亲密度信息
+}
+
+message GS2CFurnitureInfo {
+    optional HouseFurniture furniture_info = 1;
+}
+
+//刷新伙伴信息
+message GS2CPartnerInfo {
+    optional HousePartner partner_info = 1;
+}
+
+//刷新温馨度
+message GS2CRefreshHouseWarm {
+    optional uint32 warm_degree = 1;
+    optional uint32 max_warm_degree = 2;
+}
+
+//打开工作台界面
+message GS2COpenWorkDesk {
+    repeated WorkDesk desk_info = 1;        //工作台顺序,自己:1-3,好友:4
+    optional uint32 talent_level = 2;               //才艺等级
+    optional uint32 talent_schedule = 3;        //才艺进度
+    optional uint32 owner_pid = 4; //宅邸玩家的pid
+    optional uint32 handle_type = 5; //1-登录,0-客户端请求
+}
+
+//刷新工作台信息
+message GS2CRefreshWorkDesk {
+    optional WorkDesk desk_info = 1;
+    optional uint32 owner_pid = 2; //宅邸玩家的pid
+}
+
+//刷新才艺信息
+message GS2CRefreshTalent {
+    optional uint32 talent_level = 1;
+    optional uint32 talent_schedule = 2;
+}
+
+message GS2CPartnerExchangeUI {
+    optional uint32 love_cnt = 1;               //剩余可以抚摸次数
+    optional uint32 max_love_cnt = 2;      //最大次数
+    optional uint32 partner_gift_cnt = 3;        //剩余赠送礼物的次数
+    optional uint32 supple_love_time = 4;   //补充下一次抚摸次数需要的时间
+    optional uint32 max_gift_cnt = 5; //最大送礼次数
+    optional uint32 handle_type = 6; //1-登录,0-客户端请求
+    optional uint32 daily_buy_gift = 7; //购买送礼次数
+}
+
+//添加宅邸道具
+message GS2CHouseAddItem {
+    optional base.ItemInfo itemdata   = 1;
+}
+
+//删除宅邸道具
+message GS2CHouseDelItem {
+    optional uint32 id                  = 1;                                //服务的道具id
+}
+
+//刷新道具数目
+message GS2CHouseItemAmount{
+    optional uint32 id = 1;
+    optional uint32 amount = 2;
+}
+
+//宅邸好友简要信息
+message GS2CFriendHouseProfile {
+    repeated FriendHouseProfile profile_list = 1;
+}
+
+//给礼物
+message GS2CGivePartnerGift {
+}
+
+//获得新伙伴
+message GS2CAddHousePartner {
+    optional uint32 type = 1; //宅邸伙伴导表id
+}
+
+//刷新宅邸buff
+message GS2CRefreshHouseBuff {
+    optional HouseBuff buff_info = 1;
+}
+
+//领取宅邸金币
+message GS2CRecieveHouseCoin {
+    optional uint32 frd_pid = 1; //好友pid
+    optional uint32 status = 2; //0-已领取
+}
+
+//使用工作台
+message GS2CUseFriendWorkDesk {
+    optional uint32 frd_pid = 1; //好友pid
+    optional uint32 status = 2; //０-成功，１-工作台被占用
+}
+
+//离开宅邸
+message GS2CLeaveHouse {
+    
+}

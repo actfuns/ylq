@@ -1,0 +1,175 @@
+import "base/common.proto";
+//进度条
+message GS2CLoadUI {
+	optional string sessionidx	= 1;	//回调id
+	optional uint32 type		= 2;	//类型
+	optional uint32 tip		= 3;	//提示
+	optional uint32 time		= 4;	//时间
+}
+
+message GS2CPopTaskItem {
+	optional string sessionidx	= 1;	//回调id
+	optional uint32 taskid		= 2;	//任务id
+}
+
+//弹出资源获得界面
+message GS2CShortWay {
+	optional uint32 type		= 1;	//1:金币,2:水晶,3:铜币,4:勋章,8:探索点,9:彩晶,10:体力
+}
+
+
+
+message GS2CConfirmUI{
+	optional string sessionidx 	= 1;	//回调id
+	optional string sContent 	= 2;	//弹框内容
+	optional string sConfirm 	= 3;	//确认按钮内容
+	optional string sCancle		= 4;	//取消按钮内容
+	optional uint32 time 		= 5;	//默认按钮时间,单位为秒
+	optional uint32 default 	= 6;	//默认按钮内容, 1-sConfirm 0-sCancle
+	optional uint32 uitype = 7;	//UI顯示類型 0普通，1组队邀请,2历练,3社交,4.协同比武
+	optional base.SimpleRole simplerole = 8;	//玩家名片信息
+	optional uint32 forceconfirm	= 9;	//点击空白区域是否关闭当前对话框，0 是 1 否
+	optional uint32 confirmtype	=10;	//確認類型，具體用於區分系統，部分系統帶取消提示下拉選項
+	optional uint32 relation		=11;	//邀请者和自己的关系
+	optional uint32 point = 12; //协同比武分数
+}
+
+//弹出寻路任务点击按钮
+message GS2CShowOpenBtn{
+	optional uint32 taskid = 1;	//
+	optional string sessionidx = 2;
+}
+
+
+
+
+message ScheduleState {
+	optional uint32 scheduleid = 1;
+	optional uint32 done_cnt = 2;//次数
+	optional uint32 maxtimes = 3; //最大次数
+	optional uint32 activepoint = 4;//活跃点
+	optional uint32 buy = 5;//购买的次数
+	optional uint32 count =6 ;//
+	optional uint32 sum = 7;//
+	optional uint32 state = 8;//活动状态 0未开启,1正在进行 2结束
+	optional uint32 flag = 9;//标记(与活动状态独立),各自日程解析这个字段含义
+	optional uint32 left = 10;
+}
+
+
+
+//登录发送日程信息
+message GS2CSchedule {
+	optional uint32 activepoint	= 1; //活跃点
+	optional uint32 rewardidx	= 2; //已奖励活跃
+	repeated ScheduleState schlist = 3;//新加的日程状态列表
+	optional uint32 open_day 	=4;//开服天数
+}
+
+message GS2CLoginSchedule  {
+	optional uint32 activepoint	= 1; //活跃点
+	optional uint32 rewardidx	= 2; //已奖励活跃
+	repeated uint32 day_task	= 3;//
+}
+
+
+message GS2CRefreshSchedule {
+	optional uint32 activepoint		= 1;
+	optional ScheduleState schstate = 2;
+}
+
+message GS2COpenScheuleUI{
+	optional uint32 scheduleid = 1;
+}
+
+message GS2CCloseScheuleUI{
+	optional uint32 scheduleid = 1;
+}
+
+message GS2CGetScheduleReward {
+	optional uint32 rewardidx	= 1; //每一位表示哪个将来被领取
+}
+
+//让客户端打开界面
+message GS2COpenView {
+	optional uint32 vid = 1;
+}
+
+//打开商城界面
+message GS2COpenShop {
+	optional uint32 shop_id = 1;	//商城id
+}
+
+
+//场景内自动巡逻
+message GS2CXunLuo {
+	optional uint32 type = 1;	//1:开始,0:结束
+}
+
+//打开技能修炼界面
+message GS2COpenCultivateUI {
+
+}
+
+//关闭选项弹窗按钮
+message GS2CCloseConfirmUI {
+	optional string sessionidx = 1;
+}
+
+message GS2CItemShortWay{
+	optional uint32 item=1; //item_sid
+}
+
+message LotteryItem{
+	optional uint32 type = 1;//奖励类型：1 金币 2 物品
+	optional uint32 sid = 2;
+	optional uint32 value = 3;
+}
+
+//打开挖宝
+message GS2COpenLotteryUI{
+	optional uint32 totaltimes = 1;
+	repeated LotteryItem lotteryitem = 2;
+}
+
+//告知客户端服务器已刷天
+message GS2CNewDay {
+
+}
+
+//获得物品弹窗
+message GS2CShowItem {
+	repeated base.ShowItemInfo item_list = 1;
+}
+
+//关闭战斗结算界面
+message GS2CCloseWarResultUI{
+}
+
+//红包频道选择界面
+message GS2CHongBaoUI{
+	optional string sessionidx 	= 1;	//回调id
+	repeated string sContent 	= 2;	//弹框内容
+}
+
+message TeamEnterInfo{
+	optional base.SimpleRole info=1;	//玩家信息
+	optional uint32 state=2;			//玩家状态 0 - 无　1-确认  2-拒绝
+}
+
+message GS2CTeamEnterGameUI{
+	optional string sessionidx 	= 1;	//回调id
+	optional string msg = 2;			//询问语
+	repeated TeamEnterInfo mem =3;
+	optional string stype = 4;		//玩法描述　yjfuben-梦魇
+	optional uint32 timeout = 5;
+}
+
+message GS2CUpdateTeamEnterGameUI{
+	optional string msg = 1;			//询问语
+	repeated TeamEnterInfo mem =2;
+	optional string stype = 3;		//玩法描述　yjfuben-梦魇
+}
+
+message GS2CTeamEnterGameUIClose{
+}

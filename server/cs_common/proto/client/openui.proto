@@ -1,0 +1,27 @@
+
+message C2GSOpenScheduleUI{
+}
+
+
+
+message C2GSScheduleReward{
+	optional uint32 rewardidx	= 1; //第几个奖励
+}
+
+//点击日程--前往参加的操作
+message C2GSClickSchedule{
+	optional uint32 sid = 1;
+}
+
+message C2GSOpenInterface {
+    optional uint32 type = 1; /* BARRAGE_TYPE 1 */
+}
+
+message C2GSCloseInterface {
+    optional uint32 type = 1; /* BARRAGE_TYPE 1 */
+}
+
+message C2GSEditBattlCommand {
+    optional uint32 idx = 1; //指令位置 1-16
+    optional string cmd = 2; //指令描述
+}

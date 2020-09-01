@@ -1,0 +1,501 @@
+.TH "Low-level doubly-linked list manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Low-level doubly-linked list manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_gdsl_node_t\fP \fB_gdsl_list_t\fP"
+.br
+.RI "\fIGDSL low-level doubly-linked list type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB_gdsl_list_t\fP \fB_gdsl_list_alloc\fP (const \fBgdsl_element_t\fP E)"
+.br
+.RI "\fICreate a new low-level list\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_free\fP (\fB_gdsl_list_t\fP L, const \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fIDestroy a low-level list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fB_gdsl_list_is_empty\fP (const \fB_gdsl_list_t\fP L)"
+.br
+.RI "\fICheck if a low-level list is empty\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fB_gdsl_list_get_size\fP (const \fB_gdsl_list_t\fP L)"
+.br
+.RI "\fIGet the size of a low-level list\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_link\fP (\fB_gdsl_list_t\fP L1, \fB_gdsl_list_t\fP L2)"
+.br
+.RI "\fILink two low-level lists together\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_insert_after\fP (\fB_gdsl_list_t\fP L, \fB_gdsl_list_t\fP PREV)"
+.br
+.RI "\fIInsert a low-level list after another one\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_insert_before\fP (\fB_gdsl_list_t\fP L, \fB_gdsl_list_t\fP SUCC)"
+.br
+.RI "\fIInsert a low-level list before another one\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_remove\fP (\fB_gdsl_node_t\fP NODE)"
+.br
+.RI "\fIRemove a node from a low-level list\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_list_t\fP \fB_gdsl_list_search\fP (\fB_gdsl_list_t\fP L, const \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fISearch for a particular node in a low-level list\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_list_t\fP \fB_gdsl_list_map_forward\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a low-level list in forward order\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_list_t\fP \fB_gdsl_list_map_backward\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a low-level list in backward order\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_write\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all nodes of a low-level list to a file\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_write_xml\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all nodes of a low-level list to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_dump\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a low-level list to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef \fB_gdsl_node_t\fP \fB_gdsl_list_t\fP"
+.PP
+GDSL low-level doubly-linked list type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 54 of file _gdsl_list\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fB_gdsl_list_t\fP \fB_gdsl_list_alloc\fP (const \fBgdsl_element_t\fPE)"
+.PP
+Create a new low-level list\&. Allocate a new low-level list data structure which have only one node\&. The node's content is set to E\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIE\fP The content of the first node of the new low-level list to create\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated low-level list in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_free()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_list_free\fP (\fB_gdsl_list_t\fPL, const \fBgdsl_free_func_t\fPFREE_F)"
+.PP
+Destroy a low-level list\&. Flush and destroy the low-level list L\&. If FREE_F != NULL, then the FREE_F function is used to deallocated each L's element\&. Otherwise, nothing is done with L's elements\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to destroy\&. 
+.br
+\fIFREE_F\fP The function used to deallocated L's nodes contents\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_alloc()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fB_gdsl_list_is_empty\fP (const \fB_gdsl_list_t\fPL)"
+.PP
+Check if a low-level list is empty\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to check\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the low-level list L is empty\&. 
+.PP
+FALSE if the low-level list L is not empty\&. 
+.RE
+.PP
+
+.SS "\fBulong\fP \fB_gdsl_list_get_size\fP (const \fB_gdsl_list_t\fPL)"
+.PP
+Get the size of a low-level list\&. \fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of L (noted |L|)\&. 
+.RE
+.PP
+
+.SS "void \fB_gdsl_list_link\fP (\fB_gdsl_list_t\fPL1, \fB_gdsl_list_t\fPL2)"
+.PP
+Link two low-level lists together\&. Link the low-level list L2 after the end of the low-level list L1\&. So L1 is before L2\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L1| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L1 & L2 must be non-empty _gdsl_list_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL1\fP The low-level list to link before L2\&. 
+.br
+\fIL2\fP The low-level list to link after L1\&. 
+.RE
+.PP
+
+.SS "void \fB_gdsl_list_insert_after\fP (\fB_gdsl_list_t\fPL, \fB_gdsl_list_t\fPPREV)"
+.PP
+Insert a low-level list after another one\&. Insert the low-level list L after the low-level list PREV\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L & PREV must be non-empty _gdsl_list_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to link after PREV\&. 
+.br
+\fIPREV\fP The low-level list that will be linked before L\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_insert_before()\fP 
+.PP
+\fB_gdsl_list_remove()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_list_insert_before\fP (\fB_gdsl_list_t\fPL, \fB_gdsl_list_t\fPSUCC)"
+.PP
+Insert a low-level list before another one\&. Insert the low-level list L before the low-level list SUCC\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L & SUCC must be non-empty _gdsl_list_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to link before SUCC\&. 
+.br
+\fISUCC\fP The low-level list that will be linked after L\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_insert_after()\fP 
+.PP
+\fB_gdsl_list_remove()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_list_remove\fP (\fB_gdsl_node_t\fPNODE)"
+.PP
+Remove a node from a low-level list\&. Unlink the node NODE from the low-level list in which it is inserted\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+NODE must be a non-empty _gdsl_node_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINODE\fP The low-level node to unlink from the low-level list in which it's linked\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_insert_after()\fP 
+.PP
+\fB_gdsl_list_insert_before()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_list_t\fP \fB_gdsl_list_search\fP (\fB_gdsl_list_t\fPL, const \fBgdsl_compare_func_t\fPCOMP_F, void *VALUE)"
+.PP
+Search for a particular node in a low-level list\&. Research an element e in the low-level list L, by using COMP_F function to find the first element e equal to VALUE\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to use 
+.br
+\fICOMP_F\fP The comparison function to use to compare L's elements with VALUE to find the element e 
+.br
+\fIVALUE\fP The value that must be used by COMP_F to find the element e 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the sub-list starting by e if it's found\&. 
+.PP
+NULL if VALUE is not found in L\&. 
+.RE
+.PP
+
+.SS "\fB_gdsl_list_t\fP \fB_gdsl_list_map_forward\fP (const \fB_gdsl_list_t\fPL, const \fB_gdsl_node_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a low-level list in forward order\&. Parse all nodes of the low-level list L in forward order\&. The MAP_F function is called on each node with the USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fB_gdsl_list_map_forward()\fP stops and returns its last examinated node\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+MAP_F != NULL\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP Th low-level list to map\&. 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first node for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_map_backward()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_list_t\fP \fB_gdsl_list_map_backward\fP (const \fB_gdsl_list_t\fPL, const \fB_gdsl_node_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a low-level list in backward order\&. Parse all nodes of the low-level list L in backward order\&. The MAP_F function is called on each node with the USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fB_gdsl_list_map_backward()\fP stops and returns its last examinated node\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 2 |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a non-empty _gdsl_list_t & MAP_F != NULL\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP Th low-level list to map\&. 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first node for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_map_forward()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_list_write\fP (const \fB_gdsl_list_t\fPL, const \fB_gdsl_node_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write all nodes of a low-level list to a file\&. Write the nodes of the low-level list L to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+WRITE_F != NULL & OUTPUT_FILE != NULL\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write L's nodes\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_write_xml()\fP 
+.PP
+\fB_gdsl_list_dump()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_list_write_xml\fP (const \fB_gdsl_list_t\fPL, const \fB_gdsl_node_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write all nodes of a low-level list to a file into XML\&. Write the nodes of the low-level list L to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F function to write L's nodes to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+OUTPUT_FILE != NULL\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write L's nodes\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_write()\fP 
+.PP
+\fB_gdsl_list_dump()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_list_dump\fP (const \fB_gdsl_list_t\fPL, const \fB_gdsl_node_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a low-level list to a file\&. Dump the structure of the low-level list L to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F function to write L's nodes to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+OUTPUT_FILE != NULL\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The low-level list to dump\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write L's nodes\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_list_write()\fP 
+.PP
+\fB_gdsl_list_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

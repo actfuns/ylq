@@ -1,0 +1,17 @@
+scripts/runxlrd.py
+xlrd/__init__.py
+xlrd/biffh.py
+xlrd/book.py
+xlrd/compdoc.py
+xlrd/formatting.py
+xlrd/formula.py
+xlrd/info.py
+xlrd/licences.py
+xlrd/sheet.py
+xlrd/timemachine.py
+xlrd/xldate.py
+xlrd/xlsx.py
+xlrd.egg-info/PKG-INFO
+xlrd.egg-info/SOURCES.txt
+xlrd.egg-info/dependency_links.txt
+xlrd.egg-info/top_level.txt

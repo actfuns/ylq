@@ -1,0 +1,279 @@
+.TH "GDSL types" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+GDSL types \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef void * \fBgdsl_element_t\fP"
+.br
+.RI "\fIGDSL element type\&. \fP"
+.ti -1c
+.RI "typedef \fBgdsl_element_t\fP(* \fBgdsl_alloc_func_t\fP )(void *USER_DATA)"
+.br
+.RI "\fIGDSL Alloc element function type\&. \fP"
+.ti -1c
+.RI "typedef void(* \fBgdsl_free_func_t\fP )(\fBgdsl_element_t\fP E)"
+.br
+.RI "\fIGDSL Free element function type\&. \fP"
+.ti -1c
+.RI "typedef \fBgdsl_element_t\fP(* \fBgdsl_copy_func_t\fP )(const \fBgdsl_element_t\fP E)"
+.br
+.RI "\fIGDSL Copy element function type\&. \fP"
+.ti -1c
+.RI "typedef int(* \fBgdsl_map_func_t\fP )(const \fBgdsl_element_t\fP E, \fBgdsl_location_t\fP LOCATION, void *USER_DATA)"
+.br
+.RI "\fIGDSL Map element function type\&. \fP"
+.ti -1c
+.RI "typedef long int(* \fBgdsl_compare_func_t\fP )(const \fBgdsl_element_t\fP E, void *VALUE)"
+.br
+.RI "\fIGDSL Comparison element function type\&. \fP"
+.ti -1c
+.RI "typedef void(* \fBgdsl_write_func_t\fP )(const \fBgdsl_element_t\fP E, FILE *OUTPUT_FILE, \fBgdsl_location_t\fP LOCATION, void *USER_DATA)"
+.br
+.RI "\fIGDSL Write element function type\&. \fP"
+.ti -1c
+.RI "typedef unsigned long int \fBulong\fP"
+.br
+.ti -1c
+.RI "typedef unsigned short int \fBushort\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBgdsl_constant_t\fP { \fBGDSL_ERR_MEM_ALLOC\fP =  -1, \fBGDSL_MAP_STOP\fP =  0, \fBGDSL_MAP_CONT\fP =  1, \fBGDSL_INSERTED\fP, \fBGDSL_FOUND\fP }"
+.br
+.RI "\fIGDSL Constants\&. \fP"
+.ti -1c
+.RI "enum \fBgdsl_location_t\fP { \fBGDSL_LOCATION_UNDEF\fP =  0, \fBGDSL_LOCATION_HEAD\fP =  1, \fBGDSL_LOCATION_ROOT\fP =  1, \fBGDSL_LOCATION_TOP\fP =  1, \fBGDSL_LOCATION_TAIL\fP =  2, \fBGDSL_LOCATION_LEAF\fP =  2, \fBGDSL_LOCATION_BOTTOM\fP =  2, \fBGDSL_LOCATION_FIRST\fP =  1, \fBGDSL_LOCATION_LAST\fP =  2, \fBGDSL_LOCATION_FIRST_COL\fP =  1, \fBGDSL_LOCATION_LAST_COL\fP =  2, \fBGDSL_LOCATION_FIRST_ROW\fP =  4, \fBGDSL_LOCATION_LAST_ROW\fP =  8 }"
+.br
+.ti -1c
+.RI "enum \fBbool\fP { \fBFALSE\fP =  0, \fBTRUE\fP =  1 }"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef void* \fBgdsl_element_t\fP"
+.PP
+GDSL element type\&. All GDSL internal data structures contains a field of this type\&. This field is for GDSL users to store their data into GDSL data structures\&. 
+.PP
+Definition at line 130 of file gdsl_types\&.h\&.
+.SS "typedef \fBgdsl_element_t\fP(*  \fBgdsl_alloc_func_t\fP)(void *USER_DATA)"
+.PP
+GDSL Alloc element function type\&. This function type is for allocating a new gdsl_element_t variable\&. The USER_DATA argument should be used to fill-in the new element\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIUSER_DATA\fP user data used to create the new element\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated element in case of success\&. 
+.PP
+NULL in case of failure\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_free_func_t\fP 
+.RE
+.PP
+
+.PP
+Definition at line 144 of file gdsl_types\&.h\&.
+.SS "typedef void(*  \fBgdsl_free_func_t\fP)(\fBgdsl_element_t\fP E)"
+.PP
+GDSL Free element function type\&. This function type is for freeing a gdsl_element_t variable\&. The element must have been previously allocated by a function of gdsl_alloc_func_t type\&. A free function according to gdsl_free_func_t must free the ressources allocated by the corresponding call to the function of type gdsl_alloc_func_t\&. The GDSL functions doesn't check if E != NULL before calling this function\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIE\fP The element to deallocate\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_alloc_func_t\fP 
+.RE
+.PP
+
+.PP
+Definition at line 162 of file gdsl_types\&.h\&.
+.SS "typedef \fBgdsl_element_t\fP(*  \fBgdsl_copy_func_t\fP)(const \fBgdsl_element_t\fP E)"
+.PP
+GDSL Copy element function type\&. This function type is for copying gdsl_element_t variables\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIE\fP The gdsl_element_t variable to copy\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the copied element in case of success\&. 
+.PP
+NULL in case of failure\&. 
+.RE
+.PP
+
+.PP
+Definition at line 175 of file gdsl_types\&.h\&.
+.SS "typedef int(*  \fBgdsl_map_func_t\fP)(const \fBgdsl_element_t\fP E, \fBgdsl_location_t\fP LOCATION, void *USER_DATA)"
+.PP
+GDSL Map element function type\&. This function type is for mapping a gdsl_element_t variable from a GDSL data structure\&. The optional USER_DATA could be used to do special thing if needed\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIE\fP The actually mapped gdsl_element_t variable\&. 
+.br
+\fILOCATION\fP The location of E in the data structure\&. 
+.br
+\fIUSER_DATA\fP User's datas\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+GDSL_MAP_STOP if the mapping must be stopped\&. 
+.PP
+GDSL_MAP_CONT if the mapping must be continued\&. 
+.RE
+.PP
+
+.PP
+Definition at line 192 of file gdsl_types\&.h\&.
+.SS "typedef long int(*  \fBgdsl_compare_func_t\fP)(const \fBgdsl_element_t\fP E, void *VALUE)"
+.PP
+GDSL Comparison element function type\&. This function type is used to compare a gdsl_element_t variable with a user value\&. The E argument is always the one in the GDSL data structure, VALUE is always the one the user wants to compare E with\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIE\fP The gdsl_element_t variable contained into the data structure to compare from\&. 
+.br
+\fIVALUE\fP The user data to compare E with\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+< 0 if E is assumed to be less than VALUE\&. 
+.PP
+0 if E is assumed to be equal to VALUE\&. 
+.PP
+> 0 if E is assumed to be greather than VALUE\&. 
+.RE
+.PP
+
+.PP
+Definition at line 213 of file gdsl_types\&.h\&.
+.SS "typedef void(*  \fBgdsl_write_func_t\fP)(const \fBgdsl_element_t\fP E, FILE *OUTPUT_FILE, \fBgdsl_location_t\fP LOCATION, void *USER_DATA)"
+.PP
+GDSL Write element function type\&. This function type is for writing a gdsl_element_t E to OUTPUT_FILE\&. Additional USER_DATA could be passed to it\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIE\fP The gdsl element to write\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write E\&. 
+.br
+\fILOCATION\fP The location of E in the data structure\&. 
+.br
+\fIUSER_DATA\fP User's datas\&. 
+.RE
+.PP
+
+.PP
+Definition at line 229 of file gdsl_types\&.h\&.
+.SS "typedef unsigned long int \fBulong\fP"
+.PP
+Definition at line 242 of file gdsl_types\&.h\&.
+.SS "typedef unsigned short int \fBushort\fP"
+.PP
+Definition at line 246 of file gdsl_types\&.h\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBgdsl_constant_t\fP"
+.PP
+GDSL Constants\&. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIGDSL_ERR_MEM_ALLOC \fP\fP
+Memory allocation error 
+.TP
+\fB\fIGDSL_MAP_STOP \fP\fP
+For stopping a parsing function 
+.TP
+\fB\fIGDSL_MAP_CONT \fP\fP
+For continuing a parsing function 
+.TP
+\fB\fIGDSL_INSERTED \fP\fP
+To indicate an inserted value 
+.TP
+\fB\fIGDSL_FOUND \fP\fP
+To indicate a founded value 
+.PP
+Definition at line 48 of file gdsl_types\&.h\&.
+.SS "enum \fBgdsl_location_t\fP"
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIGDSL_LOCATION_UNDEF \fP\fP
+Element position undefined 
+.TP
+\fB\fIGDSL_LOCATION_HEAD \fP\fP
+Element is at head position 
+.TP
+\fB\fIGDSL_LOCATION_ROOT \fP\fP
+Element is on leaf position 
+.TP
+\fB\fIGDSL_LOCATION_TOP \fP\fP
+Element is at top position 
+.TP
+\fB\fIGDSL_LOCATION_TAIL \fP\fP
+Element is at tail position 
+.TP
+\fB\fIGDSL_LOCATION_LEAF \fP\fP
+Element is on root position 
+.TP
+\fB\fIGDSL_LOCATION_BOTTOM \fP\fP
+Element is at bottom position 
+.TP
+\fB\fIGDSL_LOCATION_FIRST \fP\fP
+Element is the first 
+.TP
+\fB\fIGDSL_LOCATION_LAST \fP\fP
+Element is the last 
+.TP
+\fB\fIGDSL_LOCATION_FIRST_COL \fP\fP
+Element is on first column 
+.TP
+\fB\fIGDSL_LOCATION_LAST_COL \fP\fP
+Element is on last column 
+.TP
+\fB\fIGDSL_LOCATION_FIRST_ROW \fP\fP
+Element is on first row 
+.TP
+\fB\fIGDSL_LOCATION_LAST_ROW \fP\fP
+Element is on last row 
+.PP
+Definition at line 69 of file gdsl_types\&.h\&.
+.SS "enum \fBbool\fP"GDSL boolean type\&. Defines _NO_LIBGDSL_TYPES_ at compilation time if you don't want them\&. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIFALSE \fP\fP
+FALSE boolean value 
+.TP
+\fB\fITRUE \fP\fP
+TRUE boolean value 
+.PP
+Definition at line 267 of file gdsl_types\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

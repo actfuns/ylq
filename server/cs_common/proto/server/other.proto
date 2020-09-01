@@ -1,0 +1,95 @@
+import "base/common.proto";
+
+message GS2CHeartBeat {
+    optional uint32 time = 1;
+}
+
+message GS2CGMMessage {
+    optional string msg = 1;
+}
+
+message GS2CBarrage {
+    optional string type = 1;       //"partner"
+    optional uint32 send_id = 2;
+    optional string content = 3;
+}
+
+message GS2CBigPacket {
+    optional uint32 type = 1;
+    optional uint32 total = 2;
+    optional uint32 index = 3;
+    optional bytes data = 4;
+}
+
+message GS2CClientUpdateCode {
+    optional string code = 1;
+}
+
+message GS2CSessionResponse {
+    optional uint32 session = 1;
+}
+
+//播放音频
+message GS2CShowVoice {
+    optional uint32 type = 1;   //1-出售
+}
+
+//备用协议
+message GS2CDoBackup{
+    optional uint32 type = 1;   //备用类型
+    repeated base.BackUpInfo backup_info = 2;
+}
+
+message GS2CPayInfo {
+    optional string order_id = 1;
+    optional string product_key = 2;
+    optional uint32 product_amount = 3;
+    optional uint32 product_value = 4;
+    optional string callback_url = 5;
+}
+
+message GS2CMergePacket{
+    repeated bytes packets = 1;
+}
+
+message GS2CClientUpdateResVersion {
+    repeated string res_file = 1;
+    optional uint32 delay = 2;
+}
+
+message GS2CClientUpdateRes {
+    repeated base.ClientResFileContent res_file = 1;
+    repeated string delete_file = 2;
+}
+
+message GS2CQRCToken {
+    optional string token = 1;
+    optional uint32 validity = 2;
+}
+
+message GS2CQRCScanSuccess {
+}
+
+message GS2CQRCAccountInfo {
+    optional bytes account_info = 1;
+    optional bytes transfer_info = 2;
+}
+
+message GS2CQRCInvalid {
+}
+
+message GS2CGMRequireInfo {
+    optional uint32 gm_id = 1;
+    optional string info = 2;
+}
+
+message GS2CAnswerGMInfo {
+    optional uint32 target_id = 1;
+    optional string info = 2;
+}
+
+message GS2CAnswerBack{
+}
+
+message GS2CClosePay {
+}

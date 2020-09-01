@@ -1,0 +1,1849 @@
+.TH "Doubly-linked list manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Doubly-linked list manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _gdsl_list * \fBgdsl_list_t\fP"
+.br
+.RI "\fIGDSL doubly-linked list type\&. \fP"
+.ti -1c
+.RI "typedef struct _gdsl_list_cursor * \fBgdsl_list_cursor_t\fP"
+.br
+.RI "\fIGDSL doubly-linked list cursor type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fICreate a new list\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_free\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIDestroy a list\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_flush\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIFlush a list\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_list_get_name\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fIGet the name of a list\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_list_get_size\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fIGet the size of a list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_is_empty\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fICheck if a list is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_get_head\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fIGet the head of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_get_tail\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fIGet the tail of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_set_name\fP (\fBgdsl_list_t\fP L, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_insert_head\fP (\fBgdsl_list_t\fP L, void *VALUE)"
+.br
+.RI "\fIInsert an element at the head of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_insert_tail\fP (\fBgdsl_list_t\fP L, void *VALUE)"
+.br
+.RI "\fIInsert an element at the tail of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_remove_head\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIRemove the head of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_remove_tail\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIRemove the tail of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_remove\fP (\fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F, const void *VALUE)"
+.br
+.RI "\fIRemove a particular element from a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_delete_head\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIDelete the head of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_delete_tail\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIDelete the tail of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_delete\fP (\fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F, const void *VALUE)"
+.br
+.RI "\fIDelete a particular element from a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_search\fP (const \fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F, const void *VALUE)"
+.br
+.RI "\fISearch for a particular element into a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_search_by_position\fP (const \fBgdsl_list_t\fP L, \fBulong\fP POS)"
+.br
+.RI "\fISearch for an element by its position in a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_search_max\fP (const \fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fISearch for the greatest element of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_search_min\fP (const \fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fISearch for the lowest element of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_sort\fP (\fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fISort a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_map_forward\fP (const \fBgdsl_list_t\fP L, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a list from head to tail\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_map_backward\fP (const \fBgdsl_list_t\fP L, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a list from tail to head\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_write\fP (const \fBgdsl_list_t\fP L, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a list to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_write_xml\fP (const \fBgdsl_list_t\fP L, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a list to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_dump\fP (const \fBgdsl_list_t\fP L, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a list to a file\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_alloc\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fICreate a new list cursor\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_free\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIDestroy a list cursor\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_move_to_head\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIPut a cursor on the head of its list\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_move_to_tail\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIPut a cursor on the tail of its list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_move_to_value\fP (\fBgdsl_list_cursor_t\fP C, \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fIPlace a cursor on a particular element\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_move_to_position\fP (\fBgdsl_list_cursor_t\fP C, \fBulong\fP POS)"
+.br
+.RI "\fIPlace a cursor on a element given by its position\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_step_forward\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIMove a cursor one step forward of its list\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_step_backward\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIMove a cursor one step backward of its list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_cursor_is_on_head\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fICheck if a cursor is on the head of its list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_cursor_is_on_tail\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fICheck if a cursor is on the tail of its list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_cursor_has_succ\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fICheck if a cursor has a successor\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_cursor_has_pred\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fICheck if a cursor has a predecessor\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_set_content\fP (\fBgdsl_list_cursor_t\fP C, \fBgdsl_element_t\fP E)"
+.br
+.RI "\fISet the content of the cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_get_content\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIGet the content of a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_insert_after\fP (\fBgdsl_list_cursor_t\fP C, void *VALUE)"
+.br
+.RI "\fIInsert a new element after a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_insert_before\fP (\fBgdsl_list_cursor_t\fP C, void *VALUE)"
+.br
+.RI "\fIInsert a new element before a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIRemovec the element under a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove_after\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIRemovec the element after a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove_before\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIRemove the element before a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIDelete the element under a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete_after\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIDelete the element after a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete_before\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIDelete the element before the cursor of a list\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct _gdsl_list* \fBgdsl_list_t\fP"
+.PP
+GDSL doubly-linked list type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 51 of file gdsl_list\&.h\&.
+.SS "typedef struct _gdsl_list_cursor* \fBgdsl_list_cursor_t\fP"
+.PP
+GDSL doubly-linked list cursor type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 59 of file gdsl_list\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBgdsl_list_t\fP \fBgdsl_list_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fPALLOC_F, \fBgdsl_free_func_t\fPFREE_F)"
+.PP
+Create a new list\&. Allocate a new list data structure which name is set to a copy of NAME\&. The function pointers ALLOC_F and FREE_F could be used to respectively, alloc and free elements in the list\&. These pointers could be set to NULL to use the default ones:
+.IP "\(bu" 2
+the default ALLOC_F simply returns its argument
+.IP "\(bu" 2
+the default FREE_F does nothing
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINAME\fP The name of the new list to create 
+.br
+\fIALLOC_F\fP Function to alloc element when inserting it in the list 
+.br
+\fIFREE_F\fP Function to free element when removing it from the list 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated list in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_free()\fP 
+.PP
+\fBgdsl_list_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_free\fP (\fBgdsl_list_t\fPL)"
+.PP
+Destroy a list\&. Flush and destroy the list L\&. All the elements of L are freed using L's FREE_F function passed to \fBgdsl_list_alloc()\fP\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to destroy 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_alloc()\fP 
+.PP
+\fBgdsl_list_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_flush\fP (\fBgdsl_list_t\fPL)"
+.PP
+Flush a list\&. Destroy all the elements of the list L by calling L's FREE_F function passed to \fBgdsl_list_alloc()\fP\&. L is not deallocated itself and L's name is not modified\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to flush 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_alloc()\fP 
+.PP
+\fBgdsl_list_free()\fP 
+.RE
+.PP
+
+.SS "const char* \fBgdsl_list_get_name\fP (const \fBgdsl_list_t\fPL)"
+.PP
+Get the name of a list\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned string MUST NOT be freed\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to get the name from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the name of the list L\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_set_name()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_list_get_size\fP (const \fBgdsl_list_t\fPL)"
+.PP
+Get the size of a list\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to get the size from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of the list L (noted |L|)\&. 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_list_is_empty\fP (const \fBgdsl_list_t\fPL)"
+.PP
+Check if a list is empty\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the list L is empty\&. 
+.PP
+FALSE if the list L is not empty\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_get_head\fP (const \fBgdsl_list_t\fPL)"
+.PP
+Get the head of a list\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to get the head from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element at L's head position if L is not empty\&. The returned element is not removed from L\&. 
+.PP
+NULL if the list L is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_get_tail()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_get_tail\fP (const \fBgdsl_list_t\fPL)"
+.PP
+Get the tail of a list\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to get the tail from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element at L's tail position if L is not empty\&. The returned element is not removed from L\&. 
+.PP
+NULL if L is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_get_head()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_list_t\fP \fBgdsl_list_set_name\fP (\fBgdsl_list_t\fPL, const char *NEW_NAME)"
+.PP
+Set the name of a list\&. Changes the previous name of the list L to a copy of NEW_NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to change the name 
+.br
+\fINEW_NAME\fP The new name of L 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified list in case of success\&. 
+.PP
+NULL in case of failure\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_get_name()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_insert_head\fP (\fBgdsl_list_t\fPL, void *VALUE)"
+.PP
+Insert an element at the head of a list\&. Allocate a new element E by calling L's ALLOC_F function on VALUE\&. ALLOC_F is the function pointer passed to \fBgdsl_list_alloc()\fP\&. The new element E is then inserted at the header position of the list L\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to insert into 
+.br
+\fIVALUE\fP The value used to make the new element to insert into L 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the inserted element E in case of success\&. 
+.PP
+NULL in case of failure\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_insert_tail()\fP 
+.PP
+\fBgdsl_list_remove_head()\fP 
+.PP
+\fBgdsl_list_remove_tail()\fP 
+.PP
+\fBgdsl_list_remove()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_insert_tail\fP (\fBgdsl_list_t\fPL, void *VALUE)"
+.PP
+Insert an element at the tail of a list\&. Allocate a new element E by calling L's ALLOC_F function on VALUE\&. ALLOC_F is the function pointer passed to \fBgdsl_list_alloc()\fP\&. The new element E is then inserted at the footer position of the list L\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to insert into 
+.br
+\fIVALUE\fP The value used to make the new element to insert into L 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the inserted element E in case of success\&. 
+.PP
+NULL in case of failure\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_insert_head()\fP 
+.PP
+\fBgdsl_list_remove_head()\fP 
+.PP
+\fBgdsl_list_remove_tail()\fP 
+.PP
+\fBgdsl_list_remove()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_remove_head\fP (\fBgdsl_list_t\fPL)"
+.PP
+Remove the head of a list\&. Remove the element at the head of the list L\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to remove the head from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed element in case of success\&. 
+.PP
+NULL in case of L is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_insert_head()\fP 
+.PP
+\fBgdsl_list_insert_tail()\fP 
+.PP
+\fBgdsl_list_remove_tail()\fP 
+.PP
+\fBgdsl_list_remove()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_remove_tail\fP (\fBgdsl_list_t\fPL)"
+.PP
+Remove the tail of a list\&. Remove the element at the tail of the list L\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to remove the tail from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed element in case of success\&. 
+.PP
+NULL in case of L is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_insert_head()\fP 
+.PP
+\fBgdsl_list_insert_tail()\fP 
+.PP
+\fBgdsl_list_remove_head()\fP 
+.PP
+\fBgdsl_list_remove()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_remove\fP (\fBgdsl_list_t\fPL, \fBgdsl_compare_func_t\fPCOMP_F, const void *VALUE)"
+.PP
+Remove a particular element from a list\&. Search into the list L for the first element E equal to VALUE by using COMP_F\&. If E is found, it is removed from L and then returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to remove the element from 
+.br
+\fICOMP_F\fP The comparison function used to find the element to remove 
+.br
+\fIVALUE\fP The value used to compare the element to remove with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the founded element E if it was found\&. 
+.PP
+NULL in case the searched element E was not found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_insert_head()\fP 
+.PP
+\fBgdsl_list_insert_tail()\fP 
+.PP
+\fBgdsl_list_remove_head()\fP 
+.PP
+\fBgdsl_list_remove_tail()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_list_t\fP \fBgdsl_list_delete_head\fP (\fBgdsl_list_t\fPL)"
+.PP
+Delete the head of a list\&. Remove the header element from the list L and deallocates it using the FREE_F function passed to \fBgdsl_list_alloc()\fP\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to destroy the head from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified list L in case of success\&. 
+.PP
+NULL if L is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_alloc()\fP 
+.PP
+gdsl_list_destroy_tail() 
+.PP
+gdsl_list_destroy() 
+.RE
+.PP
+
+.SS "\fBgdsl_list_t\fP \fBgdsl_list_delete_tail\fP (\fBgdsl_list_t\fPL)"
+.PP
+Delete the tail of a list\&. Remove the footer element from the list L and deallocates it using the FREE_F function passed to \fBgdsl_list_alloc()\fP\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to destroy the tail from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified list L in case of success\&. 
+.PP
+NULL if L is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_alloc()\fP 
+.PP
+gdsl_list_destroy_head() 
+.PP
+gdsl_list_destroy() 
+.RE
+.PP
+
+.SS "\fBgdsl_list_t\fP \fBgdsl_list_delete\fP (\fBgdsl_list_t\fPL, \fBgdsl_compare_func_t\fPCOMP_F, const void *VALUE)"
+.PP
+Delete a particular element from a list\&. Search into the list L for the first element E equal to VALUE by using COMP_F\&. If E is found, it is removed from L and deallocated using the FREE_F function passed to \fBgdsl_list_alloc()\fP\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to destroy the element from 
+.br
+\fICOMP_F\fP The comparison function used to find the element to destroy 
+.br
+\fIVALUE\fP The value used to compare the element to destroy with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified list L if the element is found\&. 
+.PP
+NULL if the element to destroy is not found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_alloc()\fP 
+.PP
+gdsl_list_destroy_head() 
+.PP
+gdsl_list_destroy_tail() 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_search\fP (const \fBgdsl_list_t\fPL, \fBgdsl_compare_func_t\fPCOMP_F, const void *VALUE)"
+.PP
+Search for a particular element into a list\&. Search the first element E equal to VALUE in the list L, by using COMP_F to compare all L's element with\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to search the element in 
+.br
+\fICOMP_F\fP The comparison function used to compare L's element with VALUE 
+.br
+\fIVALUE\fP The value to compare L's elemenst with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first founded element E in case of success\&. 
+.PP
+NULL in case the searched element E was not found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_search_by_position()\fP 
+.PP
+\fBgdsl_list_search_max()\fP 
+.PP
+\fBgdsl_list_search_min()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_search_by_position\fP (const \fBgdsl_list_t\fPL, \fBulong\fPPOS)"
+.PP
+Search for an element by its position in a list\&. \fBNote:\fP
+.RS 4
+Complexity: O( |L| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & POS > 0 & POS <= |L| 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to search the element in 
+.br
+\fIPOS\fP The position where is the element to search 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element at the POS-th position in the list L\&. 
+.PP
+NULL if POS > |L| or POS <= 0\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_search()\fP 
+.PP
+\fBgdsl_list_search_max()\fP 
+.PP
+\fBgdsl_list_search_min()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_search_max\fP (const \fBgdsl_list_t\fPL, \fBgdsl_compare_func_t\fPCOMP_F)"
+.PP
+Search for the greatest element of a list\&. Search the greatest element of the list L, by using COMP_F to compare L's elements with\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to search the element in 
+.br
+\fICOMP_F\fP The comparison function to use to compare L's element with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the highest element of L, by using COMP_F function\&. 
+.PP
+NULL if L is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_search()\fP 
+.PP
+\fBgdsl_list_search_by_position()\fP 
+.PP
+\fBgdsl_list_search_min()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_search_min\fP (const \fBgdsl_list_t\fPL, \fBgdsl_compare_func_t\fPCOMP_F)"
+.PP
+Search for the lowest element of a list\&. Search the lowest element of the list L, by using COMP_F to compare L's elements with\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to search the element in 
+.br
+\fICOMP_F\fP The comparison function to use to compare L's element with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the lowest element of L, by using COMP_F function\&. 
+.PP
+NULL if L is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_search()\fP 
+.PP
+\fBgdsl_list_search_by_position()\fP 
+.PP
+\fBgdsl_list_search_max()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_list_t\fP \fBgdsl_list_sort\fP (\fBgdsl_list_t\fPL, \fBgdsl_compare_func_t\fPCOMP_F)"
+.PP
+Sort a list\&. Sort the list L using COMP_F to order L's elements\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| * log( |L| ) ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & COMP_F != NULL & L must not contains elements that are equals 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to sort 
+.br
+\fICOMP_F\fP The comparison function used to order L's elements 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the sorted list L\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_map_forward\fP (const \fBgdsl_list_t\fPL, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a list from head to tail\&. Parse all elements of the list L from head to tail\&. The MAP_F function is called on each L's element with USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fBgdsl_list_map_forward()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to parse 
+.br
+\fIMAP_F\fP The map function to apply on each L's element 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_map_backward()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_map_backward\fP (const \fBgdsl_list_t\fPL, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a list from tail to head\&. Parse all elements of the list L from tail to head\&. The MAP_F function is called on each L's element with USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP then \fBgdsl_list_map_backward()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to parse 
+.br
+\fIMAP_F\fP The map function to apply on each L's element 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_map_forward()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_write\fP (const \fBgdsl_list_t\fPL, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write all the elements of a list to a file\&. Write the elements of the list L to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & OUTPUT_FILE != NULL & WRITE_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write L's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_write_xml()\fP 
+.PP
+\fBgdsl_list_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_write_xml\fP (const \fBgdsl_list_t\fPL, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of a list to a file into XML\&. Write the elements of the list L to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F to write L's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write L's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_write()\fP 
+.PP
+\fBgdsl_list_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_dump\fP (const \fBgdsl_list_t\fPL, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a list to a file\&. Dump the structure of the list L to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F to write L's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write L's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_write()\fP 
+.PP
+\fBgdsl_list_write_xml()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_alloc\fP (const \fBgdsl_list_t\fPL)"
+.PP
+Create a new list cursor\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+L must be a valid gdsl_list_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIL\fP The list on wich the cursor is positionned\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated list cursor in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_free()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_cursor_free\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Destroy a list cursor\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The list cursor to destroy\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_alloc()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_cursor_move_to_head\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Put a cursor on the head of its list\&. Put the cursor C on the head of C's list\&. Does nothing if C's list is empty\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to use 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_move_to_tail()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_cursor_move_to_tail\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Put a cursor on the tail of its list\&. Put the cursor C on the tail of C's list\&. Does nothing if C's list is empty\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to use 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_move_to_head()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_cursor_move_to_value\fP (\fBgdsl_list_cursor_t\fPC, \fBgdsl_compare_func_t\fPCOMP_F, void *VALUE)"
+.PP
+Place a cursor on a particular element\&. Search a particular element E in the cursor's list L by comparing all list's elements to VALUE, by using COMP_F\&. If E is found, C is positionned on it\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t & COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to put on the element E 
+.br
+\fICOMP_F\fP The comparison function to search for E 
+.br
+\fIVALUE\fP The value used to compare list's elements with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first founded element E in case it exists\&. 
+.PP
+NULL in case of element E is not found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_move_to_position()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_cursor_move_to_position\fP (\fBgdsl_list_cursor_t\fPC, \fBulong\fPPOS)"
+.PP
+Place a cursor on a element given by its position\&. Search for the POS-th element in the cursor's list L\&. In case this element exists, the cursor C is positionned on it\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |L| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t & POS > 0 & POS <= |L| 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to put on the POS-th element 
+.br
+\fIPOS\fP The position of the element to move on 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element at the POS-th position 
+.PP
+NULL if POS <= 0 or POS > |L| 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_move_to_value()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_cursor_step_forward\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Move a cursor one step forward of its list\&. Move the cursor C one node forward (from head to tail)\&. Does nothing if C is already on its list's tail\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to use 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_step_backward()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_cursor_step_backward\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Move a cursor one step backward of its list\&. Move the cursor C one node backward (from tail to head\&.) Does nothing if C is already on its list's head\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to use 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_step_forward()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_list_cursor_is_on_head\fP (const \fBgdsl_list_cursor_t\fPC)"
+.PP
+Check if a cursor is on the head of its list\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if C is on its list's head\&. 
+.PP
+FALSE if C is not on its lits's head\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_is_on_tail()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_list_cursor_is_on_tail\fP (const \fBgdsl_list_cursor_t\fPC)"
+.PP
+Check if a cursor is on the tail of its list\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if C is on its lists's tail\&. 
+.PP
+FALSE if C is not on its list's tail\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_is_on_head()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_list_cursor_has_succ\fP (const \fBgdsl_list_cursor_t\fPC)"
+.PP
+Check if a cursor has a successor\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if there exists an element after the cursor C\&. 
+.PP
+FALSE if there is no element after the cursor C\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_has_pred()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_list_cursor_has_pred\fP (const \fBgdsl_list_cursor_t\fPC)"
+.PP
+Check if a cursor has a predecessor\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if there exists an element before the cursor C\&. 
+.PP
+FALSE if there is no element before the cursor C\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_has_succ()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_list_cursor_set_content\fP (\fBgdsl_list_cursor_t\fPC, \fBgdsl_element_t\fPE)"
+.PP
+Set the content of the cursor\&. Set C's element to E\&. The previous element is *NOT* deallocated\&. If it must be deallocated, \fBgdsl_list_cursor_get_content()\fP could be used to get it in order to free it before\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor in which the content must be modified\&. 
+.br
+\fIE\fP The value used to modify C's content\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_get_content()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_cursor_get_content\fP (const \fBgdsl_list_cursor_t\fPC)"
+.PP
+Get the content of a cursor\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to get the content from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element contained in the cursor C\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_set_content()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_cursor_insert_after\fP (\fBgdsl_list_cursor_t\fPC, void *VALUE)"
+.PP
+Insert a new element after a cursor\&. A new element is created using ALLOC_F called on VALUE\&. ALLOC_F is the pointer passed to \fBgdsl_list_alloc()\fP\&. If the returned value is not NULL, then the new element is placed after the cursor C\&. If C's list is empty, the element is inserted at the head position of C's list\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor after which the new element must be inserted 
+.br
+\fIVALUE\fP The value used to allocate the new element to insert 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly inserted element in case of success\&. 
+.PP
+NULL in case of failure\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_insert_before()\fP 
+.PP
+\fBgdsl_list_cursor_remove_after()\fP 
+.PP
+\fBgdsl_list_cursor_remove_before()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_cursor_insert_before\fP (\fBgdsl_list_cursor_t\fPC, void *VALUE)"
+.PP
+Insert a new element before a cursor\&. A new element is created using ALLOC_F called on VALUE\&. ALLOC_F is the pointer passed to \fBgdsl_list_alloc()\fP\&. If the returned value is not NULL, then the new element is placed before the cursor C\&. If C's list is empty, the element is inserted at the head position of C's list\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor before which the new element must be inserted 
+.br
+\fIVALUE\fP The value used to allocate the new element to insert 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly inserted element in case of success\&. 
+.PP
+NULL in case of failure\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_insert_after()\fP 
+.PP
+\fBgdsl_list_cursor_remove_after()\fP 
+.PP
+\fBgdsl_list_cursor_remove_before()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Removec the element under a cursor\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+After this operation, the cursor is positionned on to its successor\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to remove the content from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed element if it exists\&. 
+.PP
+NULL if there is not element to remove\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_insert_after()\fP 
+.PP
+\fBgdsl_list_cursor_insert_before()\fP 
+.PP
+\fBgdsl_list_cursor_remove()\fP 
+.PP
+\fBgdsl_list_cursor_remove_before()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove_after\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Removec the element after a cursor\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to remove the successor from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed element if it exists\&. 
+.PP
+NULL if there is not element to remove\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_insert_after()\fP 
+.PP
+\fBgdsl_list_cursor_insert_before()\fP 
+.PP
+\fBgdsl_list_cursor_remove()\fP 
+.PP
+\fBgdsl_list_cursor_remove_before()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove_before\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Remove the element before a cursor\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to remove the predecessor from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed element if it exists\&. 
+.PP
+NULL if there is not element to remove\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_insert_after()\fP 
+.PP
+\fBgdsl_list_cursor_insert_before()\fP 
+.PP
+\fBgdsl_list_cursor_remove()\fP 
+.PP
+\fBgdsl_list_cursor_remove_after()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Delete the element under a cursor\&. Remove the element under the cursor C\&. The removed element is also deallocated using FREE_F passed to \fBgdsl_list_alloc()\fP\&.
+.PP
+Complexity: O( 1 )
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to delete the content\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the cursor C if the element was removed\&. 
+.PP
+NULL if there is not element to remove\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_delete_before()\fP 
+.PP
+\fBgdsl_list_cursor_delete_after()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete_after\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Delete the element after a cursor\&. Remove the element after the cursor C\&. The removed element is also deallocated using FREE_F passed to \fBgdsl_list_alloc()\fP\&.
+.PP
+Complexity: O( 1 )
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to delete the successor from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the cursor C if the element was removed\&. 
+.PP
+NULL if there is not element to remove\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_delete()\fP 
+.PP
+\fBgdsl_list_cursor_delete_before()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete_before\fP (\fBgdsl_list_cursor_t\fPC)"
+.PP
+Delete the element before the cursor of a list\&. Remove the element before the cursor C\&. The removed element is also deallocated using FREE_F passed to \fBgdsl_list_alloc()\fP\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+C must be a valid gdsl_list_cursor_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIC\fP The cursor to delete the predecessor from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the cursor C if the element was removed\&. 
+.PP
+NULL if there is not element to remove\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_list_cursor_delete()\fP 
+.PP
+\fBgdsl_list_cursor_delete_after()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

@@ -1,0 +1,44 @@
+import "base/common.proto";
+
+//返回链接索引
+message GS2CreateCLink {
+    optional uint32 idx = 1;
+    optional uint32 rand =2;
+}
+
+
+//名片
+message Link2Name {
+    optional uint32 pid =1;
+    optional string name =2;
+}
+
+
+//道具
+message Link2Item {
+    optional base.ItemInfo item = 1;
+}
+
+//伙伴
+message Link2Partner {
+    optional base.PartnerLink par = 1;
+}
+
+//玩家
+message Link2Player {
+    optional base.PlayerLink player = 1;
+}
+
+message GS2CLinkInfo  {
+    optional string mask = 1;
+    optional uint32 idx =  2;//对应链接索引
+    optional Link2Name  name = 3;
+    optional Link2Item item = 4;
+    optional Link2Partner partner =  5;
+    optional Link2Player player = 6;
+}
+
+//发送常用消息
+message GS2CSendCommonChat {
+    repeated string chat_list = 1;
+}

@@ -1,0 +1,1090 @@
+.TH "Low level binary tree manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Low level binary tree manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _gdsl_bintree * \fB_gdsl_bintree_t\fP"
+.br
+.RI "\fIGDSL low-level binary tree type\&. \fP"
+.ti -1c
+.RI "typedef int(* \fB_gdsl_bintree_map_func_t\fP )(const \fB_gdsl_bintree_t\fP TREE, void *USER_DATA)"
+.br
+.RI "\fIGDSL low-level binary tree map function type\&. \fP"
+.ti -1c
+.RI "typedef void(* \fB_gdsl_bintree_write_func_t\fP )(const \fB_gdsl_bintree_t\fP TREE, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIGDSL low-level binary tree write function type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_alloc\fP (const \fBgdsl_element_t\fP E, const \fB_gdsl_bintree_t\fP LEFT, const \fB_gdsl_bintree_t\fP RIGHT)"
+.br
+.RI "\fICreate a new low-level binary tree\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_bintree_free\fP (\fB_gdsl_bintree_t\fP T, const \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fIDestroy a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_copy\fP (const \fB_gdsl_bintree_t\fP T, const \fBgdsl_copy_func_t\fP COPY_F)"
+.br
+.RI "\fICopy a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fB_gdsl_bintree_is_empty\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fICheck if a low-level binary tree is empty\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fB_gdsl_bintree_is_leaf\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fICheck if a low-level binary tree is reduced to a leaf\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fB_gdsl_bintree_is_root\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fICheck if a low-level binary tree is a root\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fB_gdsl_bintree_get_content\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fIGet the root content of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_get_parent\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fIGet the parent tree of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_get_left\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fIGet the left sub-tree of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_get_right\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fIGet the right sub-tree of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP * \fB_gdsl_bintree_get_left_ref\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fIGet the left sub-tree reference of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP * \fB_gdsl_bintree_get_right_ref\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fIGet the right sub-tree reference of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fB_gdsl_bintree_get_height\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fIGet the height of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fB_gdsl_bintree_get_size\fP (const \fB_gdsl_bintree_t\fP T)"
+.br
+.RI "\fIGet the size of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_bintree_set_content\fP (\fB_gdsl_bintree_t\fP T, const \fBgdsl_element_t\fP E)"
+.br
+.RI "\fISet the root element of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_bintree_set_parent\fP (\fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_t\fP P)"
+.br
+.RI "\fISet the parent tree of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_bintree_set_left\fP (\fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_t\fP L)"
+.br
+.RI "\fISet left sub-tree of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_bintree_set_right\fP (\fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_t\fP R)"
+.br
+.RI "\fISet right sub-tree of a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_rotate_left\fP (\fB_gdsl_bintree_t\fP *T)"
+.br
+.RI "\fILeft rotate a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_rotate_right\fP (\fB_gdsl_bintree_t\fP *T)"
+.br
+.RI "\fIRight rotate a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_rotate_left_right\fP (\fB_gdsl_bintree_t\fP *T)"
+.br
+.RI "\fILeft-right rotate a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_rotate_right_left\fP (\fB_gdsl_bintree_t\fP *T)"
+.br
+.RI "\fIRight-left rotate a low-level binary tree\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_map_prefix\fP (const \fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a low-level binary tree in prefixed order\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_map_infix\fP (const \fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a low-level binary tree in infixed order\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_map_postfix\fP (const \fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a low-level binary tree in postfixed order\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_bintree_write\fP (const \fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of all nodes of a low-level binary tree to a file\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_bintree_write_xml\fP (const \fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a low-level binary tree to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_bintree_dump\fP (const \fB_gdsl_bintree_t\fP T, const \fB_gdsl_bintree_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a low-level binary tree to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct _gdsl_bintree* \fB_gdsl_bintree_t\fP"
+.PP
+GDSL low-level binary tree type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 54 of file _gdsl_bintree\&.h\&.
+.SS "typedef int(*  \fB_gdsl_bintree_map_func_t\fP)(const \fB_gdsl_bintree_t\fP TREE, void *USER_DATA)"
+.PP
+GDSL low-level binary tree map function type\&. \fBParameters:\fP
+.RS 4
+\fITREE\fP The low-level binary tree to map\&. 
+.br
+\fIUSER_DATA\fP The user datas to pass to this function\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+GDSL_MAP_STOP if the mapping must be stopped\&. 
+.PP
+GDSL_MAP_CONT if the mapping must be continued\&. 
+.RE
+.PP
+
+.PP
+Definition at line 63 of file _gdsl_bintree\&.h\&.
+.SS "typedef void(*  \fB_gdsl_bintree_write_func_t\fP)(const \fB_gdsl_bintree_t\fP TREE, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+GDSL low-level binary tree write function type\&. \fBParameters:\fP
+.RS 4
+\fITREE\fP The low-level binary tree to write\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write TREE\&. 
+.br
+\fIUSER_DATA\fP The user datas to pass to this function\&. 
+.RE
+.PP
+
+.PP
+Definition at line 73 of file _gdsl_bintree\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_alloc\fP (const \fBgdsl_element_t\fPE, const \fB_gdsl_bintree_t\fPLEFT, const \fB_gdsl_bintree_t\fPRIGHT)"
+.PP
+Create a new low-level binary tree\&. Allocate a new low-level binary tree data structure\&. Its root content is set to E and its left son (resp\&. right) is set to LEFT (resp\&. RIGHT)\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIE\fP The root content of the new low-level binary tree to create\&. 
+.br
+\fILEFT\fP The left sub-tree of the new low-level binary tree to create\&. 
+.br
+\fIRIGHT\fP The right sub-tree of the new low-level binary tree to create\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated low-level binary tree in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_free()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_bintree_free\fP (\fB_gdsl_bintree_t\fPT, const \fBgdsl_free_func_t\fPFREE_F)"
+.PP
+Destroy a low-level binary tree\&. Flush and destroy the low-level binary tree T\&. If FREE_F != NULL, FREE_F function is used to deallocate each T's element\&. Otherwise nothing is done with T's elements\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to destroy\&. 
+.br
+\fIFREE_F\fP The function used to deallocate T's nodes contents\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_alloc()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_copy\fP (const \fB_gdsl_bintree_t\fPT, const \fBgdsl_copy_func_t\fPCOPY_F)"
+.PP
+Copy a low-level binary tree\&. Create and return a copy of the low-level binary tree T using COPY_F on each T's element to copy them\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+COPY_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to copy\&. 
+.br
+\fICOPY_F\fP The function used to copy T's nodes contents\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a copy of T in case of success\&. 
+.PP
+NULL if _gdsl_bintree_is_empty (T) == TRUE or in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_alloc()\fP 
+.PP
+\fB_gdsl_bintree_free()\fP 
+.PP
+\fB_gdsl_bintree_is_empty()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fB_gdsl_bintree_is_empty\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Check if a low-level binary tree is empty\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to check\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the low-level binary tree T is empty\&. 
+.PP
+FALSE if the low-level binary tree T is not empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_is_leaf()\fP 
+.PP
+\fB_gdsl_bintree_is_root()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fB_gdsl_bintree_is_leaf\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Check if a low-level binary tree is reduced to a leaf\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to check\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the low-level binary tree T is a leaf\&. 
+.PP
+FALSE if the low-level binary tree T is not a leaf\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_is_empty()\fP 
+.PP
+\fB_gdsl_bintree_is_root()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fB_gdsl_bintree_is_root\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Check if a low-level binary tree is a root\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to check\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the low-level binary tree T is a root\&. 
+.PP
+FALSE if the low-level binary tree T is not a root\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_is_empty()\fP 
+.PP
+\fB_gdsl_bintree_is_leaf()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fB_gdsl_bintree_get_content\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Get the root content of a low-level binary tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the root's content of the low-level binary tree T\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_set_content()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_get_parent\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Get the parent tree of a low-level binary tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the parent of the low-level binary tree T if T isn't a root\&. 
+.PP
+NULL if the low-level binary tree T is a root (ie\&. T has no parent)\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_is_root()\fP 
+.PP
+\fB_gdsl_bintree_set_parent()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_get_left\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Get the left sub-tree of a low-level binary tree\&. Return the left subtree of the low-level binary tree T (noted l(T))\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the left sub-tree of the low-level binary tree T if T has a left sub-tree\&. 
+.PP
+NULL if the low-level binary tree T has no left sub-tree\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_get_right()\fP 
+.PP
+\fB_gdsl_bintree_set_left()\fP 
+.PP
+\fB_gdsl_bintree_set_right()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_get_right\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Get the right sub-tree of a low-level binary tree\&. Return the right subtree of the low-level binary tree T (noted r(T))\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the right sub-tree of the low-level binary tree T if T has a right sub-tree\&. 
+.PP
+NULL if the low-level binary tree T has no right sub-tree\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_get_left()\fP 
+.PP
+\fB_gdsl_bintree_set_left()\fP 
+.PP
+\fB_gdsl_bintree_set_right()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP* \fB_gdsl_bintree_get_left_ref\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Get the left sub-tree reference of a low-level binary tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the left sub-tree reference of the low-level binary tree T\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_get_right_ref()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP* \fB_gdsl_bintree_get_right_ref\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Get the right sub-tree reference of a low-level binary tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the right sub-tree reference of the low-level binary tree T\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_get_left_ref()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fB_gdsl_bintree_get_height\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Get the height of a low-level binary tree\&. Compute the height of the low-level binary tree T (noted h(T))\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the height of T\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_get_size()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fB_gdsl_bintree_get_size\fP (const \fB_gdsl_bintree_t\fPT)"
+.PP
+Get the size of a low-level binary tree\&. \fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of T (noted |T|)\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_get_height()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_bintree_set_content\fP (\fB_gdsl_bintree_t\fPT, const \fBgdsl_element_t\fPE)"
+.PP
+Set the root element of a low-level binary tree\&. Modify the root element of the low-level binary tree T to E\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to modify\&. 
+.br
+\fIE\fP The new T's root content\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_get_content\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_bintree_set_parent\fP (\fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_t\fPP)"
+.PP
+Set the parent tree of a low-level binary tree\&. Modify the parent of the low-level binary tree T to P\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to modify\&. 
+.br
+\fIP\fP The new T's parent\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_get_parent()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_bintree_set_left\fP (\fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_t\fPL)"
+.PP
+Set left sub-tree of a low-level binary tree\&. Modify the left sub-tree of the low-level binary tree T to L\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to modify\&. 
+.br
+\fIL\fP The new T's left sub-tree\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_set_right()\fP 
+.PP
+\fB_gdsl_bintree_get_left()\fP 
+.PP
+\fB_gdsl_bintree_get_right()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_bintree_set_right\fP (\fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_t\fPR)"
+.PP
+Set right sub-tree of a low-level binary tree\&. Modify the right sub-tree of the low-level binary tree T to R\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T must be a non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to modify\&. 
+.br
+\fIR\fP The new T's right sub-tree\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_set_left()\fP 
+.PP
+\fB_gdsl_bintree_get_left()\fP 
+.PP
+\fB_gdsl_bintree_get_right()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_rotate_left\fP (\fB_gdsl_bintree_t\fP *T)"
+.PP
+Left rotate a low-level binary tree\&. Do a left rotation of the low-level binary tree T\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T & r(T) must be non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to rotate\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified T left-rotated\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_rotate_right()\fP 
+.PP
+\fB_gdsl_bintree_rotate_left_right()\fP 
+.PP
+\fB_gdsl_bintree_rotate_right_left()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_rotate_right\fP (\fB_gdsl_bintree_t\fP *T)"
+.PP
+Right rotate a low-level binary tree\&. Do a right rotation of the low-level binary tree T\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T & l(T) must be non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to rotate\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified T right-rotated\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_rotate_left()\fP 
+.PP
+\fB_gdsl_bintree_rotate_left_right()\fP 
+.PP
+\fB_gdsl_bintree_rotate_right_left()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_rotate_left_right\fP (\fB_gdsl_bintree_t\fP *T)"
+.PP
+Left-right rotate a low-level binary tree\&. Do a double left-right rotation of the low-level binary tree T\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T & l(T) & r(l(T)) must be non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to rotate\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified T left-right-rotated\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_rotate_left()\fP 
+.PP
+\fB_gdsl_bintree_rotate_right()\fP 
+.PP
+\fB_gdsl_bintree_rotate_right_left()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_rotate_right_left\fP (\fB_gdsl_bintree_t\fP *T)"
+.PP
+Right-left rotate a low-level binary tree\&. Do a double right-left rotation of the low-level binary tree T\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+T & r(T) & l(r(T)) must be non-empty _gdsl_bintree_t\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to rotate\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified T right-left-rotated\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_rotate_left()\fP 
+.PP
+\fB_gdsl_bintree_rotate_right()\fP 
+.PP
+\fB_gdsl_bintree_rotate_left_right()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_map_prefix\fP (const \fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a low-level binary tree in prefixed order\&. Parse all nodes of the low-level binary tree T in prefixed order\&. The MAP_F function is called on each node with the USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fB_gdsl_bintree_map_prefix()\fP stops and returns its last examinated node\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to map\&. 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first node for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_map_infix()\fP 
+.PP
+\fB_gdsl_bintree_map_postfix()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_map_infix\fP (const \fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a low-level binary tree in infixed order\&. Parse all nodes of the low-level binary tree T in infixed order\&. The MAP_F function is called on each node with the USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fB_gdsl_bintree_map_infix()\fP stops and returns its last examinated node\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to map\&. 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first node for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_map_prefix()\fP 
+.PP
+\fB_gdsl_bintree_map_postfix()\fP 
+.RE
+.PP
+
+.SS "\fB_gdsl_bintree_t\fP \fB_gdsl_bintree_map_postfix\fP (const \fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a low-level binary tree in postfixed order\&. Parse all nodes of the low-level binary tree T in postfixed order\&. The MAP_F function is called on each node with the USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fB_gdsl_bintree_map_postfix()\fP stops and returns its last examinated node\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to map\&. 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first node for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_map_prefix()\fP 
+.PP
+\fB_gdsl_bintree_map_infix()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_bintree_write\fP (const \fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of all nodes of a low-level binary tree to a file\&. Write the nodes contents of the low-level binary tree T to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+WRITE_F != NULL & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write T's nodes\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_write_xml()\fP 
+.PP
+\fB_gdsl_bintree_dump()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_bintree_write_xml\fP (const \fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of a low-level binary tree to a file into XML\&. Write the nodes contents of the low-level binary tree T to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F function to write T's nodes content to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write T's nodes\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_write()\fP 
+.PP
+\fB_gdsl_bintree_dump()\fP 
+.RE
+.PP
+
+.SS "void \fB_gdsl_bintree_dump\fP (const \fB_gdsl_bintree_t\fPT, const \fB_gdsl_bintree_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a low-level binary tree to a file\&. Dump the structure of the low-level binary tree T to OUTPUT_FILE\&. If WRITE_F != NULL, then use WRITE_F function to write T's nodes contents to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |T| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The low-level binary tree to dump\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write T's nodes\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fB_gdsl_bintree_write()\fP 
+.PP
+\fB_gdsl_bintree_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

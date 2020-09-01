@@ -1,0 +1,52 @@
+import "base/common.proto";
+
+message GS2CHello {
+    optional uint32 time = 1;
+}
+
+message GS2CLoginError {
+    optional uint32 pid = 1;
+    optional uint32 errcode = 2; /* 1001  in_login 1002 in_logout */
+}
+
+message GS2CLoginErrorNotify{
+    optional string cmd = 1;
+}
+
+message GS2CLoginAccount {
+    optional string account = 1;
+    repeated base.SimpleRole role_list = 2;
+    optional uint32 channel = 3;
+}
+
+message GS2CLoginRole {
+    optional string account = 1;
+    optional uint32 pid = 2;
+    optional base.Role role = 3;
+    optional string role_token = 4;
+    optional uint32 is_gm = 5;
+    optional uint32 channel = 6;
+    optional string xg_account = 7; //信鸽注册帐号
+}
+
+message GS2CCreateRole {
+    optional string account = 1;
+    optional base.SimpleRole role = 2;
+    optional uint32 channel = 3;
+}
+
+message GS2CCheckInviteCodeResult{
+    optional uint32 result = 1;   /*0为没有有效邀请码，1为有*/
+    optional string msg = 2;
+}
+
+message GS2CSetInviteCodeResult{
+    optional uint32 result = 1;   /*0为没有有效邀请码，1为有*/
+    optional string msg = 2;
+}
+
+message GS2CQueryLogin {
+    repeated string delete_file = 1;    //删除的导表资源文件名字
+    repeated base.ClientResFileContent res_file = 2;    //新增或者改变的资源文件信息
+    optional string code = 3;               //客户端在线更新代码
+}

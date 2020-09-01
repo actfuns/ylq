@@ -1,0 +1,88 @@
+import "base/common.proto";
+
+message C2GSHeartBeat {
+}
+
+message C2GSGMCmd {
+    optional string cmd = 1;
+}
+
+/*提交任务需求道具*/
+message CommitItem {
+    optional uint32 id = 1;
+    optional uint32 amount = 2;
+}
+
+message C2GSCallback{
+    optional string sessionidx	= 1;
+    optional uint32 answer  = 2;                                           //点击npc回应
+    repeated CommitItem itemlist = 3;                               //提交寻物任务道具
+    optional string message = 4;                                               //附帶信息
+    optional uint32 blacklisttime = 5;                                   //x分钟内拒绝再次收到该请求
+}
+
+//玩家处于呆滞
+message C2GSNotActive {
+
+}
+
+//发送弹幕
+message C2GSBarrage{
+    optional string type = 1;           //"partner"
+    optional string content = 2;
+    optional bool valid = 3; //合法弹幕
+}
+
+message C2GSBigPacket {
+    optional uint32 type = 1;
+    optional uint32 total = 2;
+    optional uint32 index = 3;
+    optional bytes data = 4;
+}
+
+message C2GSQueryClientUpdateRes {
+    repeated base.ClientResFileVersion res_file_version = 1;
+}
+
+message C2GSForceLeaveWar{
+}
+
+message C2GSClientSession {
+    optional uint32 session = 1;
+}
+
+//备用协议
+message C2GSDoBackup{
+    optional uint32 type = 1;   //备用类型
+    repeated base.BackUpInfo backup_info = 2;
+}
+
+//goods_key:商店,grade_key:等级礼包
+message RequestPay {
+    optional string request_key = 1;        //参数goods_key,grade_key, one_RMB_gift
+    optional string request_value = 2;    //参数对应的值
+}
+
+message C2GSRequestPay {
+    optional string product_key = 1;            //产品key
+    optional uint32 product_amount = 2;    //产品数目
+    optional RequestPay pay_args = 3;         //充值参数
+}
+
+message C2GSGMRequire {
+    optional uint32 target_id = 1;
+    optional string info = 2;
+}
+
+message C2GSAnswerGM {
+    optional uint32 gm_id = 1;
+    optional string info = 2;
+}
+
+//切后台发送协议
+message C2GSQueryBack {
+}
+
+message C2GSSendXGToken {
+    optional string xg_token = 1;
+}

@@ -1,0 +1,108 @@
+-- ./excel/huodong/shimen/dialog.xlsx
+return {
+
+    [1] = {
+        content = "市政厅每天总是有处理不完的事情,是时候需要扩充编制了。\n每日可领取2次巡查任务(剩余:$lefttime次)",
+        dialog_id = 100,
+        last_action = {{["content"] = "领取任务", ["event"] = "_GT"}, {["content"] = "长官威武"}},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [2] = {
+        content = "你手头上还有任务没有完成，先去做完再来吧。",
+        dialog_id = 101,
+        last_action = {},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [3] = {
+        content = "只有委托书上的任务全部完成了，我才能给你发奖励",
+        dialog_id = 102,
+        last_action = {},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [4] = {
+        content = "今天的委托全都发布完了，难得在下班之前把事情都处理完。",
+        dialog_id = 103,
+        last_action = {},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [5] = {
+        content = "背包满了，先清理一下空位再来吧。",
+        dialog_id = 104,
+        last_action = {},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [6] = {
+        content = "请先将你当前的任务交付",
+        dialog_id = 105,
+        last_action = {},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [7] = {
+        content = "你还没有领任务就想领奖励，是不是想搞事情？",
+        dialog_id = 106,
+        last_action = {},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [8] = {
+        content = "先去把手头的任务完成了再来吧。",
+        dialog_id = 107,
+        last_action = {},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+}

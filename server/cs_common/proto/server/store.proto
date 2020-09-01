@@ -1,0 +1,58 @@
+
+//商品信息
+message GoodsInfo {
+    optional uint32 item_id = 1; //商品唯一ID
+    optional uint32 rebate = 2; //折扣 0为没有
+    optional uint32 amount =3 ;//可购买数量
+    optional uint32 limit = 4 ; //是否限购
+    optional uint32 pos = 5;
+}
+
+
+message GS2CNpcStoreInfo {
+   optional uint32 shop_id =1 ; //商店
+   repeated GoodsInfo goodslist=2; //商品信息
+   optional uint32 refresh_time = 3; //下次刷新时间戳,没有刷新规则返回0
+   optional uint32 refresh_cost = 4; //下次刷新所需货币数量
+   optional uint32 refresh_coin_type = 5; //下次刷新所需货币类型
+   optional uint32 refresh_count = 6; //剩余可刷新次数
+   optional uint32 refresh_rule = 7; //0-不能刷新,1-CD刷新,2-固定时间刷新,3-CD+固定
+}
+
+//打开金币铜币兑换界面
+message GS2COpenGold2Coin{
+  optional uint32 type = 1;  //1水晶to金币,4水晶to体力
+  optional uint32 ratio = 2; //兑换比例
+  optional uint32 max_extra = 3; //最大赠送次数
+  optional uint32 remain_extra = 4; //剩余赠送次数
+}
+
+
+message GS2CGold2Coin {
+    optional uint32 result = 1;//1玩法关闭
+}
+
+//刷新部分商品
+message GS2CStoreRefresh {
+   optional uint32 shop_id =1;
+    optional GoodsInfo goodsInfo=2; //商品信息
+}
+
+//充值相关
+message ColorCoinUnit {
+    optional string key = 1;        //充值项
+    optional uint32 val = 2;        //表示充值次数
+}
+
+//登录
+message GS2CPayForColorCoinInfo {
+    repeated ColorCoinUnit colorcoin_list = 1;
+}
+
+//刷新
+message GS2CRefreshChargeColorCoin {
+    optional ColorCoinUnit unit = 1;
+}
+
+
+

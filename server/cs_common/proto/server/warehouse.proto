@@ -1,0 +1,44 @@
+import "base/common.proto";
+
+//登录发送
+message GS2CWareHouseInfo {
+    optional uint32 size        = 1;        //仓库的数目
+    repeated string namelist = 2;       //名字列表
+}
+
+//仓库刷新信息
+message GS2CRefreshWareHouse{
+    optional uint32 wid = 1;
+    optional string name = 2;
+    repeated base.ItemInfo itemdata  = 3;                                //道具信息
+}
+
+//仓库名
+message GS2CWareHouseName {
+    optional uint32 wid = 1;
+    optional string name = 2;
+}
+
+//仓库增加道具
+message GS2CAddWareHouseItem{
+    optional uint32 wid = 1;
+    optional base.ItemInfo itemdata   = 2;
+}
+
+//仓库删除道具
+message GS2CDelWareHouseItem{
+    optional uint32 wid = 1;
+    optional uint32 itemid = 2; //道具
+}
+
+//仓库内移动道具
+message GS2CWHItemArrange{
+    optional uint32 wid = 1;          //仓库id
+    repeated base.ItemPos pos_info = 2;
+}
+
+message GS2CWHItemAmount {
+    optional uint32 wid = 1;
+    optional uint32 itemid = 2;
+    optional uint32 amount = 3;
+}

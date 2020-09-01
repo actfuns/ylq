@@ -1,0 +1,172 @@
+//创建队伍
+message C2GSCreateTeam{
+    optional uint32 auto_target = 1;
+    optional uint32 min_grade = 2;
+    optional uint32 max_grade = 3;
+}
+
+//请求队伍信息
+message C2GSTeamInfo {
+    optional uint32 teamid = 1;
+}
+
+//申请入队
+message C2GSApplyTeam{
+    optional uint32 pid = 1;
+}
+
+//申请信息
+message C2GSTeamApplyInfo{
+}
+
+//申请通过
+message C2GSApplyTeamPass{
+    optional uint32 pid = 1;
+}
+
+//清除申请
+message C2GSClearApply{
+}
+
+//取消申请
+message C2GSCancelApply{
+    optional uint32 teamid = 1;
+}
+
+//邀请入队
+message C2GSInviteTeam {
+    optional uint32 target = 1;
+    optional uint32 auto_target = 2;
+    optional uint32 min_grade = 3;
+    optional uint32 max_grade = 4;
+}
+
+message C2GSInviteAll{
+    repeated uint32 target_list = 1;
+    optional uint32 auto_target = 2;
+    optional uint32 min_grade = 3;
+    optional uint32 max_grade = 4;
+}
+
+//获取邀请信息
+message C2GSTeamInviteInfo{
+}
+
+//邀请通过
+message C2GSInvitePass{
+    optional uint32 teamid = 1;
+}
+
+//清除邀请
+message C2GSClearInvite{
+}
+
+//暂离
+message C2GSShortLeave{
+    
+}
+
+//离队
+message C2GSLeaveTeam{
+    
+}
+
+message C2GSLeaveLiLianTeam{
+    
+}
+
+//请离
+message C2GSKickOutTeam{
+    optional uint32 target = 1;
+}
+
+//归队
+message C2GSBackTeam{
+}
+
+//召唤
+message C2GSTeamSummon{
+    optional uint32 pid = 1;
+}
+
+//申请队长
+message C2GSApplyLeader{
+}
+
+//设置成员为队长
+message C2GSSetLeader{
+    optional uint32 target = 1;
+}
+
+//队伍自动匹配
+message C2GSTeamAutoMatch {
+    optional uint32 auto_target = 1; // 0-无目标队伍
+    optional uint32 min_grade = 2;
+    optional uint32 max_grade = 3;
+    optional uint32 team_match = 4; /* 1-进入自动匹配 0-不进入自动匹配队列 */
+}
+
+//取消队伍自动匹配
+message C2GSTeamCancelAutoMatch {
+    
+}
+
+message C2GSPlayerAutoMatch {
+    optional uint32 auto_target = 1;    //1为爱心匹配
+    optional uint32 min_grade = 2;
+    optional uint32 max_grade = 3;
+}
+
+message C2GSPlayerCancelAutoMatch {
+    optional uint32 auto_target = 1;
+    optional uint32 tips = 2;
+}
+
+message C2GSGetTargetTeamInfo {
+    optional uint32 auto_target = 1; /* 0-全部，其他-活动id */
+}
+
+message C2GSTakeOverLeader{
+    
+}
+
+message C2GSSetTeamTarget{
+    optional uint32 auto_target = 1;
+    optional uint32 min_grade = 2;
+    optional uint32 max_grade = 3;
+}
+
+message C2GSLeaderSleep{
+    optional uint32 status = 1;   /*1为sleep,2为awake*/
+}
+
+message SettingInfo{
+    optional string option = 1;     //開關名稱
+    optional uint32 value = 2;      //開關設置
+}
+
+message C2GSChangeTeamSetting{
+    repeated SettingInfo setting_info = 1;
+}
+
+message C2GSGetMingleiTeamInfo{
+    optional uint32 type = 1;   //1为组队界面的请求，2为日程界面的请求
+}
+
+message C2GSTrapmineTeamInfo {
+
+}
+
+message C2GSInviteFriendList{
+    
+}
+
+//给予队友指挥权限
+message C2GSAwardWarBattleCommand {
+    optional uint32 target = 1; //目标 
+    optional uint32 op = 2; //操作,1:给予,0回收
+}
+
+message C2GSGetTargetMemList{
+    optional uint32 target = 1;
+}

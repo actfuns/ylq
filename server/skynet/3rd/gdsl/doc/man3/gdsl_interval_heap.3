@@ -1,0 +1,698 @@
+.TH "Interval Heap manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Interval Heap manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct heap * \fBgdsl_interval_heap_t\fP"
+.br
+.RI "\fIGDSL interval heap type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fICreate a new interval heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_free\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIDestroy an interval heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_flush\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIFlush an interval heap\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_interval_heap_get_name\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIGet the name of an interval heap\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_interval_heap_get_size\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIGet the size of a interval heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_set_max_size\fP (const \fBgdsl_interval_heap_t\fP H, \fBulong\fP size)"
+.br
+.RI "\fISet the maximum size of the interval heap\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_interval_heap_is_empty\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fICheck if an interval heap is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_set_name\fP (\fBgdsl_interval_heap_t\fP H, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of an interval heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_insert\fP (\fBgdsl_interval_heap_t\fP H, void *VALUE)"
+.br
+.RI "\fIInsert an element into an interval heap (PUSH)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_remove_max\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIRemove the maximum element from an interval heap (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_remove_min\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIRemove the minimum element from an interval heap (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_get_min\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIGet the minimum element\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_get_max\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIGet the maximum element\&. \fP"
+.ti -1c
+.RI "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_delete_min\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIDelete the minimum element from an interval heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_delete_max\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIDelete the maximum element from an interval heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_map_forward\fP (const \fBgdsl_interval_heap_t\fP H, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a interval heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_write\fP (const \fBgdsl_interval_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of an interval heap to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_write_xml\fP (const \fBgdsl_interval_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of an interval heap to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_dump\fP (const \fBgdsl_interval_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of an interval heap to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct heap* \fBgdsl_interval_heap_t\fP"
+.PP
+GDSL interval heap type\&. This type is voluntary opaque\&. Variables of this kind couldn't be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 53 of file gdsl_interval_heap\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fPALLOC_F, \fBgdsl_free_func_t\fPFREE_F, \fBgdsl_compare_func_t\fPCOMP_F)"
+.PP
+Create a new interval heap\&. Allocate a new interval heap data structure which name is set to a copy of NAME\&. The function pointers ALLOC_F, FREE_F and COMP_F could be used to respectively, alloc, free and compares elements in the interval heap\&. These pointers could be set to NULL to use the default ones:
+.IP "\(bu" 2
+the default ALLOC_F simply returns its argument
+.IP "\(bu" 2
+the default FREE_F does nothing
+.IP "\(bu" 2
+the default COMP_F always returns 0
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINAME\fP The name of the new interval heap to create 
+.br
+\fIALLOC_F\fP Function to alloc element when inserting it in the interval heap 
+.br
+\fIFREE_F\fP Function to free element when removing it from the interval heap 
+.br
+\fICOMP_F\fP Function to compare elements into the interval heap 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated interval heap in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_free()\fP 
+.PP
+\fBgdsl_interval_heap_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_interval_heap_free\fP (\fBgdsl_interval_heap_t\fPH)"
+.PP
+Destroy an interval heap\&. Deallocate all the elements of the interval heap H by calling H's FREE_F function passed to \fBgdsl_interval_heap_alloc()\fP\&. The name of H is deallocated and H is deallocated itself too\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to destroy 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_alloc()\fP 
+.PP
+\fBgdsl_interval_heap_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_interval_heap_flush\fP (\fBgdsl_interval_heap_t\fPH)"
+.PP
+Flush an interval heap\&. Deallocate all the elements of the interval heap H by calling H's FREE_F function passed to \fBgdsl_interval_heap_alloc()\fP\&. H is not deallocated itself and H's name is not modified\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The heap to flush 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_alloc()\fP 
+.PP
+\fBgdsl_interval_heap_free()\fP 
+.RE
+.PP
+
+.SS "const char* \fBgdsl_interval_heap_get_name\fP (const \fBgdsl_interval_heap_t\fPH)"
+.PP
+Get the name of an interval heap\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned string MUST NOT be freed\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to get the name from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the name of the interval heap H\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_set_name()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_interval_heap_get_size\fP (const \fBgdsl_interval_heap_t\fPH)"
+.PP
+Get the size of a interval heap\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to get the size from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of H (noted |H|)\&. 
+.RE
+.PP
+
+.SS "void \fBgdsl_interval_heap_set_max_size\fP (const \fBgdsl_interval_heap_t\fPH, \fBulong\fPsize)"
+.PP
+Set the maximum size of the interval heap\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to get the size from 
+.br
+\fIsize\fP The new maximum size 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of H (noted |H|)\&. 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_interval_heap_is_empty\fP (const \fBgdsl_interval_heap_t\fPH)"
+.PP
+Check if an interval heap is empty\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the interval heap H is empty\&. 
+.PP
+FALSE if the interval heap H is not empty\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_set_name\fP (\fBgdsl_interval_heap_t\fPH, const char *NEW_NAME)"
+.PP
+Set the name of an interval heap\&. Change the previous name of the interval heap H to a copy of NEW_NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to change the name 
+.br
+\fINEW_NAME\fP The new name of H 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified interval heap in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_get_name()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_interval_heap_insert\fP (\fBgdsl_interval_heap_t\fPH, void *VALUE)"
+.PP
+Insert an element into an interval heap (PUSH)\&. Allocate a new element E by calling H's ALLOC_F function on VALUE\&. The element E is then inserted into H at the good position to ensure H is always an interval heap\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( log ( |H| ) ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to modify 
+.br
+\fIVALUE\fP The value used to make the new element to insert into H 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the inserted element E in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_alloc()\fP 
+.PP
+gdsl_interval_heap_remove() 
+.PP
+gdsl_interval_heap_delete() 
+.PP
+\fBgdsl_interval_heap_get_size()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_interval_heap_remove_max\fP (\fBgdsl_interval_heap_t\fPH)"
+.PP
+Remove the maximum element from an interval heap (POP)\&. Remove the maximum element from the interval heap H\&. The element is removed from H and is also returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( log ( |H| ) ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to modify 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed top element\&. 
+.PP
+NULL if the interval heap is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_insert()\fP 
+.PP
+\fBgdsl_interval_heap_delete_max()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_interval_heap_remove_min\fP (\fBgdsl_interval_heap_t\fPH)"
+.PP
+Remove the minimum element from an interval heap (POP)\&. Remove the minimum element from the interval heap H\&. The element is removed from H and is also returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( log ( |H| ) ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to modify 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed top element\&. 
+.PP
+NULL if the interval heap is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_insert()\fP 
+.PP
+\fBgdsl_interval_heap_delete_max()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_interval_heap_get_min\fP (const \fBgdsl_interval_heap_t\fPH)"
+.PP
+Get the minimum element\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to get the size from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The smallest element in H 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_interval_heap_get_max\fP (const \fBgdsl_interval_heap_t\fPH)"
+.PP
+Get the maximum element\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to get the size from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The largest element in H 
+.RE
+.PP
+
+.SS "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_delete_min\fP (\fBgdsl_interval_heap_t\fPH)"
+.PP
+Delete the minimum element from an interval heap\&. Remove the minimum element from the interval heap H\&. The element is removed from H and is also deallocated using H's FREE_F function passed to \fBgdsl_interval_heap_alloc()\fP, then H is returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( log ( |H| ) ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to modify 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified interval heap after removal of top element\&. 
+.PP
+NULL if interval heap is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_insert()\fP 
+.PP
+gdsl_interval_heap_remove_top() 
+.RE
+.PP
+
+.SS "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_delete_max\fP (\fBgdsl_interval_heap_t\fPH)"
+.PP
+Delete the maximum element from an interval heap\&. Remove the maximum element from the interval heap H\&. The element is removed from H and is also deallocated using H's FREE_F function passed to \fBgdsl_interval_heap_alloc()\fP, then H is returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( log ( |H| ) ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to modify 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified interval heap after removal of top element\&. 
+.PP
+NULL if interval heap is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_insert()\fP 
+.PP
+gdsl_interval_heap_remove_top() 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_interval_heap_map_forward\fP (const \fBgdsl_interval_heap_t\fPH, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a interval heap\&. Parse all elements of the interval heap H\&. The MAP_F function is called on each H's element with USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP then gdsl_interval_heap_map() stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to map 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+
+.SS "void \fBgdsl_interval_heap_write\fP (const \fBgdsl_interval_heap_t\fPH, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write all the elements of an interval heap to a file\&. Write the elements of the interval heap H to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t & OUTPUT_FILE != NULL & WRITE_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write H's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_write_xml()\fP 
+.PP
+\fBgdsl_interval_heap_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_interval_heap_write_xml\fP (const \fBgdsl_interval_heap_t\fPH, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of an interval heap to a file into XML\&. Write the elements of the interval heap H to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F to write H's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write H's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_write()\fP 
+.PP
+\fBgdsl_interval_heap_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_interval_heap_dump\fP (const \fBgdsl_interval_heap_t\fPH, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of an interval heap to a file\&. Dump the structure of the interval heap H to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F to write H's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_interval_heap_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The interval heap to write 
+.br
+\fIWRITE_F\fP The write function 
+.br
+\fIOUTPUT_FILE\fP The file where to write H's elements 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_interval_heap_write()\fP 
+.PP
+\fBgdsl_interval_heap_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

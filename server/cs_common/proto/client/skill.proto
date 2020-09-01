@@ -1,0 +1,15 @@
+
+message C2GSLearnSkill {
+    optional string type = 1;           //school
+    optional uint32 sk = 2;
+}
+
+message C2GSLearnCultivateSkill {
+    optional uint32 sk = 1;
+    optional uint32 count = 2;  //修炼次数
+}
+
+//门派技能洗点
+message C2GSWashSchoolSkill {
+    optional uint32 cost_type = 1; //０-消耗水晶，1-消耗道具
+}

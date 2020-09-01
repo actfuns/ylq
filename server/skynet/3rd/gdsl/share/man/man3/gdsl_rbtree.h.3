@@ -1,0 +1,98 @@
+.TH "gdsl_rbtree.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_rbtree.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct gdsl_rbtree * \fBgdsl_rbtree_t\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_rbtree_t\fP \fBgdsl_rbtree_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fICreate a new red-black tree\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_rbtree_free\fP (\fBgdsl_rbtree_t\fP T)"
+.br
+.RI "\fIDestroy a red-black tree\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_rbtree_flush\fP (\fBgdsl_rbtree_t\fP T)"
+.br
+.RI "\fIFlush a red-black tree\&. \fP"
+.ti -1c
+.RI "char * \fBgdsl_rbtree_get_name\fP (const \fBgdsl_rbtree_t\fP T)"
+.br
+.RI "\fIGet the name of a red-black tree\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_rbtree_is_empty\fP (const \fBgdsl_rbtree_t\fP T)"
+.br
+.RI "\fICheck if a red-black tree is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_rbtree_get_root\fP (const \fBgdsl_rbtree_t\fP T)"
+.br
+.RI "\fIGet the root of a red-black tree\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_rbtree_get_size\fP (const \fBgdsl_rbtree_t\fP T)"
+.br
+.RI "\fIGet the size of a red-black tree\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_rbtree_height\fP (const \fBgdsl_rbtree_t\fP T)"
+.br
+.RI "\fIGet the height of a red-black tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_rbtree_t\fP \fBgdsl_rbtree_set_name\fP (\fBgdsl_rbtree_t\fP T, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a red-black tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_rbtree_insert\fP (\fBgdsl_rbtree_t\fP T, void *VALUE, int *RESULT)"
+.br
+.RI "\fIInsert an element into a red-black tree if it's not found or return it\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_rbtree_remove\fP (\fBgdsl_rbtree_t\fP T, void *VALUE)"
+.br
+.RI "\fIRemove an element from a red-black tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_rbtree_t\fP \fBgdsl_rbtree_delete\fP (\fBgdsl_rbtree_t\fP T, void *VALUE)"
+.br
+.RI "\fIDelete an element from a red-black tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_rbtree_search\fP (const \fBgdsl_rbtree_t\fP T, \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fISearch for a particular element into a red-black tree\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_rbtree_map_prefix\fP (const \fBgdsl_rbtree_t\fP T, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a red-black tree in prefixed order\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_rbtree_map_infix\fP (const \fBgdsl_rbtree_t\fP T, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a red-black tree in infixed order\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_rbtree_map_postfix\fP (const \fBgdsl_rbtree_t\fP T, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a red-black tree in postfixed order\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_rbtree_write\fP (const \fBgdsl_rbtree_t\fP T, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the element of each node of a red-black tree to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_rbtree_write_xml\fP (const \fBgdsl_rbtree_t\fP T, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a red-black tree to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_rbtree_dump\fP (const \fBgdsl_rbtree_t\fP T, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a red-black tree to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

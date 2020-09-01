@@ -1,0 +1,83 @@
+
+message C2GSClickTask {
+	optional uint32 taskid		= 1;
+}
+
+message C2GSTaskEvent{
+	optional uint32 taskid		= 1;
+	optional uint32 npcid		= 2;
+}
+
+//采集和使用物品使用提交
+message C2GSCommitTask {
+	optional uint32 taskid		= 1;
+}
+
+//放弃任务
+message C2GSAbandonTask{
+	optional uint32 taskid 		= 1;
+}
+
+message C2GSAcceptTask{
+	optional uint32 taskid		= 1;
+}
+
+message TaskItemChangeInfo{
+	optional uint32 taskid	= 1;
+	optional uint32 sid	= 2;
+}
+
+message C2GSTaskItemChange{
+	repeated TaskItemChangeInfo  change_info	= 1;
+}
+
+message C2GSClickTaskInScene{
+	optional uint32 sceneid = 1;
+	optional uint32 taskid = 2;
+}
+
+message C2GSGetTaskBarrage{
+	optional uint32 showid = 1;
+}
+
+message C2GSSetTaskBarrage{
+	optional uint32 showid = 1;
+	optional string msg = 2;
+}
+
+message C2GSEnterShow{
+	optional uint32 is_show = 1;	//进入发1，退出发0
+	optional uint32 reenter_scene = 2;//是否重进场景，0否，1是
+}
+
+message C2GSSyncTraceInfo{
+	optional uint32 taskid = 1;
+	optional uint32 cur_mapid = 2;
+	optional uint32 cur_posx = 3;
+	optional uint32 cur_posy = 4;
+}
+
+message C2GSAcceptSideTask{
+	optional uint32 taskid = 1;
+}
+
+message C2GSGetAchieveTaskReward{
+	optional uint32 taskid = 1;
+}
+
+message C2GSTriggerPatrolFight{
+	optional uint32 taskid = 1;
+}
+
+message C2GSFinishAchieveTask{
+	optional string key = 1;
+	optional uint32 value = 2;
+}
+
+message C2GSFinishShimenTask{
+	
+}
+
+message C2GSAcceptShimenTask{
+	
+}

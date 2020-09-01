@@ -1,0 +1,111 @@
+.TH "gdsl_hash.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_hash.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct hash_table * \fBgdsl_hash_t\fP"
+.br
+.RI "\fIGDSL hashtable type\&. \fP"
+.ti -1c
+.RI "typedef const char *(* \fBgdsl_key_func_t\fP )(void *VALUE)"
+.br
+.RI "\fIGDSL hashtable key function type\&. \fP"
+.ti -1c
+.RI "typedef \fBulong\fP(* \fBgdsl_hash_func_t\fP )(const char *KEY)"
+.br
+.RI "\fIGDSL hashtable hash function type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_hash\fP (const char *KEY)"
+.br
+.RI "\fIComputes a hash value from a NULL terminated character string\&. \fP"
+.ti -1c
+.RI "\fBgdsl_hash_t\fP \fBgdsl_hash_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F, \fBgdsl_key_func_t\fP KEY_F, \fBgdsl_hash_func_t\fP HASH_F, \fBushort\fP INITIAL_ENTRIES_NB)"
+.br
+.RI "\fICreate a new hashtable\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_free\fP (\fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIDestroy a hashtable\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_flush\fP (\fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIFlush a hashtable\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_hash_get_name\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the name of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBushort\fP \fBgdsl_hash_get_entries_number\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the number of entries of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBushort\fP \fBgdsl_hash_get_lists_max_size\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the max number of elements allowed in each entry of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBushort\fP \fBgdsl_hash_get_longest_list_size\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the number of elements of the longest list entry of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_hash_get_size\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the size of a hashtable\&. \fP"
+.ti -1c
+.RI "double \fBgdsl_hash_get_fill_factor\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the fill factor of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBgdsl_hash_t\fP \fBgdsl_hash_set_name\fP (\fBgdsl_hash_t\fP H, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_hash_insert\fP (\fBgdsl_hash_t\fP H, void *VALUE)"
+.br
+.RI "\fIInsert an element into a hashtable (PUSH)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_hash_remove\fP (\fBgdsl_hash_t\fP H, const char *KEY)"
+.br
+.RI "\fIRemove an element from a hashtable (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_hash_t\fP \fBgdsl_hash_delete\fP (\fBgdsl_hash_t\fP H, const char *KEY)"
+.br
+.RI "\fIDelete an element from a hashtable\&. \fP"
+.ti -1c
+.RI "\fBgdsl_hash_t\fP \fBgdsl_hash_modify\fP (\fBgdsl_hash_t\fP H, \fBushort\fP NEW_ENTRIES_NB, \fBushort\fP NEW_LISTS_MAX_SIZE)"
+.br
+.RI "\fIIncrease the dimensions of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_hash_search\fP (const \fBgdsl_hash_t\fP H, const char *KEY)"
+.br
+.RI "\fISearch for a particular element into a hashtable (GET)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_hash_map\fP (const \fBgdsl_hash_t\fP H, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a hashtable\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_write\fP (const \fBgdsl_hash_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a hashtable to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_write_xml\fP (const \fBgdsl_hash_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a hashtable to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_dump\fP (const \fBgdsl_hash_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a hashtable to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

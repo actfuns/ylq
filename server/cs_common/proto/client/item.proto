@@ -1,0 +1,177 @@
+import "base/common.proto";
+
+message SimpleItem {
+    optional uint32 itemid = 1;
+    optional uint32 amount = 2;
+}
+
+//使用
+message C2GSItemUse{
+    optional uint32 itemid = 1;                         //道具id
+    optional uint32 target = 2;                          //使用目标
+    optional uint32 amount = 3;                      //使用数量
+}
+
+//请求道具信息
+message C2GSItemInfo{
+    optional uint32 itemid = 1;                         //道具id
+}
+
+//道具背包开格子
+message C2GSAddItemExtendSize{
+    optional uint32 size = 1;                          //格子数目:5,10
+}
+
+//分解道具
+message C2GSDeComposeItem{
+    optional uint32 id                 = 1;              //id
+    optional uint32 amount     = 2;              //分解数目
+}
+
+message C2GSComposeItem {
+    optional uint32 sid                  = 1;            //导表id
+    optional uint32 amount       = 2;            //合成数目,需要整除
+    optional uint32 coin_type = 3;      //不足则使用对应货币补齐,类型参考通用货币的类型
+}
+
+message C2GSRecycleItem {
+    optional uint32 itemid = 1;
+    optional uint32 amount = 2;
+}
+
+message C2GSRecycleItemList {
+    repeated SimpleItem sale_list = 1;
+}
+
+//整理道具
+message C2GSArrangeItem {
+
+}
+
+//装备修理
+message C2GSFixEquip {
+    optional uint32 pos = 1;
+}
+
+message C2GSPromoteEquipLevel {
+    optional uint32 pos = 1;                 //升级装备位置
+    optional uint32 itemid = 2;            //装备灵石id
+}
+
+//请求材料价格
+message C2GSItemPrice {
+    repeated uint32 sid_list = 1;
+}
+
+message C2GSResetFuWen {
+    optional uint32 pos = 1;
+    optional uint32 price = 2;  //当前客户端价格
+}
+
+message C2GSSaveFuWen {
+    optional uint32 pos = 1;
+}
+
+message StrengthItem {
+    optional uint32 sid = 1;
+    optional uint32 amount = 2;
+    optional uint32 price = 3;
+}
+
+//强化角色装备
+message C2GSEquipStrength {
+    optional uint32 pos = 1;
+    repeated StrengthItem strength_info = 2;
+}
+
+message C2GSInlayGem {
+    optional uint32 pos = 1;                //装备位置
+    optional uint32 gem_pos = 2;        //宝石位置
+    optional uint32 itemid = 3;           //宝石物品id
+}
+
+//一键镶嵌
+message C2GSInlayAllGem {
+}
+
+//宝石合成
+message C2GSComposeGem {
+    optional uint32 sid = 1; //导表id
+    optional uint32 amount = 2; //0-全部合成，其他-数量
+}
+
+message C2GSAddGemExp {
+    optional uint32 pos = 1;                //装备位置
+    optional uint32 gem_pos = 2;       //宝石位置
+    repeated uint32 gem_list = 3;       //添加宝石列表
+}
+
+//一键融合宝石
+message C2GSFastAddGemExp{
+}
+
+//一键打造
+message C2GSFastStrength{
+}
+
+//切换淬灵方案
+message C2GSUseFuWenPlan {
+    optional uint32 pos = 1; //装备位置
+}
+
+//淬灵方案改名
+message C2GSReNameFuWen {
+    repeated base.FuWenName fuwen_name = 1;
+}
+
+message C2GSCompoundItem{
+    optional uint32 sid = 1;        //目标装备ID
+    optional uint32 upgrade = 2;  // 0-没装备,其他-装备id
+}
+
+//装备合成
+message C2GSComposeEquip {
+    optional uint32 pos = 1; //装备部位
+    optional uint32 level = 2; //合成等级
+}
+
+//升级装备
+message C2GSUpgradeEquip {
+    optional uint32 pos = 1; //部位
+    optional uint32 level = 2; //等级
+    optional uint32 cost_id = 3; //消耗道具id
+}
+
+message DeComposeInfo{
+    optional uint32 sid = 1;
+    optional uint32 id = 2;
+    optional uint32 amount = 3;
+}
+
+message C2GSDeCompose {
+    repeated DeComposeInfo info = 1;
+}
+
+//装备转换
+message C2GSExChangeEquip{
+    optional uint32 equipid = 1; //装备服务器id
+}
+
+//装备上锁,已穿戴传pos，没穿戴itemid
+message C2GSLockEquip {
+    optional uint32 itemid = 1; //
+    optional uint32 pos = 2;
+}
+
+//打开礼包选择道具
+message C2GSChooseItem {
+    optional uint32 itemid = 1; //服务器导表id
+    repeated string itemsids = 2;            //礼包选择物品sid,字符串类型
+    optional uint32 amount =3;  //批量使用数量
+}
+
+//神格道具操作
+message C2GSBuffStoneOp {
+    optional uint32 itemid = 1; //消耗道具id
+    optional uint32 op = 2; //1-强化，2-覆盖
+}

@@ -1,0 +1,229 @@
+//1.请求公会列表
+message C2GSOrgList {
+}
+
+//2.公会搜索
+message C2GSSearchOrg {
+    optional string text = 1;
+}
+
+//3.申请加入公会
+message C2GSApplyJoinOrg {
+    optional uint32 orgid = 1;
+    optional uint32 flag = 2;
+}
+
+//4.快捷加入公会
+message C2GSMultiApplyJoinOrg {
+}
+
+//5.查看公会详情
+message C2GSGetOrgInfo {
+    optional uint32 orgid = 1;//公会ID
+}
+
+//6.创建公会，成功返回协议7，失败notify
+message C2GSCreateOrg {
+    optional string name = 1;
+    optional string sflag = 2;//会徽id
+    optional uint32 flagbgid = 3;//会徽背景id
+    optional string aim = 4;//公告
+}
+
+//7.打开公会主界面
+message C2GSOrgMainInfo {
+}
+
+//8.请求公会成员列表
+message C2GSOrgMemberList {
+    optional uint32 handle_type = 1;//回调处理类型
+}
+
+//9.请求申请加入公会列表
+message C2GSOrgApplyList {
+}
+
+//10.处理加入申请
+message C2GSOrgDealApply {
+    optional uint32 pid = 1;
+    optional uint32 deal = 2;//1.同意,0.不同意
+}
+
+//11.修改宣言
+message C2GSUpdateAim{
+    optional string aim = 1;
+}
+
+//12.拒绝全部申请
+message C2GSRejectAllApply {
+}
+
+//13.设置职位
+message C2GSOrgSetPosition {
+    optional uint32 pid = 1;//成员ID
+    optional uint32 position = 2;//职位
+}
+
+//14.脱离公会
+message C2GSLeaveOrg {
+}
+
+//15.世界频道宣传公会
+message C2GSSpreadOrg {
+    optional uint32 powerlimit = 1; //战力要求
+}
+
+//16.踢出公会
+message C2GSKickMember{
+    optional uint32 pid = 1;
+}
+
+//17.邀请加入公会
+message C2GSInvited2Org{
+    optional uint32 pid = 1;
+}
+
+//18.处理邀请加入公会
+message C2GSDealInvited2Org {
+    optional uint32 pid = 1;
+    optional uint32 orgid = 2;      //公会ID
+    optional uint32 flag = 3;        //1.同意,0.不同意
+}
+
+//19.设置申请需求
+message C2GSSetApplyLimit{
+    optional uint32 powerlimit = 1; //战力要求
+    optional uint32 needallow = 2; //是否需要审批
+}
+
+//20.修改公会会徽
+message C2GSUpdateFlagID{
+    optional string sflag = 1; //会徽ID
+    optional uint32 flagbgid = 2; //会徽背景ID
+}
+
+//21.获取指定公会公告
+message C2GSGetAim{
+    optional uint32 orgid = 1; //公会ID
+}
+
+//22.会长禁言
+message C2GSBanChat{
+    optional uint32 target = 1; //禁言目标
+    optional uint32 flag = 2; //0-解除禁言1-禁言
+}
+
+message C2GSOrgBuild{
+    optional uint32 build_type = 1;
+}
+
+//加快公会建设
+message C2GSSpeedOrgBuild{
+    optional uint32 gold_coin = 1;   //需要花费的资金
+}
+
+//完成公会建设
+message C2GSDoneOrgBuild{
+}
+
+//领取公会签到奖励
+message C2GSOrgSignReward{
+    optional uint32 idx = 1;            //奖励对应的编号
+}
+
+//请求公会许愿列表
+message C2GSOrgWishList {
+}
+
+//离开许愿界面
+message C2GSLeaveOrgWishUI {
+}
+
+
+//公会许愿
+message C2GSOrgWish {
+    optional uint32 partner_chip = 1;   //伙伴碎片
+}
+
+//公会装备许愿
+message C2GSOrgEquipWish {
+    optional uint32 sid = 1;   //装备碎片编号
+}
+
+//给予公会许愿道具
+message C2GSGiveOrgWish{
+    optional uint32 target = 1;
+}
+
+//给予公会装备许愿
+message C2GSGiveOrgEquipWish{
+    optional uint32 target = 1;
+}
+
+//开启帮派红包
+message C2GSOpenOrgRedPacket {
+}
+
+//领取帮派红包
+message C2GSDrawOrgRedPacket {
+    optional uint32 idx = 1;                    //红包对应的位置
+}
+
+//红包信息
+message C2GSOrgRedPacket {
+    optional uint32 idx = 1;
+}
+
+//请求公会log
+message C2GSOrgLog{
+}
+
+//公会升级
+message C2GSPromoteOrgLevel{
+}
+
+//公会邀请
+message C2GSOrgRecruit {
+}
+
+//点击公会邀请
+message C2GSClickSpreadOrg{
+    optional uint32 orgid = 1;
+}
+
+//公会副本
+//打开公会界面
+message C2GSOpenOrgFBUI {
+}
+
+//点击副本BOSS
+message C2GSClickOrgFBBoss {
+    optional uint32 bid = 1 ; //BOSS 类型
+}
+
+//重置副本
+message C2GSRestOrgFuBen {
+
+}
+
+message C2GSOrgOnlineCount {
+}
+
+message C2GSOrgSendMail {
+    optional string content = 1;
+}
+
+//招募申请加入公会
+message C2GSJoinOrgBySpread {
+    optional uint32 orgid = 1;
+}
+
+//工会玩家qq行为,加入和推出
+message C2GSOrgQQAction {
+    optional uint32 action = 1;//1:进入,0:退出
+}
+
+//工会改名
+message C2GSOrgRename {
+    optional string name = 1;       //名字 
+}

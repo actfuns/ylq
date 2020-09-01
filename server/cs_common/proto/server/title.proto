@@ -1,0 +1,27 @@
+message TitleInfo {
+    optional uint32 tid = 1;
+    optional string name = 2;
+    optional uint32 create_time = 3;    //创建时间
+    optional uint32 left_time = 4;         //过期时间戳，未获得则为0
+    optional uint32 progress = 5;         //当前进度
+}
+
+// 称谓列表
+message GS2CTitleInfoList {
+    repeated TitleInfo infos = 1;
+}
+
+// 单个称谓更新
+message GS2CUpdateTitleInfo {
+    optional TitleInfo info = 1;
+}
+
+// 单个称谓增加
+message GS2CAddTitleInfo {
+    optional TitleInfo info = 1;
+}
+
+// 称谓删除
+message GS2CRemoveTitles {
+    repeated uint32 tidlist = 1;
+}

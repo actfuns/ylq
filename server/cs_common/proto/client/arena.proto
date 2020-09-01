@@ -1,0 +1,198 @@
+
+//获取比武场信息
+message C2GSOpenArena {
+}
+
+//请求匹配
+message C2GSArenaMatch {
+}
+
+//取消匹配
+message C2GSArenaCancelMatch {
+}
+
+//获取比武场前100名信息
+message C2GSArenaDetailRank {
+}
+
+//通过玩家ID回放玩家展示的战斗记录
+message C2GSArenaReplayByPlayerId {
+    optional uint32 id = 1;//玩家id
+    optional uint32 iView = 2;// 观看视觉
+}
+
+//对玩家点赞
+message C2GSArenaPraise {
+    optional uint32 id = 1;//玩家id
+}
+
+//获取比武场战斗记录
+message C2GSArenaHistory {
+}
+
+//设置展示的战斗记录
+message C2GSArenaSetShowing {
+    optional string fid =1;//需要展示的战斗数据的id
+}
+
+//通过战斗记录id回放战斗记录
+message C2GSArenaReplayByRecordId {
+    optional string fid = 1;// 需要回放的战斗数据的id
+    optional uint32 view = 2; //观看的视觉
+}
+
+//打开比武场观战
+message C2GSArenaOpenWatch {
+}
+
+
+//=================公平竞技=================
+
+//打开界面
+message C2GSOpenEqualArena {
+}
+
+//替换出战伙伴
+message C2GSSetEqualArenaPartner {
+    repeated uint32 partner = 1;
+}
+
+
+//请求匹配
+message C2GSEqualArenaMatch {
+}
+
+//取消匹配
+message C2GSEqualArenaCancelMatch {
+}
+
+//同步选中信息
+message C2GSSyncSelectInfo {
+    optional uint32 select_type = 1;//1，伙伴2，符文
+    optional uint32 index = 2;//处理的伙伴/符文序号
+    optional uint32 handle_type = 3;//1.选中 2.取消选中
+}
+
+
+//选择伙伴或者符文
+message C2GSSelectEqualArena {
+    repeated uint32 select_par = 1; //伙伴顺序编号
+    repeated uint32 select_item = 2; //符文顺序编号
+}
+
+
+message C2GSConfigEqualArena{
+    repeated uint32 select_par = 1; //伙伴顺序编号 1,2,3 对应select_item的1,2,3
+    repeated uint32 select_item = 2;//符文顺序编号 
+    optional uint32 handle_type = 3; // 1 最终确定 , 2临时操作
+}
+
+message C2GSEqualArenaHistory {
+    
+}
+
+
+//设置展示的战斗记录
+message C2GSEqualArenaSetShowing {
+    optional string fid =1;//需要展示的战斗数据的id
+}
+
+//打开比武场观战
+message C2GSEqualArenaOpenWatch {
+}
+
+message C2GSGuaidArenaWar{
+    
+}
+
+
+///----TeamPVP ----
+
+//请求匹配
+message C2GSTeamPVPMatch {
+
+}
+
+//取消匹配
+message C2GSTeamPVPCancelMatch {
+}
+
+
+message C2GSOpenTeamPVPRank {
+    
+}
+
+//获取和刷新推荐界面
+message C2GSGetTeamPVPInviteList {
+    repeated uint32 exculelist = 1; //排除列表
+}
+
+message C2GSTeamPVPToInviteList {
+    repeated uint32 plist = 1;// 邀请列表
+}
+
+message C2GSTeamPVPLeaveScene {
+    
+}
+
+//任命队长
+message C2GSTeamPVPLeader {
+    optional uint32 target = 1;    
+}
+
+//自动离开队伍
+message C2GSTeamPVPLeave {
+    
+}
+
+//请离队伍
+message C2GSTeamPVPKickout {
+    optional uint32 target = 1;
+}
+
+///---- ClubArena ----
+
+//打开界面
+message C2GSOpenClubArenaMain {
+}
+
+//进入对应武馆
+message C2GSOpenClubArenaInfo {
+    optional uint32 club = 1; //武馆
+}
+
+//进入战斗
+message C2GSClubArenaFight {
+    optional uint32 club = 1; //武馆
+    optional uint32 post = 2; //位置索引
+    optional uint32 pid = 3; //玩家ID
+}
+
+
+//重置对手
+message C2GSResetClubArena {
+    optional uint32 club = 1;
+}
+
+//增加挑战次数
+message C2GSClubArenaAddFightCnt {
+    
+}
+
+//保存防守阵容
+message C2GSSaveClubArenaLineup {
+    repeated uint32 parlist=1; //伙伴ID 对应的位置1-4
+}
+
+message C2GSShowClubArenaHistory{
+}
+
+
+//获得防守伙伴列表
+message C2GSOpenClubArenaDefense {
+    
+}
+
+message C2GSCleanClubArenaCD {
+    
+}

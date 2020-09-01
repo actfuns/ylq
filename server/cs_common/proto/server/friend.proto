@@ -1,0 +1,164 @@
+import "base/common.proto";
+
+message SingleChat {
+    optional string message_id = 1;
+    optional string msg = 2;
+}
+
+message LoginFriendChat {
+    optional uint32 pid = 1;
+    repeated SingleChat chat_list = 2;
+}
+
+message RecommendFriend {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional string shape = 3;
+}
+
+//在线状态
+message OnlineStatusInfo{
+    optional uint32 pid = 1;
+    optional uint32 onlinestatus = 2; //0离线 1在线
+}
+
+
+message GS2COnlineStatus{
+    repeated OnlineStatusInfo onlinestatus =1;
+}
+
+message GS2CLoginFriend {
+    repeated LoginFriendChat friend_chat_list = 1;
+    repeated uint32 black_list = 2;
+    repeated OnlineStatusInfo friend_onlinestatus_list = 3;
+}
+
+//添加好友
+message GS2CAddFriend {
+    repeated base.FriendProfile profile_list = 1;
+}
+
+
+message GS2CDelFriend {
+    repeated uint32 pid_list = 1;
+}
+
+
+
+message GS2CAckChatTo {
+    optional uint32 pid = 1;
+    optional string message_id = 2;
+}
+
+message GS2CChatFrom {
+    optional uint32 pid = 1;
+    optional string msg = 2;
+    optional string message_id = 3;
+}
+
+message GS2CRecommendFriends {
+    repeated RecommendFriend recommend_friend_list = 1; 
+}
+
+
+message GS2CStrangerProfile {
+    repeated base.FriendProfile profile_list = 1;
+}
+
+message GS2CFriendShield {
+    repeated uint32 pid_list = 1;
+}
+
+message GS2CFriendUnshield {
+    repeated uint32 pid_list = 1;
+}
+
+message SimplePartnerInfo{
+    optional uint32 parid = 1;
+    optional uint32 partner_type =2 ;
+    optional uint32 star = 3;
+    optional uint32 grade = 4;
+    optional uint32 awake = 5;//觉醒 1-觉醒
+}
+
+message SimpleEquip {
+    optional uint32 pos = 1; //位置 1-6
+    optional uint32 item = 2;//道具编号
+    optional  uint32 quality = 3;//品质
+}
+
+//获取档案
+message GS2CSendDocument {
+    optional base.FriendDoc doc = 1;
+    repeated SimplePartnerInfo parlist = 2;
+    optional string ph_url = 3;
+    repeated SimpleEquip equip = 4;
+    optional uint32 is_charm= 5; //是否点过赞
+}
+
+message GS2CFriendSetting {
+    optional base.FriendSetting setting = 1;
+}
+
+//申请列表
+message GS2CApplyList {
+    repeated uint32 pidlist = 1; 
+}
+
+//刷新好友度
+message GS2CFriendDegree {
+    optional uint32 pid =1 ;
+    optional uint32 degree = 2;
+}
+
+//刷新等级
+message GS2CFriendGrade {
+    optional uint32 pid =1 ;
+    optional uint32 grade = 2;
+}
+
+message ApplyUnit {
+    optional base.FriendProfile pro = 1; //简要信息
+    repeated string labal = 2;//标签
+    optional string addr = 3;// 地址
+}
+
+//申请列表信息
+message GS2CApplyProfile {
+    repeated ApplyUnit profile_list = 1;
+}
+
+//查找结果
+message GS2CSearchFriend {
+    optional ApplyUnit unit = 1;
+}
+
+//系统提示
+message GS2CSysFriendChat {
+    optional string msg = 1;
+}
+
+//发送附近的人列表
+message GS2CNearbyFriend {
+    repeated ApplyUnit profile_list = 1;
+}
+
+message GS2CSendFriendPartnerInfo {
+    optional base.PartnerLink par = 2;
+}
+
+message GS2CSendFriendEquipInfo {
+    optional uint32 pid = 1;
+    optional base.ItemInfo item = 2;
+}
+
+
+message SimpleFriendInfo {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 grade  = 3;
+}
+
+message GS2CSendSimpleInfo {
+    repeated SimpleFriendInfo frdlist = 1;
+}

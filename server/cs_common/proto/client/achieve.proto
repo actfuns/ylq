@@ -1,0 +1,54 @@
+//1 打开成就主界面
+message C2GSAchieveMain {
+}
+
+//2 打开成就大类界面
+message C2GSAchieveDirection {
+        optional uint32 id = 1;     //成就大类id
+        optional uint32 belong = 2; //成就小类
+}
+
+//3 领取成就奖励
+message C2GSAchieveReward {
+        optional uint32 id = 1;     //成就id
+}
+
+//4 领取成就点数奖励
+message C2GSAchievePointReward {
+        optional uint32 id = 1;     //成就点数奖励id
+}
+
+message C2GSPictureReward{
+        optional uint32 id = 1;
+}
+
+message C2GSOpenPicture{
+
+}
+
+message C2GSCloseMainUI{
+}
+
+//
+message C2GSOpenSevenDayMain {
+    optional uint32 day = 1; //默认打开第一天成就
+}
+
+message C2GSOpenSevenDay{
+    optional uint32 day = 1; //切换天数
+}
+
+//七日目标奖励
+message C2GSSevenDayReward {
+    optional uint32 id =1; //成就id
+}
+
+//七日目标进度奖励
+message C2GSSevenDayPointReward {
+    optional uint32 id = 1; //进度奖励id
+}
+
+//购买七日登录礼包
+message C2GSBuySevenDayGift {
+    optional uint32 day = 1; //第几天
+}

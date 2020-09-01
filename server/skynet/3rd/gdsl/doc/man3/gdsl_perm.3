@@ -1,0 +1,917 @@
+.TH "Permutation manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Permutation manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct gdsl_perm * \fBgdsl_perm_t\fP"
+.br
+.RI "\fIGDSL permutation type\&. \fP"
+.ti -1c
+.RI "typedef void(* \fBgdsl_perm_write_func_t\fP )(\fBulong\fP E, FILE *OUTPUT_FILE, \fBgdsl_location_t\fP POSITION, void *USER_DATA)"
+.br
+.RI "\fIGDSL permutation write function type\&. \fP"
+.ti -1c
+.RI "typedef struct gdsl_perm_data * \fBgdsl_perm_data_t\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBgdsl_perm_position_t\fP { \fBGDSL_PERM_POSITION_FIRST\fP =  1, \fBGDSL_PERM_POSITION_LAST\fP =  2 }"
+.br
+.RI "\fIThis type is for gdsl_perm_write_func_t\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_alloc\fP (const char *NAME, const \fBulong\fP N)"
+.br
+.RI "\fICreate a new permutation\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_perm_free\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIDestroy a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_copy\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fICopy a permutation\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_perm_get_name\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the name of a permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_get_size\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the size of a permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_get_element\fP (const \fBgdsl_perm_t\fP P, const \fBulong\fP INDIX)"
+.br
+.RI "\fIGet the (INDIX+1)-th element from a permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP * \fBgdsl_perm_get_elements_array\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the array elements of a permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_linear_inversions_count\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fICount the inversions number into a linear permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_linear_cycles_count\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fICount the cycles number into a linear permutation\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_perm_canonical_cycles_count\fP (const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fICount the cycles number into a canonical permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_set_name\fP (\fBgdsl_perm_t\fP P, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_next\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the next permutation from a linear permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_prev\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIGet the previous permutation from a linear permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_set_elements_array\fP (\fBgdsl_perm_t\fP P, const \fBulong\fP *ARRAY)"
+.br
+.RI "\fIInitialize a permutation with an array of values\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_multiply\fP (\fBgdsl_perm_t\fP RESULT, const \fBgdsl_perm_t\fP ALPHA, const \fBgdsl_perm_t\fP BETA)"
+.br
+.RI "\fIMultiply two permutations\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_to_canonical\fP (\fBgdsl_perm_t\fP Q, const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIConvert a linear permutation to its canonical form\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_canonical_to_linear\fP (\fBgdsl_perm_t\fP Q, const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIConvert a canonical permutation to its linear form\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_inverse\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIInverse in place a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_reverse\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIReverse in place a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_perm_t\fP \fBgdsl_perm_randomize\fP (\fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIRandomize a permutation\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP * \fBgdsl_perm_apply_on_array\fP (\fBgdsl_element_t\fP *V, const \fBgdsl_perm_t\fP P)"
+.br
+.RI "\fIApply a permutation on to a vector\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_perm_write\fP (const \fBgdsl_perm_t\fP P, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the elements of a permutation to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_perm_write_xml\fP (const \fBgdsl_perm_t\fP P, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the elements of a permutation to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_perm_dump\fP (const \fBgdsl_perm_t\fP P, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a permutation to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct gdsl_perm* \fBgdsl_perm_t\fP"
+.PP
+GDSL permutation type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 50 of file gdsl_perm\&.h\&.
+.SS "typedef void(*  \fBgdsl_perm_write_func_t\fP)(\fBulong\fP E, FILE *OUTPUT_FILE, \fBgdsl_location_t\fP POSITION, void *USER_DATA)"
+.PP
+GDSL permutation write function type\&. \fBParameters:\fP
+.RS 4
+\fIE\fP The permutation element to write 
+.br
+\fIOUTPUT_FILE\fP The file where to write E 
+.br
+\fIPOSITION\fP is an or-ed combination of gdsl_perm_position_t values to indicate where E is located into the gdsl_perm_t mapped\&. 
+.br
+\fIUSER_DATA\fP User's datas 
+.RE
+.PP
+
+.PP
+Definition at line 74 of file gdsl_perm\&.h\&.
+.SS "typedef struct gdsl_perm_data* \fBgdsl_perm_data_t\fP"
+.PP
+Definition at line 80 of file gdsl_perm\&.h\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBgdsl_perm_position_t\fP"
+.PP
+This type is for gdsl_perm_write_func_t\&. 
+.PP
+\fBEnumerator: \fP
+.in +1c
+.TP
+\fB\fIGDSL_PERM_POSITION_FIRST \fP\fP
+When element is at first position 
+.TP
+\fB\fIGDSL_PERM_POSITION_LAST \fP\fP
+When element is at last position 
+.PP
+Definition at line 55 of file gdsl_perm\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_alloc\fP (const char *NAME, const \fBulong\fPN)"
+.PP
+Create a new permutation\&. Allocate a new permutation data structure of size N wich name is set to a copy of NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( N ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+N > 0 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIN\fP The number of elements of the permutation to create\&. 
+.br
+\fINAME\fP The name of the new permutation to create 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated identity permutation in its linear form in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_free()\fP 
+.PP
+\fBgdsl_perm_copy()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_perm_free\fP (\fBgdsl_perm_t\fPP)"
+.PP
+Destroy a permutation\&. Deallocate the permutation P\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to destroy 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_alloc()\fP 
+.PP
+\fBgdsl_perm_copy()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_copy\fP (const \fBgdsl_perm_t\fPP)"
+.PP
+Copy a permutation\&. Create and return a copy of the permutation P\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t\&. 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned permutation must be deallocated with gdsl_perm_free\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to copy\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a copy of P in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_alloc\fP 
+.PP
+\fBgdsl_perm_free\fP 
+.RE
+.PP
+
+.SS "const char* \fBgdsl_perm_get_name\fP (const \fBgdsl_perm_t\fPP)"
+.PP
+Get the name of a permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned string MUST NOT be freed\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to get the name from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the name of the permutation P\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_set_name()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_perm_get_size\fP (const \fBgdsl_perm_t\fPP)"
+.PP
+Get the size of a permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to get the size from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of P (noted |P|)\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_get_element()\fP 
+.PP
+\fBgdsl_perm_get_elements_array()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_perm_get_element\fP (const \fBgdsl_perm_t\fPP, const \fBulong\fPINDIX)"
+.PP
+Get the (INDIX+1)-th element from a permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t & <= 0 INDIX < |P| 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to use\&. 
+.br
+\fIINDIX\fP The indix of the value to get\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the value at the INDIX-th position in the permutation P\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_get_size()\fP 
+.PP
+\fBgdsl_perm_get_elements_array()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP* \fBgdsl_perm_get_elements_array\fP (const \fBgdsl_perm_t\fPP)"
+.PP
+Get the array elements of a permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to get datas from\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the values array of the permutation P\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_get_element()\fP 
+.PP
+\fBgdsl_perm_set_elements_array()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_perm_linear_inversions_count\fP (const \fBgdsl_perm_t\fPP)"
+.PP
+Count the inversions number into a linear permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid linear gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The linear permutation to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of inversions into the linear permutation P\&. 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_perm_linear_cycles_count\fP (const \fBgdsl_perm_t\fPP)"
+.PP
+Count the cycles number into a linear permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid linear gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The linear permutation to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of cycles into the linear permutation P\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_canonical_cycles_count()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_perm_canonical_cycles_count\fP (const \fBgdsl_perm_t\fPP)"
+.PP
+Count the cycles number into a canonical permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid canonical gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The canonical permutation to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of cycles into the canonical permutation P\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_linear_cycles_count()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_set_name\fP (\fBgdsl_perm_t\fPP, const char *NEW_NAME)"
+.PP
+Set the name of a permutation\&. Change the previous name of the permutation P to a copy of NEW_NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to change the name 
+.br
+\fINEW_NAME\fP The new name of P 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified permutation in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_get_name()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_next\fP (\fBgdsl_perm_t\fPP)"
+.PP
+Get the next permutation from a linear permutation\&. The permutation P is modified to become the next permutation after P\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid linear gdsl_perm_t & |P| > 1 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The linear permutation to modify 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the next permutation after the permutation P\&. 
+.PP
+NULL if P is already the last permutation\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_linear_prev()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_prev\fP (\fBgdsl_perm_t\fPP)"
+.PP
+Get the previous permutation from a linear permutation\&. The permutation P is modified to become the previous permutation before P\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid linear gdsl_perm_t & |P| >= 2 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The linear permutation to modify 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the previous permutation before the permutation P\&. 
+.PP
+NULL if P is already the first permutation\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_linear_next()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_set_elements_array\fP (\fBgdsl_perm_t\fPP, const \fBulong\fP *ARRAY)"
+.PP
+Initialize a permutation with an array of values\&. Initialize the permutation P with the values contained in the array of values ARRAY\&. If ARRAY does not design a permutation, then P is left unchanged\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t & V != NULL & |V| == |P| 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to initialize 
+.br
+\fIARRAY\fP The array of values to initialize P 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified permutation in case of success\&. 
+.PP
+NULL in case V does not design a valid permutation\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_get_elements_array()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_multiply\fP (\fBgdsl_perm_t\fPRESULT, const \fBgdsl_perm_t\fPALPHA, const \fBgdsl_perm_t\fPBETA)"
+.PP
+Multiply two permutations\&. Compute the product of the permutations ALPHA x BETA and puts the result in RESULT without modifying ALPHA and BETA\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |RESULT| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+RESULT, ALPHA and BETA must be valids gdsl_perm_t & |RESULT| == |ALPHA| == |BETA| 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIRESULT\fP The result of the product ALPHA x BETA 
+.br
+\fIALPHA\fP The first permutation used in the product 
+.br
+\fIBETA\fP The second permutation used in the product 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+RESULT, the result of the multiplication ALPHA x BETA\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_linear_to_canonical\fP (\fBgdsl_perm_t\fPQ, const \fBgdsl_perm_t\fPP)"
+.PP
+Convert a linear permutation to its canonical form\&. Convert the linear permutation P to its canonical form\&. The resulted canonical permutation is placed into Q without modifying P\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P & Q must be valids gdsl_perm_t & |P| == |Q| & P != Q 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The canonical form of P 
+.br
+\fIP\fP The linear permutation used to compute its canonical form into Q 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the canonical form Q of the permutation P\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_canonical_to_linear()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_canonical_to_linear\fP (\fBgdsl_perm_t\fPQ, const \fBgdsl_perm_t\fPP)"
+.PP
+Convert a canonical permutation to its linear form\&. Convert the canonical permutation P to its linear form\&. The resulted linear permutation is placed into Q without modifying P\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P & Q must be valids gdsl_perm_t & |P| == |Q| & P != Q 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The linear form of P 
+.br
+\fIP\fP The canonical permutation used to compute its linear form into Q 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the linear form Q of the permutation P\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_linear_to_canonical()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_inverse\fP (\fBgdsl_perm_t\fPP)"
+.PP
+Inverse in place a permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to invert 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the inverse permutation of P in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_reverse()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_reverse\fP (\fBgdsl_perm_t\fPP)"
+.PP
+Reverse in place a permutation\&. \fBNote:\fP
+.RS 4
+Complexity: O( |P| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to reverse 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the mirror image of the permutation P 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_inverse()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_perm_t\fP \fBgdsl_perm_randomize\fP (\fBgdsl_perm_t\fPP)"
+.PP
+Randomize a permutation\&. The permutation P is randomized in an efficient way, using inversions array\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to randomize 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the mirror image ~P of the permutation of P in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP* \fBgdsl_perm_apply_on_array\fP (\fBgdsl_element_t\fP *V, const \fBgdsl_perm_t\fPP)"
+.PP
+Apply a permutation on to a vector\&. \fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t & |P| == |V| 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIV\fP The vector/array to reorder according to P 
+.br
+\fIP\fP The permutation to use to reorder V 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the reordered array V according to the permutation P in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+
+.SS "void \fBgdsl_perm_write\fP (const \fBgdsl_perm_t\fPP, const \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the elements of a permutation to a file\&. Write the elements of the permuation P to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t & WRITE_F != NULL & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write P's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_write_xml()\fP 
+.PP
+\fBgdsl_perm_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_perm_write_xml\fP (const \fBgdsl_perm_t\fPP, const \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the elements of a permutation to a file into XML\&. Write the elements of the permutation P to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F function to write P's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write P's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_write()\fP 
+.PP
+\fBgdsl_perm_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_perm_dump\fP (const \fBgdsl_perm_t\fPP, const \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a permutation to a file\&. Dump the structure of the permutation P to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F function to write P's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |P| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+P must be a valid gdsl_perm_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIP\fP The permutation to dump\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write P's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_perm_write()\fP 
+.PP
+\fBgdsl_perm_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

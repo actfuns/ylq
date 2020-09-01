@@ -1,0 +1,53 @@
+
+message C2GSChargeReward {
+    optional uint32 id = 1;
+}
+
+message C2GSSetBackPartner {
+    optional uint32 sid = 1;
+    optional uint32 star = 2;
+}
+
+message C2GSGetBackPartnerInfo {
+}
+
+
+//获取找回奖励
+message C2GSGetRewardBack {
+    optional uint32 sid = 1; //sid = 0为一键领取
+    optional uint32 vip = 2; //0免费,1付费
+}
+
+//获取福利积分
+message C2GSGetFuliPointInfo {
+}
+
+//购买福利积分物品
+message C2GSBuyFuliPointItem {
+    optional uint32 id = 1;
+    optional uint32 amount = 2;
+    optional uint32 version = 3;
+}
+
+message C2GSGetLuckDrawInfo{
+}
+
+//抽奖
+message C2GSStartLuckDraw{
+    optional uint32 type = 1;   //消费方式 1-消耗次数 2-消耗水晶
+}
+
+//发放奖励
+message C2GSGiveLuckDraw{
+}
+
+//领取首充奖励
+message C2GSReceiveFirstCharge{
+}
+
+message C2GSRedeemcode {
+    optional string code = 1;
+}
+
+message C2GSOpenChargeBackUI {
+}

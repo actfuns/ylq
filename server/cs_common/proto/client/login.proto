@@ -1,0 +1,49 @@
+import "base/common.proto";
+
+message C2GSLoginAccount {
+    optional string account = 1;
+    optional string token = 2;
+    optional string device = 3; //机型:huawei xiaomi
+    optional uint32 platform = 4;    // {1 : "Andorid", 2 : "越狱ios", 3 : "IOS"}
+    optional string mac = 5;    // mac地址
+    optional uint32 client_svn_version = 6; //客户端svn版本
+    optional string client_version = 7; //客户端版本
+    optional string os = 8; //客户端操作系统
+    optional string udid = 9;//客户端唯一识别
+    optional string imei = 10;
+    optional uint32 is_qrcode = 11;//是否扫码登录,0:否,1:是
+}
+
+message C2GSLoginRole {
+    optional string account = 1;
+    optional uint32 pid = 2;
+    optional uint32 scene_model = 3;    //场景设置1:正常,2:省流量
+}
+
+message C2GSCreateRole {
+    optional string account = 1;
+    optional uint32 role_type = 2;
+    optional string name = 3;
+}
+
+//重登,重连
+message C2GSReLoginRole {
+    optional uint32 pid = 1;            //角色id
+    optional string role_token = 2; //角色token
+    optional uint32 scene_model = 3;
+}
+
+message C2GSSetInviteCode{
+    optional string invitecode = 1;
+}
+
+message C2GSLogoutByOneKey{
+	
+}
+
+message C2GSChangeAccount{
+}
+
+message C2GSQueryLogin {
+    repeated base.ClientResFileVersion res_file_version = 1;
+}

@@ -1,0 +1,216 @@
+import "base/common.proto";
+
+message TeamPosInfo{
+    optional uint32 pos = 1;
+    optional uint32 pid = 2;
+}
+
+message MemStatusInfo {
+    optional string mask = 1;
+    optional string name = 2;
+    optional base.ModelInfo model_info = 3;
+    optional uint32 school = 4;
+    optional uint32 grade = 5;
+    optional uint32 status = 6;
+    optional uint32 hp = 7;
+    optional uint32 max_hp =8;
+    optional uint32 school_branch = 9;
+    optional uint32 bcmd = 10; //指挥权限
+}
+
+message TeamMem{
+    optional uint32 pid = 1;
+    optional MemStatusInfo status_info = 2;
+    repeated base.SimplePartner partner_info = 3;
+}
+
+message ApplyInfo {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional base.ModelInfo model_info = 3;
+    optional uint32 school = 4;
+    optional uint32 grade = 5;
+    optional uint32 school_branch = 6;
+}
+
+message TargetInfo {
+    optional uint32 auto_target = 1; //0-无目标，其他为活动目标
+    optional uint32 min_grade = 2;
+    optional uint32 max_grade = 3;
+    optional uint32 team_match = 4; // 1-正在匹配，0-不匹配
+}
+
+message TeamInfo {
+    optional uint32 teamid = 1;
+    optional uint32 leader  = 2;
+    repeated TeamMem member = 3;
+    optional TargetInfo target_info = 4;
+    optional uint32 type = 5;
+    optional uint32 auto_match = 6;     //1-正在匹配，0-不匹配
+}
+
+message TargetTeamInfo {
+    optional uint32 teamid = 1;
+    optional uint32 leader  = 2;
+    optional uint32 applying = 3; //1-正在申请，0-没申请
+    repeated TeamMem member = 4;
+    optional TargetInfo target_info = 5;
+    repeated TeamPosInfo posinfo = 6;
+    optional uint32 type = 7;
+    optional uint32 auto_match = 8;
+}
+
+message TeamMemStatus{
+    optional uint32 pid = 1;
+    optional uint32 status = 2;     //1:成员,2:暂离,3:离线
+}
+
+//增加队伍
+message GS2CAddTeam{
+    optional uint32 teamid = 1;
+    optional uint32 leader  = 2;
+    repeated TeamMem member = 3;
+    optional TargetInfo target_info = 4;
+    repeated TeamPosInfo posinfo = 5;
+    optional uint32 type = 6;
+    optional uint32 auto_match = 7;
+}
+
+//删除队伍
+message GS2CDelTeam{
+}
+
+//增加队伍成员
+message GS2CAddTeamMember{
+    optional TeamMem mem_info = 1;
+}
+
+//刷新队伍状态
+message GS2CRefreshTeamStatus{
+    repeated TeamMemStatus team_status = 1;
+    repeated TeamPosInfo posinfo = 2;
+}
+
+message GS2CRefreshMemberInfo {
+    optional uint32 pid = 1;
+    optional MemStatusInfo status_info = 2;
+}
+
+//队伍申请信息
+message GS2CTeamApplyInfo{
+    repeated ApplyInfo apply_info = 1;
+}
+
+//删除一个申请
+message GS2CDelTeamApplyInfo{
+    optional uint32 pid = 1;
+}
+
+//增加申请信息
+message GS2CAddTeamApplyInfo{
+    optional ApplyInfo apply_info = 1;
+}
+
+//邀请信息
+message GS2CInviteInfo {
+    repeated TeamInfo teaminfo = 1;
+
+}
+
+//删除一个邀请
+message GS2CRemoveInvite{
+    optional uint32 teamid = 1;
+}
+
+//增加邀请信息
+message GS2CAddInviteInfo {
+    optional TeamInfo teaminfo = 1;
+}
+
+message GS2CTargetInfo {
+    optional TargetInfo target_info = 1;
+}
+
+message GS2CNotifyAutoMatch {
+    optional uint32 player_match = 1;   /*1-正在匹配，0-取消匹配 */
+}
+
+//活动目标队伍信息
+message GS2CTargetTeamInfo {
+    optional TargetTeamInfo teaminfo = 1;
+}
+
+message GS2CPlayerMatchTargetInfo{
+    optional TargetInfo target_info = 1;
+}
+
+//活动目标队伍信息列表
+message GS2CTargetTeamInfoList {
+    repeated TargetTeamInfo teaminfo = 1;
+    optional uint32 auto_target = 2;
+}
+
+message GS2CCountAutoMatch {
+    optional uint32 auto_target = 1;
+    optional uint32 member_count = 2;
+    optional uint32 team_count = 3;
+}
+
+message GS2CMemPartnerInfoChange{
+    optional uint32 pid = 1;
+    optional base.SimplePartner partner_info = 2;
+}
+
+message GS2CChangePosInfo{
+    repeated TeamPosInfo posinfo = 1;
+}
+
+message GS2CPlayerMatchSuccess{
+}
+
+message GS2CCancelTeamAutoMatch{
+}
+
+message MingleiInfo{
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional string fight_time = 3;
+    optional string buy_time = 4;
+}
+
+message GS2CTeamMingleiInfo{
+    repeated MingleiInfo minglei_info = 1;
+}
+
+message TrapmineInfo {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 cd = 3; //冷却时间,单位:秒
+}
+
+message GS2CTeamTrapmineInfo {
+    repeated TrapmineInfo trapmine_info = 1;
+}
+
+message FriendList{
+    optional uint32 pid = 1;
+    optional uint32 can_invite = 2;     //1为可邀请，0为不可邀请
+}
+
+message GS2CInviteFriendList{
+    repeated FriendList friend_list = 1;
+}
+
+//通知客户端创建队伍
+message GS2CCreateTeam {
+    optional uint32 target = 1; //目标id，0-无目标
+}
+
+message TargetMemInfo{
+    optional uint32 pid = 1;
+    optional ApplyInfo player_info = 2;
+}
+
+message GS2CTargetMemList{
+    repeated TargetMemInfo info = 1;
+}

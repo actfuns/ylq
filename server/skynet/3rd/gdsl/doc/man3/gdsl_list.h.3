@@ -1,0 +1,223 @@
+.TH "gdsl_list.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_list.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _gdsl_list * \fBgdsl_list_t\fP"
+.br
+.RI "\fIGDSL doubly-linked list type\&. \fP"
+.ti -1c
+.RI "typedef struct _gdsl_list_cursor * \fBgdsl_list_cursor_t\fP"
+.br
+.RI "\fIGDSL doubly-linked list cursor type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fICreate a new list\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_free\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIDestroy a list\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_flush\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIFlush a list\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_list_get_name\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fIGet the name of a list\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_list_get_size\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fIGet the size of a list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_is_empty\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fICheck if a list is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_get_head\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fIGet the head of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_get_tail\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fIGet the tail of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_set_name\fP (\fBgdsl_list_t\fP L, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_insert_head\fP (\fBgdsl_list_t\fP L, void *VALUE)"
+.br
+.RI "\fIInsert an element at the head of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_insert_tail\fP (\fBgdsl_list_t\fP L, void *VALUE)"
+.br
+.RI "\fIInsert an element at the tail of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_remove_head\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIRemove the head of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_remove_tail\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIRemove the tail of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_remove\fP (\fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F, const void *VALUE)"
+.br
+.RI "\fIRemove a particular element from a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_delete_head\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIDelete the head of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_delete_tail\fP (\fBgdsl_list_t\fP L)"
+.br
+.RI "\fIDelete the tail of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_delete\fP (\fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F, const void *VALUE)"
+.br
+.RI "\fIDelete a particular element from a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_search\fP (const \fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F, const void *VALUE)"
+.br
+.RI "\fISearch for a particular element into a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_search_by_position\fP (const \fBgdsl_list_t\fP L, \fBulong\fP POS)"
+.br
+.RI "\fISearch for an element by its position in a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_search_max\fP (const \fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fISearch for the greatest element of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_search_min\fP (const \fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fISearch for the lowest element of a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_t\fP \fBgdsl_list_sort\fP (\fBgdsl_list_t\fP L, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fISort a list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_map_forward\fP (const \fBgdsl_list_t\fP L, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a list from head to tail\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_map_backward\fP (const \fBgdsl_list_t\fP L, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a list from tail to head\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_write\fP (const \fBgdsl_list_t\fP L, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a list to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_write_xml\fP (const \fBgdsl_list_t\fP L, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a list to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_dump\fP (const \fBgdsl_list_t\fP L, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a list to a file\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_alloc\fP (const \fBgdsl_list_t\fP L)"
+.br
+.RI "\fICreate a new list cursor\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_free\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIDestroy a list cursor\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_move_to_head\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIPut a cursor on the head of its list\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_move_to_tail\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIPut a cursor on the tail of its list\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_move_to_value\fP (\fBgdsl_list_cursor_t\fP C, \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fIPlace a cursor on a particular element\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_move_to_position\fP (\fBgdsl_list_cursor_t\fP C, \fBulong\fP POS)"
+.br
+.RI "\fIPlace a cursor on a element given by its position\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_step_forward\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIMove a cursor one step forward of its list\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_step_backward\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIMove a cursor one step backward of its list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_cursor_is_on_head\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fICheck if a cursor is on the head of its list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_cursor_is_on_tail\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fICheck if a cursor is on the tail of its list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_cursor_has_succ\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fICheck if a cursor has a successor\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_list_cursor_has_pred\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fICheck if a cursor has a predecessor\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_list_cursor_set_content\fP (\fBgdsl_list_cursor_t\fP C, \fBgdsl_element_t\fP E)"
+.br
+.RI "\fISet the content of the cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_get_content\fP (const \fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIGet the content of a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_insert_after\fP (\fBgdsl_list_cursor_t\fP C, void *VALUE)"
+.br
+.RI "\fIInsert a new element after a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_insert_before\fP (\fBgdsl_list_cursor_t\fP C, void *VALUE)"
+.br
+.RI "\fIInsert a new element before a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIRemovec the element under a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove_after\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIRemovec the element after a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_list_cursor_remove_before\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIRemove the element before a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIDelete the element under a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete_after\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIDelete the element after a cursor\&. \fP"
+.ti -1c
+.RI "\fBgdsl_list_cursor_t\fP \fBgdsl_list_cursor_delete_before\fP (\fBgdsl_list_cursor_t\fP C)"
+.br
+.RI "\fIDelete the element before the cursor of a list\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

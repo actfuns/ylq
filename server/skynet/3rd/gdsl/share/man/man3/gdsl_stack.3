@@ -1,0 +1,749 @@
+.TH "Stack manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Stack manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _gdsl_stack * \fBgdsl_stack_t\fP"
+.br
+.RI "\fIGDSL stack type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_stack_t\fP \fBgdsl_stack_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fICreate a new stack\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_free\fP (\fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIDestroy a stack\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_flush\fP (\fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIFlush a stack\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_stack_get_name\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGetsthe name of a stack\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_stack_get_size\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGet the size of a stack\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_stack_get_growing_factor\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGet the growing factor of a stack\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_stack_is_empty\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fICheck if a stack is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_get_top\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGet the top of a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_get_bottom\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGet the bottom of a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_stack_t\fP \fBgdsl_stack_set_name\fP (\fBgdsl_stack_t\fP S, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a stack\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_set_growing_factor\fP (\fBgdsl_stack_t\fP S, \fBulong\fP G)"
+.br
+.RI "\fISet the growing factor of a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_insert\fP (\fBgdsl_stack_t\fP S, void *VALUE)"
+.br
+.RI "\fIInsert an element in a stack (PUSH)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_remove\fP (\fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIRemove an element from a stack (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_search\fP (const \fBgdsl_stack_t\fP S, \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fISearch for a particular element in a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_search_by_position\fP (const \fBgdsl_stack_t\fP S, \fBulong\fP POS)"
+.br
+.RI "\fISearch for an element by its position in a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_map_forward\fP (const \fBgdsl_stack_t\fP S, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a stack from bottom to top\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_map_backward\fP (const \fBgdsl_stack_t\fP S, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a stack from top to bottom\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_write\fP (const \fBgdsl_stack_t\fP S, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a stack to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_write_xml\fP (\fBgdsl_stack_t\fP S, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a stack to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_dump\fP (\fBgdsl_stack_t\fP S, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a stack to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct _gdsl_stack* \fBgdsl_stack_t\fP"
+.PP
+GDSL stack type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 53 of file gdsl_stack\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBgdsl_stack_t\fP \fBgdsl_stack_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fPALLOC_F, \fBgdsl_free_func_t\fPFREE_F)"
+.PP
+Create a new stack\&. Allocate a new stack data structure which name is set to a copy of NAME\&. The functions pointers ALLOC_F and FREE_F could be used to respectively, alloc and free elements in the stack\&. These pointers could be set to NULL to use the default ones:
+.IP "\(bu" 2
+the default ALLOC_F simply returns its argument
+.IP "\(bu" 2
+the default FREE_F does nothing
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINAME\fP The name of the new stack to create 
+.br
+\fIALLOC_F\fP Function to alloc element when inserting it in a stack 
+.br
+\fIFREE_F\fP Function to free element when deleting it from a stack 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated stack in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_free()\fP 
+.PP
+\fBgdsl_stack_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_stack_free\fP (\fBgdsl_stack_t\fPS)"
+.PP
+Destroy a stack\&. Deallocate all the elements of the stack S by calling S's FREE_F function passed to \fBgdsl_stack_alloc()\fP\&. The name of S is deallocated and S is deallocated itself too\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |S| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to destroy 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_alloc()\fP 
+.PP
+\fBgdsl_stack_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_stack_flush\fP (\fBgdsl_stack_t\fPS)"
+.PP
+Flush a stack\&. Deallocate all the elements of the stack S by calling S's FREE_F function passed to \fBgdsl_stack_alloc()\fP\&. S is not deallocated itself and S's name is not modified\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |S| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to flush 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_alloc()\fP 
+.PP
+\fBgdsl_stack_free()\fP 
+.RE
+.PP
+
+.SS "const char* \fBgdsl_stack_get_name\fP (const \fBgdsl_stack_t\fPS)"
+.PP
+Getsthe name of a stack\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned string MUST NOT be freed\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to get the name from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the name of the stack S\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_set_name()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_stack_get_size\fP (const \fBgdsl_stack_t\fPS)"
+.PP
+Get the size of a stack\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to get the size from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of the stack S (noted |S|)\&. 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_stack_get_growing_factor\fP (const \fBgdsl_stack_t\fPS)"
+.PP
+Get the growing factor of a stack\&. Get the growing factor of the stack S\&. This value is the amount of cells to reserve for next insertions\&. For example, if you set this value to 10, each time the number of elements of S reaches 10, then 10 new cells will be reserved for next 10 insertions\&. It is a way to save time for insertions\&. This value is 1 by default and can be modified with \fBgdsl_stack_set_growing_factor()\fP\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to get the growing factor from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the growing factor of the stack S\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_insert()\fP 
+.PP
+\fBgdsl_stack_set_growing_factor()\fP 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_stack_is_empty\fP (const \fBgdsl_stack_t\fPS)"
+.PP
+Check if a stack is empty\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the stack S is empty\&. 
+.PP
+FALSE if the stack S is not empty\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_stack_get_top\fP (const \fBgdsl_stack_t\fPS)"
+.PP
+Get the top of a stack\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to get the top from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element contained at the top position of the stack S if S is not empty\&. The returned element is not removed from S\&. 
+.PP
+NULL if the stack S is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_get_bottom()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_stack_get_bottom\fP (const \fBgdsl_stack_t\fPS)"
+.PP
+Get the bottom of a stack\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to get the bottom from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element contained at the bottom position of the stack S if S is not empty\&. The returned element is not removed from S\&. 
+.PP
+NULL if the stack S is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_get_top()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_stack_t\fP \fBgdsl_stack_set_name\fP (\fBgdsl_stack_t\fPS, const char *NEW_NAME)"
+.PP
+Set the name of a stack\&. Change the previous name of the stack S to a copy of NEW_NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to change the name 
+.br
+\fINEW_NAME\fP The new name of S 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified stack in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_get_name()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_stack_set_growing_factor\fP (\fBgdsl_stack_t\fPS, \fBulong\fPG)"
+.PP
+Set the growing factor of a stack\&. Set the growing factor of the stack S\&. This value is the amount of cells to reserve for next insertions\&. For example, if you set this value to 10, each time the number of elements of S reaches 10, then 10 new cells will be reserved for next 10 insertions\&. It is a way to save time for insertions\&. To know the actual value of the growing factor, use \fBgdsl_stack_get_growing_factor()\fP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to get the growing factor from 
+.br
+\fIG\fP The new growing factor of S\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the growing factor of the stack S\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_insert()\fP 
+.PP
+\fBgdsl_stack_get_growing_factor()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_stack_insert\fP (\fBgdsl_stack_t\fPS, void *VALUE)"
+.PP
+Insert an element in a stack (PUSH)\&. Allocate a new element E by calling S's ALLOC_F function on VALUE\&. ALLOC_F is the function pointer passed to \fBgdsl_stack_alloc()\fP\&. The new element E is the inserted at the top position of the stack S\&. If the number of elements in S reaches S's growing factor (G), then G new cells are reserved for future insertions into S to save time\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to insert in 
+.br
+\fIVALUE\fP The value used to make the new element to insert into S 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the inserted element E in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_set_growing_factor()\fP 
+.PP
+\fBgdsl_stack_get_growing_factor()\fP 
+.PP
+\fBgdsl_stack_remove()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_stack_remove\fP (\fBgdsl_stack_t\fPS)"
+.PP
+Remove an element from a stack (POP)\&. Remove the element at the top position of the stack S\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to remove the top from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed element in case of success\&. 
+.PP
+NULL in case of S is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_insert()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_stack_search\fP (const \fBgdsl_stack_t\fPS, \fBgdsl_compare_func_t\fPCOMP_F, void *VALUE)"
+.PP
+Search for a particular element in a stack\&. Search for the first element E equal to VALUE in the stack S, by using COMP_F to compare all S's element with\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |S| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t & COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to search the element in 
+.br
+\fICOMP_F\fP The comparison function used to compare S's element with VALUE 
+.br
+\fIVALUE\fP The value to compare S's elements with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first founded element E in case of success\&. 
+.PP
+NULL if no element is found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_search_by_position()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_stack_search_by_position\fP (const \fBgdsl_stack_t\fPS, \fBulong\fPPOS)"
+.PP
+Search for an element by its position in a stack\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t & POS > 0 & POS <= |S| 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to search the element in 
+.br
+\fIPOS\fP The position where is the element to search 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element at the POS-th position in the stack S\&. 
+.PP
+NULL if POS > |L| or POS <= 0\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_search()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_stack_map_forward\fP (const \fBgdsl_stack_t\fPS, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a stack from bottom to top\&. Parse all elements of the stack S from bottom to top\&. The MAP_F function is called on each S's element with USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fBgdsl_stack_map_forward()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |S| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to parse 
+.br
+\fIMAP_F\fP The map function to apply on each S's element 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F Returns the first element for which MAP_F returns GDSL_MAP_STOP\&. Returns NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_map_backward()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_stack_map_backward\fP (const \fBgdsl_stack_t\fPS, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a stack from top to bottom\&. Parse all elements of the stack S from top to bottom\&. The MAP_F function is called on each S's element with USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fBgdsl_stack_map_backward()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |S| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to parse 
+.br
+\fIMAP_F\fP The map function to apply on each S's element 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_map_forward()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_stack_write\fP (const \fBgdsl_stack_t\fPS, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write all the elements of a stack to a file\&. Write the elements of the stack S to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |S| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t & OUTPUT_FILE != NULL & WRITE_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write S's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_write_xml()\fP 
+.PP
+\fBgdsl_stack_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_stack_write_xml\fP (\fBgdsl_stack_t\fPS, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of a stack to a file into XML\&. Write the elements of the stack S to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F to write S's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |S| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write S's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_write()\fP 
+.PP
+\fBgdsl_stack_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_stack_dump\fP (\fBgdsl_stack_t\fPS, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a stack to a file\&. Dump the structure of the stack S to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F to write S's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |S| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+S must be a valid gdsl_stack_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIS\fP The stack to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write S's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_stack_write()\fP 
+.PP
+\fBgdsl_stack_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

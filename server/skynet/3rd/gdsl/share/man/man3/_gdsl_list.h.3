@@ -1,0 +1,79 @@
+.TH "_gdsl_list.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+_gdsl_list.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_gdsl_node_t\fP \fB_gdsl_list_t\fP"
+.br
+.RI "\fIGDSL low-level doubly-linked list type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB_gdsl_list_t\fP \fB_gdsl_list_alloc\fP (const \fBgdsl_element_t\fP E)"
+.br
+.RI "\fICreate a new low-level list\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_free\fP (\fB_gdsl_list_t\fP L, const \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fIDestroy a low-level list\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fB_gdsl_list_is_empty\fP (const \fB_gdsl_list_t\fP L)"
+.br
+.RI "\fICheck if a low-level list is empty\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fB_gdsl_list_get_size\fP (const \fB_gdsl_list_t\fP L)"
+.br
+.RI "\fIGet the size of a low-level list\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_link\fP (\fB_gdsl_list_t\fP L1, \fB_gdsl_list_t\fP L2)"
+.br
+.RI "\fILink two low-level lists together\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_insert_after\fP (\fB_gdsl_list_t\fP L, \fB_gdsl_list_t\fP PREV)"
+.br
+.RI "\fIInsert a low-level list after another one\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_insert_before\fP (\fB_gdsl_list_t\fP L, \fB_gdsl_list_t\fP SUCC)"
+.br
+.RI "\fIInsert a low-level list before another one\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_remove\fP (\fB_gdsl_node_t\fP NODE)"
+.br
+.RI "\fIRemove a node from a low-level list\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_list_t\fP \fB_gdsl_list_search\fP (\fB_gdsl_list_t\fP L, const \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fISearch for a particular node in a low-level list\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_list_t\fP \fB_gdsl_list_map_forward\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a low-level list in forward order\&. \fP"
+.ti -1c
+.RI "\fB_gdsl_list_t\fP \fB_gdsl_list_map_backward\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a low-level list in backward order\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_write\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all nodes of a low-level list to a file\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_write_xml\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all nodes of a low-level list to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fB_gdsl_list_dump\fP (const \fB_gdsl_list_t\fP L, const \fB_gdsl_node_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a low-level list to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

@@ -1,0 +1,3 @@
+1.http://svn.cilugame.com/N1/client/trunk/Assets/Lua/logic/data
+检出上面svn地址目录到client/data
+2.每次导表后上传client/data的修改

@@ -1,0 +1,65 @@
+//请求商城信息
+message C2GSOpenShop{
+   optional uint32 shop_id = 1; //商城ID
+}
+
+//元宝兑换金币
+message C2GSExchangeGold {
+    optional uint32 store_itemid = 1; /* 金币商城的商品id */
+}
+
+//元宝兑换银币
+message C2GSExchangeSilver {
+    optional uint32 store_itemid = 1; /*银币商城的商品id */
+}
+
+//npc 商城
+message C2GSNpcStoreBuy {
+    optional uint32 buy_id = 1;    //商品唯一id
+    optional uint32 buy_count = 2; //购买数量
+    optional uint32 buy_price = 3; //购买时价格
+    optional uint32 pos= 4;
+}
+
+//请求打开金币铜币界面
+message C2GSOpenGold2Coin {
+	optional uint32 type = 1; //1水晶to金币,2彩晶to金币,3:彩晶to水晶
+}
+
+//金币铜币兑换
+message C2GSGold2Coin {
+   optional uint32 val =1 ;
+   optional uint32 ratio =2 ; //兑换比例,服务器验证用
+   optional uint32 type = 3;//1水晶to金币,2彩晶to金币,3:彩晶to水晶
+}
+
+//花费刷新商店
+message C2GSRefreshShop {
+    optional uint32 shop_id = 1;
+}
+
+//探索点兑换
+message C2GSExchangeTrapminePoint {
+  optional uint32 amount = 1; //兑换数量
+}
+
+//商品
+message BuyItem {
+    optional uint32 buy_id = 1;    //商品唯一id
+    optional uint32 buy_count = 2; //购买数量
+    optional uint32 buy_price = 3; //购买时价格
+    optional uint32 pos= 4;
+}
+
+//购买列表物品商城
+message C2GSStoreBuyList {
+  repeated BuyItem buys = 1; //购买列表
+}
+
+
+//购买道具
+message C2GSBuyItemByCoin {
+  optional uint32 coin_type = 1; //货币类型，商店的coin_type表
+  optional uint32 item_sid = 2; //购买的道具导表id
+  optional uint32 buy_amount = 3; //购买数量，需大于0且小于等于上限值
+}

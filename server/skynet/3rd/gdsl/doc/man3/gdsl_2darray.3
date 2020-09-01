@@ -1,0 +1,477 @@
+.TH "2D-Arrays manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+2D-Arrays manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct gdsl_2darray * \fBgdsl_2darray_t\fP"
+.br
+.RI "\fIGDSL 2D-array type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_2darray_t\fP \fBgdsl_2darray_alloc\fP (const char *NAME, const \fBulong\fP R, const \fBulong\fP C, const \fBgdsl_alloc_func_t\fP ALLOC_F, const \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fICreate a new 2D-array\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_2darray_free\fP (\fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIDestroy a 2D-array\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_2darray_get_name\fP (const \fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIGet the name of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_2darray_get_rows_number\fP (const \fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIGet the number of rows of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_2darray_get_columns_number\fP (const \fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIGet the number of columns of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_2darray_get_size\fP (const \fBgdsl_2darray_t\fP A)"
+.br
+.RI "\fIGet the size of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_2darray_get_content\fP (const \fBgdsl_2darray_t\fP A, const \fBulong\fP R, const \fBulong\fP C)"
+.br
+.RI "\fIGet an element from a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBgdsl_2darray_t\fP \fBgdsl_2darray_set_name\fP (\fBgdsl_2darray_t\fP A, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a 2D-array\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_2darray_set_content\fP (\fBgdsl_2darray_t\fP A, const \fBulong\fP R, const \fBulong\fP C, void *VALUE)"
+.br
+.RI "\fIModify an element in a 2D-array\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_2darray_write\fP (const \fBgdsl_2darray_t\fP A, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a 2D-array to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_2darray_write_xml\fP (const \fBgdsl_2darray_t\fP A, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a 2D array to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_2darray_dump\fP (const \fBgdsl_2darray_t\fP A, const \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a 2D array to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct gdsl_2darray* \fBgdsl_2darray_t\fP"
+.PP
+GDSL 2D-array type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 53 of file gdsl_2darray\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBgdsl_2darray_t\fP \fBgdsl_2darray_alloc\fP (const char *NAME, const \fBulong\fPR, const \fBulong\fPC, const \fBgdsl_alloc_func_t\fPALLOC_F, const \fBgdsl_free_func_t\fPFREE_F)"
+.PP
+Create a new 2D-array\&. Allocate a new 2D-array data structure with R rows and C columns and its name is set to a copy of NAME\&. The functions pointers ALLOC_F and FREE_F could be used to respectively, alloc and free elements in the 2D-array\&. These pointers could be set to NULL to use the default ones:
+.IP "\(bu" 2
+the default ALLOC_F simply returns its argument
+.IP "\(bu" 2
+the default FREE_F does nothing
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINAME\fP The name of the new 2D-array to create 
+.br
+\fIR\fP The number of rows of the new 2D-array to create 
+.br
+\fIC\fP The number of columns of the new 2D-array to create 
+.br
+\fIALLOC_F\fP Function to alloc element when inserting it in a 2D-array 
+.br
+\fIFREE_F\fP Function to free element when removing it from a 2D-array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated 2D-array in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_free()\fP 
+.PP
+\fBgdsl_alloc_func_t\fP 
+.PP
+\fBgdsl_free_func_t\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_2darray_free\fP (\fBgdsl_2darray_t\fPA)"
+.PP
+Destroy a 2D-array\&. Flush and destroy the 2D-array A\&. The FREE_F function passed to \fBgdsl_2darray_alloc()\fP is used to free elements from A, but no check is done to see if an element was set (ie\&. != NULL) or not\&.It's up to you to check if the element to free is NULL or not into the FREE_F function\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( R x C ), where R is A's rows count, and C is A's columns count 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array to destroy 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_alloc()\fP 
+.RE
+.PP
+
+.SS "const char* \fBgdsl_2darray_get_name\fP (const \fBgdsl_2darray_t\fPA)"
+.PP
+Get the name of a 2D-array\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned string MUST NOT be freed\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array from which getting the name 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the name of the 2D-array A\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_set_name()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_2darray_get_rows_number\fP (const \fBgdsl_2darray_t\fPA)"
+.PP
+Get the number of rows of a 2D-array\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array from which getting the rows count 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of rows of the 2D-array A\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_get_columns_number()\fP 
+.PP
+\fBgdsl_2darray_get_size()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_2darray_get_columns_number\fP (const \fBgdsl_2darray_t\fPA)"
+.PP
+Get the number of columns of a 2D-array\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array from which getting the columns count 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of columns of the 2D-array A\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_get_rows_number()\fP 
+.PP
+\fBgdsl_2darray_get_size()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_2darray_get_size\fP (const \fBgdsl_2darray_t\fPA)"
+.PP
+Get the size of a 2D-array\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of A (noted |A|)\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_get_rows_number()\fP 
+.PP
+\fBgdsl_2darray_get_columns_number()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_2darray_get_content\fP (const \fBgdsl_2darray_t\fPA, const \fBulong\fPR, const \fBulong\fPC)"
+.PP
+Get an element from a 2D-array\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t & R <= gdsl_2darray_get_rows_number( A ) & C <= gdsl_2darray_get_columns_number( A ) 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array from which getting the element 
+.br
+\fIR\fP The row indix of the element to get 
+.br
+\fIC\fP The column indix of the element to get 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element of the 2D-array A contained in row R and column C\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_set_content()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_2darray_t\fP \fBgdsl_2darray_set_name\fP (\fBgdsl_2darray_t\fPA, const char *NEW_NAME)"
+.PP
+Set the name of a 2D-array\&. Change the previous name of the 2D-array A to a copy of NEW_NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array to change the name 
+.br
+\fINEW_NAME\fP The new name of A 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified 2D-array in case of success\&. 
+.PP
+NULL in case of failure\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_get_name()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_2darray_set_content\fP (\fBgdsl_2darray_t\fPA, const \fBulong\fPR, const \fBulong\fPC, void *VALUE)"
+.PP
+Modify an element in a 2D-array\&. Change the element at row R and column C of the 2D-array A, and returns it\&. The new element to insert is allocated using the ALLOC_F function passed to gdsl_2darray_create() applied on VALUE\&. The previous element contained in row R and in column C is NOT deallocated\&. It's up to you to do it before, if necessary\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t & R <= gdsl_2darray_get_rows_number( A ) & C <= gdsl_2darray_get_columns_number( A ) 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array to modify on element from 
+.br
+\fIR\fP The row number of the element to modify 
+.br
+\fIC\fP The column number of the element to modify 
+.br
+\fIVALUE\fP The user value to use for allocating the new element 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated element in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_get_content()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_2darray_write\fP (const \fBgdsl_2darray_t\fPA, const \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of a 2D-array to a file\&. Write the elements of the 2D-array A to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( R x C ), where R is A's rows count, and C is A's columns count 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+WRITE_F != NULL & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array to write 
+.br
+\fIWRITE_F\fP The write function 
+.br
+\fIOUTPUT_FILE\fP The file where to write A's elements 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_write_xml()\fP 
+.PP
+\fBgdsl_2darray_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_2darray_write_xml\fP (const \fBgdsl_2darray_t\fPA, const \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of a 2D array to a file into XML\&. Write all A's elements to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F to write A's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( R x C ), where R is A's rows count, and C is A's columns count 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array to write 
+.br
+\fIWRITE_F\fP The write function 
+.br
+\fIOUTPUT_FILE\fP The file where to write A's elements 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_write()\fP 
+.PP
+\fBgdsl_2darray_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_2darray_dump\fP (const \fBgdsl_2darray_t\fPA, const \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a 2D array to a file\&. Dump A's structure to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F to write A's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( R x C ), where R is A's rows count, and C is A's columns count 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+A must be a valid gdsl_2darray_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIA\fP The 2D-array to dump 
+.br
+\fIWRITE_F\fP The write function 
+.br
+\fIOUTPUT_FILE\fP The file where to write A's elements 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_2darray_write()\fP 
+.PP
+\fBgdsl_2darray_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

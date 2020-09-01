@@ -1,0 +1,13 @@
+
+message C2GSClickNpc{
+    optional uint32 npcid		= 1;		//npcid
+}
+
+message C2GSNpcRespond{
+    optional uint32 npcid		= 1;
+    optional uint32 answer		= 2;		//回应值
+}
+
+message C2GSClickConvoyNpc{
+	optional uint32 npcid		= 1;		//npcid
+}

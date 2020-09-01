@@ -1,0 +1,4 @@
+//1 图片信息
+message GS2CImages{
+	repeated string keys = 1;		//图片路径列表
+}

@@ -1,0 +1,858 @@
+.TH "Hashtable manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Hashtable manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct hash_table * \fBgdsl_hash_t\fP"
+.br
+.RI "\fIGDSL hashtable type\&. \fP"
+.ti -1c
+.RI "typedef const char *(* \fBgdsl_key_func_t\fP )(void *VALUE)"
+.br
+.RI "\fIGDSL hashtable key function type\&. \fP"
+.ti -1c
+.RI "typedef \fBulong\fP(* \fBgdsl_hash_func_t\fP )(const char *KEY)"
+.br
+.RI "\fIGDSL hashtable hash function type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_hash\fP (const char *KEY)"
+.br
+.RI "\fIComputes a hash value from a NULL terminated character string\&. \fP"
+.ti -1c
+.RI "\fBgdsl_hash_t\fP \fBgdsl_hash_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F, \fBgdsl_key_func_t\fP KEY_F, \fBgdsl_hash_func_t\fP HASH_F, \fBushort\fP INITIAL_ENTRIES_NB)"
+.br
+.RI "\fICreate a new hashtable\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_free\fP (\fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIDestroy a hashtable\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_flush\fP (\fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIFlush a hashtable\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_hash_get_name\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the name of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBushort\fP \fBgdsl_hash_get_entries_number\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the number of entries of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBushort\fP \fBgdsl_hash_get_lists_max_size\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the max number of elements allowed in each entry of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBushort\fP \fBgdsl_hash_get_longest_list_size\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the number of elements of the longest list entry of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_hash_get_size\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the size of a hashtable\&. \fP"
+.ti -1c
+.RI "double \fBgdsl_hash_get_fill_factor\fP (const \fBgdsl_hash_t\fP H)"
+.br
+.RI "\fIGet the fill factor of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBgdsl_hash_t\fP \fBgdsl_hash_set_name\fP (\fBgdsl_hash_t\fP H, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_hash_insert\fP (\fBgdsl_hash_t\fP H, void *VALUE)"
+.br
+.RI "\fIInsert an element into a hashtable (PUSH)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_hash_remove\fP (\fBgdsl_hash_t\fP H, const char *KEY)"
+.br
+.RI "\fIRemove an element from a hashtable (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_hash_t\fP \fBgdsl_hash_delete\fP (\fBgdsl_hash_t\fP H, const char *KEY)"
+.br
+.RI "\fIDelete an element from a hashtable\&. \fP"
+.ti -1c
+.RI "\fBgdsl_hash_t\fP \fBgdsl_hash_modify\fP (\fBgdsl_hash_t\fP H, \fBushort\fP NEW_ENTRIES_NB, \fBushort\fP NEW_LISTS_MAX_SIZE)"
+.br
+.RI "\fIIncrease the dimensions of a hashtable\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_hash_search\fP (const \fBgdsl_hash_t\fP H, const char *KEY)"
+.br
+.RI "\fISearch for a particular element into a hashtable (GET)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_hash_map\fP (const \fBgdsl_hash_t\fP H, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a hashtable\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_write\fP (const \fBgdsl_hash_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a hashtable to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_write_xml\fP (const \fBgdsl_hash_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a hashtable to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_hash_dump\fP (const \fBgdsl_hash_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a hashtable to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct hash_table* \fBgdsl_hash_t\fP"
+.PP
+GDSL hashtable type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 54 of file gdsl_hash\&.h\&.
+.SS "typedef const char*(* \fBgdsl_key_func_t\fP)(void *VALUE)"
+.PP
+GDSL hashtable key function type\&. \fBPostcondition:\fP
+.RS 4
+Returned value must be != '' && != NULL\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIVALUE\fP The value used to get the key from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The key associated to the VALUE\&. 
+.RE
+.PP
+
+.PP
+Definition at line 62 of file gdsl_hash\&.h\&.
+.SS "typedef \fBulong\fP(* \fBgdsl_hash_func_t\fP)(const char *KEY)"
+.PP
+GDSL hashtable hash function type\&. \fBParameters:\fP
+.RS 4
+\fIKEY\fP the key used to compute the hash code\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The hashed value computed from KEY\&. 
+.RE
+.PP
+
+.PP
+Definition at line 70 of file gdsl_hash\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBulong\fP \fBgdsl_hash\fP (const char *KEY)"
+.PP
+Computes a hash value from a NULL terminated character string\&. This function computes a hash value from the NULL terminated KEY string\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O ( |key| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+KEY must be NULL-terminated\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIKEY\fP The NULL terminated string to compute the key from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the hash code computed from KEY\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_hash_t\fP \fBgdsl_hash_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fPALLOC_F, \fBgdsl_free_func_t\fPFREE_F, \fBgdsl_key_func_t\fPKEY_F, \fBgdsl_hash_func_t\fPHASH_F, \fBushort\fPINITIAL_ENTRIES_NB)"
+.PP
+Create a new hashtable\&. Allocate a new hashtable data structure which name is set to a copy of NAME\&. The new hashtable will contain initially INITIAL_ENTRIES_NB lists\&. This value could be (only) increased with \fBgdsl_hash_modify()\fP function\&. Until this function is called, then all H's lists entries have no size limit\&. The function pointers ALLOC_F and FREE_F could be used to respectively, alloc and free elements in the hashtable\&. The KEY_F function must provide a unique key associated to its argument\&. The HASH_F function must compute a hash code from its argument\&. These pointers could be set to NULL to use the default ones:
+.IP "\(bu" 2
+the default ALLOC_F simply returns its argument
+.IP "\(bu" 2
+the default FREE_F does nothing
+.IP "\(bu" 2
+the default KEY_F simply returns its argument
+.IP "\(bu" 2
+the default HASH_F is \fBgdsl_hash()\fP above
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINAME\fP The name of the new hashtable to create 
+.br
+\fIALLOC_F\fP Function to alloc element when inserting it in the hashtable 
+.br
+\fIFREE_F\fP Function to free element when deleting it from the hashtable 
+.br
+\fIKEY_F\fP Function to get the key from an element 
+.br
+\fIHASH_F\fP Function used to compute the hash value\&. 
+.br
+\fIINITIAL_ENTRIES_NB\fP Initial number of entries of the hashtable 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated hashtable in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_free()\fP 
+.PP
+\fBgdsl_hash_flush()\fP 
+.PP
+\fBgdsl_hash_insert()\fP 
+.PP
+\fBgdsl_hash_modify()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_hash_free\fP (\fBgdsl_hash_t\fPH)"
+.PP
+Destroy a hashtable\&. Deallocate all the elements of the hashtable H by calling H's FREE_F function passed to \fBgdsl_hash_alloc()\fP\&. The name of H is deallocated and H is deallocated itself too\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to destroy 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_alloc()\fP 
+.PP
+\fBgdsl_hash_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_hash_flush\fP (\fBgdsl_hash_t\fPH)"
+.PP
+Flush a hashtable\&. Deallocate all the elements of the hashtable H by calling H's FREE_F function passed to \fBgdsl_hash_alloc()\fP\&. H is not deallocated itself and H's name is not modified\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to flush 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_alloc()\fP 
+.PP
+\fBgdsl_hash_free()\fP 
+.RE
+.PP
+
+.SS "const char* \fBgdsl_hash_get_name\fP (const \fBgdsl_hash_t\fPH)"
+.PP
+Get the name of a hashtable\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned string MUST NOT be freed\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to get the name from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the name of the hashtable H\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_set_name()\fP 
+.RE
+.PP
+
+.SS "\fBushort\fP \fBgdsl_hash_get_entries_number\fP (const \fBgdsl_hash_t\fPH)"
+.PP
+Get the number of entries of a hashtable\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of lists entries of the hashtable H\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_get_size()\fP 
+.PP
+gdsl_hash_fill_factor() 
+.RE
+.PP
+
+.SS "\fBushort\fP \fBgdsl_hash_get_lists_max_size\fP (const \fBgdsl_hash_t\fPH)"
+.PP
+Get the max number of elements allowed in each entry of a hashtable\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 if no lists max size was set before (ie\&. no limit for H's entries)\&. 
+.PP
+the max number of elements for each entry of the hashtable H, if the function \fBgdsl_hash_modify()\fP was used with a NEW_LISTS_MAX_SIZE greather than the actual one\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+gdsl_hash_fill_factor() 
+.PP
+\fBgdsl_hash_get_entries_number()\fP 
+.PP
+\fBgdsl_hash_get_longest_list_size()\fP 
+.PP
+\fBgdsl_hash_modify()\fP 
+.RE
+.PP
+
+.SS "\fBushort\fP \fBgdsl_hash_get_longest_list_size\fP (const \fBgdsl_hash_t\fPH)"
+.PP
+Get the number of elements of the longest list entry of a hashtable\&. \fBNote:\fP
+.RS 4
+Complexity: O( L ), where L = gdsl_hash_get_entries_number(H) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to use\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of the longest list entry of the hashtable H\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_get_size()\fP 
+.PP
+gdsl_hash_fill_factor() 
+.PP
+\fBgdsl_hash_get_entries_number()\fP 
+.PP
+\fBgdsl_hash_get_lists_max_size()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_hash_get_size\fP (const \fBgdsl_hash_t\fPH)"
+.PP
+Get the size of a hashtable\&. \fBNote:\fP
+.RS 4
+Complexity: O( L ), where L = gdsl_hash_get_entries_number(H) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to get the size from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of H (noted |H|)\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_get_entries_number()\fP 
+.PP
+gdsl_hash_fill_factor() 
+.PP
+\fBgdsl_hash_get_longest_list_size()\fP 
+.RE
+.PP
+
+.SS "double \fBgdsl_hash_get_fill_factor\fP (const \fBgdsl_hash_t\fPH)"
+.PP
+Get the fill factor of a hashtable\&. \fBNote:\fP
+.RS 4
+Complexity: O( L ), where L = gdsl_hash_get_entries_number(H) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to use 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+The fill factor of H, computed as |H| / L 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_get_entries_number()\fP 
+.PP
+\fBgdsl_hash_get_longest_list_size()\fP 
+.PP
+\fBgdsl_hash_get_size()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_hash_t\fP \fBgdsl_hash_set_name\fP (\fBgdsl_hash_t\fPH, const char *NEW_NAME)"
+.PP
+Set the name of a hashtable\&. Change the previous name of the hashtable H to a copy of NEW_NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to change the name 
+.br
+\fINEW_NAME\fP The new name of H 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified hashtable in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_get_name()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_hash_insert\fP (\fBgdsl_hash_t\fPH, void *VALUE)"
+.PP
+Insert an element into a hashtable (PUSH)\&. Allocate a new element E by calling H's ALLOC_F function on VALUE\&. The key K of the new element E is computed using KEY_F called on E\&. If the value of gdsl_hash_get_lists_max_size(H) is not reached, or if it is equal to zero, then the insertion is simple\&. Otherwise, H is re-organized as follow:
+.IP "\(bu" 2
+its actual gdsl_hash_get_entries_number(H) (say N) is modified as N * 2 + 1
+.IP "\(bu" 2
+its actual gdsl_hash_get_lists_max_size(H) (say M) is modified as M * 2 The element E is then inserted into H at the entry computed by HASH_F( K ) modulo gdsl_hash_get_entries_number(H)\&. ALLOC_F, KEY_F and HASH_F are the function pointers passed to \fBgdsl_hash_alloc()\fP\&.
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) if gdsl_hash_get_lists_max_size(H) is not reached or if it is equal to zero 
+.PP
+Complexity: O ( gdsl_hash_modify (H) ) if gdsl_hash_get_lists_max_size(H) is reached, so H needs to grow 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to modify 
+.br
+\fIVALUE\fP The value used to make the new element to insert into H 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the inserted element E in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_alloc()\fP 
+.PP
+\fBgdsl_hash_remove()\fP 
+.PP
+\fBgdsl_hash_delete()\fP 
+.PP
+\fBgdsl_hash_get_size()\fP 
+.PP
+\fBgdsl_hash_get_entries_number()\fP 
+.PP
+\fBgdsl_hash_modify()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_hash_remove\fP (\fBgdsl_hash_t\fPH, const char *KEY)"
+.PP
+Remove an element from a hashtable (POP)\&. Search into the hashtable H for the first element E equal to KEY\&. If E is found, it is removed from H and then returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( M ), where M is the average size of H's lists 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to modify 
+.br
+\fIKEY\fP The key used to find the element to remove 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first founded element equal to KEY in H in case is found\&. 
+.PP
+NULL in case no element equal to KEY is found in H\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_insert()\fP 
+.PP
+\fBgdsl_hash_search()\fP 
+.PP
+\fBgdsl_hash_delete()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_hash_t\fP \fBgdsl_hash_delete\fP (\fBgdsl_hash_t\fPH, const char *KEY)"
+.PP
+Delete an element from a hashtable\&. Remove from he hashtable H the first founded element E equal to KEY\&. If E is found, it is removed from H and E is deallocated using H's FREE_F function passed to \fBgdsl_hash_alloc()\fP, then H is returned\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( M ), where M is the average size of H's lists 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to modify 
+.br
+\fIKEY\fP The key used to find the element to remove 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified hashtable after removal of E if E was found\&. 
+.PP
+NULL if no element equal to KEY was found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_insert()\fP 
+.PP
+\fBgdsl_hash_search()\fP 
+.PP
+\fBgdsl_hash_remove()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_hash_t\fP \fBgdsl_hash_modify\fP (\fBgdsl_hash_t\fPH, \fBushort\fPNEW_ENTRIES_NB, \fBushort\fPNEW_LISTS_MAX_SIZE)"
+.PP
+Increase the dimensions of a hashtable\&. The hashtable H is re-organized to have NEW_ENTRIES_NB lists entries\&. Each entry is limited to NEW_LISTS_MAX_SIZE elements\&. After a call to this function, all insertions into H will make H automatically growing if needed\&. The grow is needed each time an insertion makes an entry list to reach NEW_LISTS_MAX_SIZE elements\&. In this case, H will be reorganized automatically by \fBgdsl_hash_insert()\fP\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t & NEW_ENTRIES_NB > gdsl_hash_get_entries_number(H) & NEW_LISTS_MAX_SIZE > gdsl_hash_get_lists_max_size(H) 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to modify 
+.br
+\fINEW_ENTRIES_NB\fP 
+.br
+\fINEW_LISTS_MAX_SIZE\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified hashtable H in case of success 
+.PP
+NULL in case of failure, or in case NEW_ENTRIES_NB <= gdsl_hash_get_entries_number(H) or in case NEW_LISTS_MAX_SIZE <= gdsl_hash_get_lists_max_size(H) in these cases, H is not modified 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_insert()\fP 
+.PP
+\fBgdsl_hash_get_entries_number()\fP 
+.PP
+\fBgdsl_hash_get_fill_factor()\fP 
+.PP
+\fBgdsl_hash_get_longest_list_size()\fP 
+.PP
+\fBgdsl_hash_get_lists_max_size()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_hash_search\fP (const \fBgdsl_hash_t\fPH, const char *KEY)"
+.PP
+Search for a particular element into a hashtable (GET)\&. Search the first element E equal to KEY in the hashtable H\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( M ), where M is the average size of H's lists 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to search the element in 
+.br
+\fIKEY\fP The key to compare H's elements with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the founded element E if it was found\&. 
+.PP
+NULL in case the searched element E was not found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_insert()\fP 
+.PP
+\fBgdsl_hash_remove()\fP 
+.PP
+\fBgdsl_hash_delete()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_hash_map\fP (const \fBgdsl_hash_t\fPH, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a hashtable\&. Parse all elements of the hashtable H\&. The MAP_F function is called on each H's element with USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP then \fBgdsl_hash_map()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to map 
+.br
+\fIMAP_F\fP The map function\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+
+.SS "void \fBgdsl_hash_write\fP (const \fBgdsl_hash_t\fPH, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write all the elements of a hashtable to a file\&. Write the elements of the hashtable H to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t & OUTPUT_FILE != NULL & WRITE_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write H's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_write_xml()\fP 
+.PP
+\fBgdsl_hash_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_hash_write_xml\fP (const \fBgdsl_hash_t\fPH, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of a hashtable to a file into XML\&. Write the elements of the hashtable H to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F to write H's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write H's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_write()\fP 
+.PP
+\fBgdsl_hash_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_hash_dump\fP (const \fBgdsl_hash_t\fPH, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a hashtable to a file\&. Dump the structure of the hashtable H to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F to write H's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |H| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+H must be a valid gdsl_hash_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIH\fP The hashtable to write 
+.br
+\fIWRITE_F\fP The write function 
+.br
+\fIOUTPUT_FILE\fP The file where to write H's elements 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_hash_write()\fP 
+.PP
+\fBgdsl_hash_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

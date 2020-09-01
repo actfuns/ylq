@@ -1,0 +1,99 @@
+.TH "gdsl_interval_heap.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_interval_heap.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct heap * \fBgdsl_interval_heap_t\fP"
+.br
+.RI "\fIGDSL interval heap type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fICreate a new interval heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_free\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIDestroy an interval heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_flush\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIFlush an interval heap\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_interval_heap_get_name\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIGet the name of an interval heap\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_interval_heap_get_size\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIGet the size of a interval heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_set_max_size\fP (const \fBgdsl_interval_heap_t\fP H, \fBulong\fP size)"
+.br
+.RI "\fISet the maximum size of the interval heap\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_interval_heap_is_empty\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fICheck if an interval heap is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_set_name\fP (\fBgdsl_interval_heap_t\fP H, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of an interval heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_insert\fP (\fBgdsl_interval_heap_t\fP H, void *VALUE)"
+.br
+.RI "\fIInsert an element into an interval heap (PUSH)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_remove_max\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIRemove the maximum element from an interval heap (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_remove_min\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIRemove the minimum element from an interval heap (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_get_min\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIGet the minimum element\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_get_max\fP (const \fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIGet the maximum element\&. \fP"
+.ti -1c
+.RI "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_delete_min\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIDelete the minimum element from an interval heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_interval_heap_t\fP \fBgdsl_interval_heap_delete_max\fP (\fBgdsl_interval_heap_t\fP H)"
+.br
+.RI "\fIDelete the maximum element from an interval heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_interval_heap_map_forward\fP (const \fBgdsl_interval_heap_t\fP H, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a interval heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_write\fP (const \fBgdsl_interval_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of an interval heap to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_write_xml\fP (const \fBgdsl_interval_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of an interval heap to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_interval_heap_dump\fP (const \fBgdsl_interval_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of an interval heap to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

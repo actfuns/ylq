@@ -1,0 +1,63 @@
+.TH "gdsl_types.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_types.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef void * \fBgdsl_element_t\fP"
+.br
+.RI "\fIGDSL element type\&. \fP"
+.ti -1c
+.RI "typedef \fBgdsl_element_t\fP(* \fBgdsl_alloc_func_t\fP )(void *USER_DATA)"
+.br
+.RI "\fIGDSL Alloc element function type\&. \fP"
+.ti -1c
+.RI "typedef void(* \fBgdsl_free_func_t\fP )(\fBgdsl_element_t\fP E)"
+.br
+.RI "\fIGDSL Free element function type\&. \fP"
+.ti -1c
+.RI "typedef \fBgdsl_element_t\fP(* \fBgdsl_copy_func_t\fP )(const \fBgdsl_element_t\fP E)"
+.br
+.RI "\fIGDSL Copy element function type\&. \fP"
+.ti -1c
+.RI "typedef int(* \fBgdsl_map_func_t\fP )(const \fBgdsl_element_t\fP E, \fBgdsl_location_t\fP LOCATION, void *USER_DATA)"
+.br
+.RI "\fIGDSL Map element function type\&. \fP"
+.ti -1c
+.RI "typedef long int(* \fBgdsl_compare_func_t\fP )(const \fBgdsl_element_t\fP E, void *VALUE)"
+.br
+.RI "\fIGDSL Comparison element function type\&. \fP"
+.ti -1c
+.RI "typedef void(* \fBgdsl_write_func_t\fP )(const \fBgdsl_element_t\fP E, FILE *OUTPUT_FILE, \fBgdsl_location_t\fP LOCATION, void *USER_DATA)"
+.br
+.RI "\fIGDSL Write element function type\&. \fP"
+.ti -1c
+.RI "typedef unsigned long int \fBulong\fP"
+.br
+.ti -1c
+.RI "typedef unsigned short int \fBushort\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBgdsl_constant_t\fP { \fBGDSL_ERR_MEM_ALLOC\fP =  -1, \fBGDSL_MAP_STOP\fP =  0, \fBGDSL_MAP_CONT\fP =  1, \fBGDSL_INSERTED\fP, \fBGDSL_FOUND\fP }"
+.br
+.RI "\fIGDSL Constants\&. \fP"
+.ti -1c
+.RI "enum \fBgdsl_location_t\fP { \fBGDSL_LOCATION_UNDEF\fP =  0, \fBGDSL_LOCATION_HEAD\fP =  1, \fBGDSL_LOCATION_ROOT\fP =  1, \fBGDSL_LOCATION_TOP\fP =  1, \fBGDSL_LOCATION_TAIL\fP =  2, \fBGDSL_LOCATION_LEAF\fP =  2, \fBGDSL_LOCATION_BOTTOM\fP =  2, \fBGDSL_LOCATION_FIRST\fP =  1, \fBGDSL_LOCATION_LAST\fP =  2, \fBGDSL_LOCATION_FIRST_COL\fP =  1, \fBGDSL_LOCATION_LAST_COL\fP =  2, \fBGDSL_LOCATION_FIRST_ROW\fP =  4, \fBGDSL_LOCATION_LAST_ROW\fP =  8 }"
+.br
+.ti -1c
+.RI "enum \fBbool\fP { \fBFALSE\fP =  0, \fBTRUE\fP =  1 }"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

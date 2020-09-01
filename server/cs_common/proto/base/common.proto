@@ -1,0 +1,591 @@
+package base;
+
+message PosInfo {
+    optional uint32 v = 1;
+    optional uint32 x = 2;
+    optional uint32 y = 3;
+    optional uint32 z = 4;
+    optional int32 face_x = 5;
+    optional int32 face_y = 6;
+    optional int32 face_z = 7;
+}
+message ModelInfo {
+    optional uint32 shape = 1;
+    optional float scale = 2;           /*缩放比例*/
+    repeated uint32 color = 3;            /*染色*/
+    optional uint32 mutate_texture = 4;            /*变色贴图*/
+    optional uint32 weapon = 5;           /*关联武器id*/
+    optional uint32 adorn = 6;           /*装饰*/
+    optional uint32 skin = 7;       /*皮肤导表id*/
+}
+
+message SimpleRole {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 grade = 3;
+    optional uint32 school = 4;
+    optional ModelInfo model_info = 5;
+    optional uint32 school_branch = 6;
+}
+
+message TitleInfo {
+    optional uint32 tid = 1;
+    optional string name = 2;
+    optional uint32 create_time = 3;    //创建时间
+    optional uint32 left_time = 4;         //过期时间戳，未获得则为0
+    optional uint32 progress = 5;         //当前进度
+}
+
+message SystemSetting{
+    optional TeamSetting teamsetting = 1;
+    optional HuntSetting huntsetting = 2;
+}
+
+message TeamSetting{
+    optional uint32 barrage = 1;
+    optional uint32 auto_agree = 2;
+    optional uint32 autostart_teammatch = 3;
+}
+
+message HuntSetting{
+    optional uint32 auto_sale = 1;
+}
+
+message SimplePlayer {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 grade = 3;
+    optional uint32 school = 4;
+    optional uint32 shape = 5;
+}
+
+message KaopuSdk {
+    optional uint32 create_time = 46;       //角色创建时间
+    optional uint32 upgrade_time = 47;    //升级等级时间
+}
+
+message BattleCmd {
+    optional uint32 idx = 1; //索引
+    optional string cmd = 2;
+}
+
+message Role {
+    optional string mask = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    repeated TitleInfo title_info = 4;
+    optional uint32 goldcoin = 5;
+    optional uint32 coin = 6;
+    optional uint32 exp = 7;
+    optional uint32 chubeiexp = 8;
+    optional uint32 max_hp = 9;
+    optional uint32 hp = 10;
+    optional uint32 attack = 11;
+    optional uint32 defense = 12;
+    optional uint32 speed = 13;
+    optional uint32 critical_ratio = 14;
+    optional uint32 res_critical_ratio = 15;
+    optional uint32 critical_damage = 16;
+    optional uint32 cure_critical_ratio = 17;
+    optional uint32 abnormal_attr_ratio = 18;
+    optional uint32 res_abnormal_ratio = 19;
+    optional ModelInfo model_info = 20;
+    optional uint32 school = 21;
+    optional uint32 coin_over = 22;     //金币溢出, 目前不需要
+    repeated FollowerInfo followers = 23;     //跟随信息
+    optional uint32 power = 24; //战力
+    optional uint32 school_branch = 25; //流派分支
+    optional uint32 skill_point = 26;   //技能点
+    optional SystemSetting systemsetting = 27;      //用戶設置
+    optional uint32 upvote_amount = 28;     //点赞数量
+    optional uint32 arenamedal = 29; //荣誉
+    optional uint32 org_id = 30;    // 帮派ID
+    optional string orgname = 31;   //帮派名称
+    optional uint32 org_status = 32;    // 帮派状态
+    optional uint32 org_offer = 33;    // 帮派offer
+    optional uint32 org_pos = 34;       //帮派职位
+    optional uint32 medal = 35;       //勋章
+    optional uint32 skin  = 36; //皮肤
+    optional uint32 sex = 37; //1:man 2:women
+    optional uint32 active = 38;
+    optional uint32 org_build_status = 39;  //帮派建设状态,0:无,1-3:建设类型,4:完成,5:领取奖励
+    optional uint32 org_sign_reward = 40;  //帮派签到进度奖励
+    optional uint32 org_red_packet = 41;    //当天是否领取过帮派红包,1:领取过
+    repeated uint32 give_org_wish = 42;     //当天赠送帮派许愿列表
+    optional uint32 org_build_time = 43;    //帮派建设结束时间
+    optional uint32 trapmine_point = 44;    //暗雷探索点
+    optional uint32 is_org_wish = 45;       //是否进行过帮派许愿
+    optional KaopuSdk kp_sdk_info = 46;        //提供靠谱sdk信息
+    optional uint32 org_fuben_cnt = 47;       //公会副本剩余次数
+    optional uint32 is_equip_wish = 48;       //是否进行过装备许愿
+    repeated uint32 give_org_equip = 49;     //当天赠送装备许愿列表
+    optional uint32 travel_score = 50; //游历积分
+    optional uint32 color_coin = 51; //彩晶
+    optional string org_leader = 52;    // 公会会长
+    optional uint32 org_level = 53;   //公会等级
+    repeated BattleCmd bcmd = 54; //战斗指令
+    optional uint32 show_id = 55;                        //靓号ID
+    optional uint32 open_day = 56;  //开服天数，0-开始
+    optional uint32 energy = 57; //体力
+    optional bool chatself = 58; //true-聊天仅自己可见
+    optional uint32 camp = 59;                        //阵营
+}
+
+message FollowerInfo {
+    optional string name = 1;
+    optional ModelInfo model_info = 2;
+    repeated TitleInfo title_info = 3; //跟随伙伴称号
+}
+
+message PlayerAoi {
+    optional PlayerAoiBlock block = 1;
+    optional PosInfo pos_info = 2;
+    optional uint32 pid = 3;
+}
+
+message PosQueueInfo {
+    optional PosInfo pos = 1;
+    optional uint32 time = 2;
+}
+
+message PlayerAoiBlock {
+    optional string mask = 1;
+    optional string name = 2;
+    optional ModelInfo model_info = 3;
+    optional uint32 war_tag = 4;                        //战斗标记
+    repeated FollowerInfo followers = 5;        //跟随信息
+    repeated TitleInfo title_info = 6;                  //称谓信息
+    optional uint32 trapmine = 7;       //1-暗雷探索,0-非探索
+    optional SocialDisplay social_display = 8;             //社交展示
+    optional uint32 state = 9;      //玩家状态：位标识1-野外boss保护
+    optional uint32 show_id = 10;                        //靓号ID
+    optional uint32 camp = 11;                        //阵营
+    optional uint32 is_hide = 12;                      //是否隐藏,默认不隐藏.0:不隐藏,1:隐藏
+}
+
+message SocialDisplay {
+    optional uint32 display_id = 1; //动作id
+    optional uint32 target = 2; //目标pid
+    optional uint32 is_invite = 3; //0-被邀请者,1-发出邀请
+    optional uint32 start_time = 4; //开始时间戳
+}
+
+message NpcAoi {
+    optional NpcAoiBlock block = 1;
+    optional PosInfo pos_info = 2;
+    optional uint32 npctype = 3;
+    optional uint32 npcid = 4;
+    optional uint32 mode = 5; //模式  0:无状态 1:装备副本
+    optional uint32 orgid = 6;
+    optional string orgflag = 7;
+    optional string owner = 8;
+    optional uint32 ownerid = 9;
+    optional string titlename = 10;
+}
+
+message TrapmineNpcInfo {
+    optional uint32 create_time = 1; //创建时间戳
+    optional uint32 end_time = 2; //结束时间戳
+    optional uint32 owner_sec = 3; //发现者拥有怪物时间
+}
+
+message NpcAoiBlock{
+    optional string mask = 1;
+    optional string name = 2;
+    optional ModelInfo model_info = 3;
+    optional uint32 war_tag = 4;                        //战斗标记
+    optional uint32 orgid = 5;
+    optional string orgflag = 6;
+    optional string owner = 7;
+    optional uint32 ownerid = 8;
+    optional TrapmineNpcInfo  trapmine = 9; //暗雷怪特殊信息
+}
+
+message WarriorStatus {
+    optional string mask = 1;
+    optional uint32 hp = 2;
+    optional uint32 max_hp = 3;
+    optional ModelInfo model_info = 4;
+    optional string name = 5;
+    optional uint32 status = 6;                             //状态,1:活着,2:死亡
+    optional uint32 auto_skill = 7;                       //自动战斗招式
+}
+
+message PerformInfo {
+    optional uint32 id = 1; //技能id
+    optional uint32 level = 2; //技能等级
+}
+
+message PlayerWarrior {
+    optional uint32 wid = 1;
+    optional uint32 pid = 2;
+    optional uint32 pos = 3;
+    repeated PerformInfo pflist = 4;
+    optional WarriorStatus status = 5;
+    optional uint32 bcmd = 6;//指挥权限
+}
+
+//怪物特殊技能
+message SpecialSkill {
+    optional uint32 skill_id = 1;            //技能id
+    optional uint32 sum_grid = 2;       //使用需要的格子数
+    optional uint32 cur_grid = 3;         //当前格子数目
+}
+
+message NpcWarrior {
+    optional uint32 wid = 1;
+    optional uint32 pos = 2;
+    optional uint32 owner = 3;
+    repeated uint32 pflist = 4;
+    optional SpecialSkill special_skill = 5;
+    optional WarriorStatus status = 6;
+    optional uint32 w_type = 7; //0普通怪 1boss
+    repeated uint32 show_skill = 8;//显示技能
+    optional uint32 show_lv = 9;
+}
+
+message SumWarrior{
+    optional uint32 wid = 1;
+    optional uint32 pos = 2;
+    optional uint32 owner = 3;                                      //主人
+    optional uint32 sum_id = 4;
+    repeated uint32 pflist = 5;
+    optional WarriorStatus status = 6;
+}
+
+message PartnerWarrior {
+    optional uint32 wid = 1;
+    optional uint32 pos = 2;
+    optional uint32 owner = 3;
+    optional uint32 parid = 4;
+    repeated PerformInfo pflist = 5;
+    optional WarriorStatus status = 6;
+}
+
+message ApplyInfo {
+    optional string key            = 1;
+    optional uint32 value         = 2;
+}
+
+message GemInfo {
+    optional uint32 pos = 1;
+    optional uint32 sid = 2;
+    repeated ApplyInfo apply_info = 3;
+}
+
+message FuWenAttr {
+    optional string key = 1; //属性字段
+    optional uint32 value = 2; //属性值
+    optional uint32 quality = 3; //品质
+}
+
+message FuWenInfo {
+    optional uint32 plan = 1;    //方案id
+    repeated FuWenAttr fuwen_attr = 2; //quality表示品质
+    repeated FuWenAttr back_fuwen = 3;//quality表示品质
+    optional uint32 level = 4; //等级
+}
+
+message EquipInfo {
+    optional uint32 pos              = 1;                                 //位置
+    repeated FuWenInfo fuwen = 2;
+    optional uint32 fuwen_plan = 3;
+    repeated ApplyInfo strength_attr = 4;
+    repeated GemInfo gem_attr = 5;
+    optional uint32 stone_sid = 6;      //灵石导表id
+}
+
+message ParStone {
+    optional uint32 pos = 1;
+    repeated uint32 sids = 2; //吞食列表
+    repeated ApplyInfo apply_info = 3; //属性
+}
+
+message PartnerEquipInfo {
+    optional uint32 partner_id    = 1;        //0-未穿戴，其他已穿戴伙伴id
+    optional uint32 level                       = 2;        //强化等级，1级开始
+    optional uint32 exp                         = 3;        //经验
+    repeated ApplyInfo main_apply       = 4;        //主属性
+    repeated ApplyInfo sub_apply         = 5;       //副属性
+    optional uint32 lock                = 6;                //0-未锁，1-上锁
+    optional uint32 in_plan = 7;                //0-不在任何方案,1-在伙伴方案
+}
+
+message PartnerEquip {
+    optional uint32 parid    = 1;        //0-未穿戴，其他已穿戴伙伴id
+    repeated ParStone stone_info = 2; //符石
+    optional uint32 stone_level = 3; //品质
+}
+
+//伙伴御灵
+message PartnerSoul {
+    optional uint32 parid = 1; //0-未穿戴，其他已穿戴伙伴id
+    optional uint32 level = 2; //等级
+    optional uint32 exp = 3; //经验
+    optional uint32 plan = 4; //1-在方案中，0-不再方案
+}
+
+message TreasureInfoInfo {
+    optional uint32 treasure_mapid = 1;
+    optional uint32 treasure_posx = 2;
+    optional uint32 treasure_posy = 3;
+}
+
+message ItemInfo {
+    optional uint32 id                  = 1;                                  //服务的道具id
+    optional uint32 sid                = 2;                                 //shape
+    optional string  name         = 3;
+    optional uint32 create_time = 4;                            //创建时间
+    optional uint32 itemlevel   = 5;                                 //品质
+    optional uint32 amount      = 6;                                 //数目
+    optional uint32 end_time            = 7;                        //过期时间
+    optional uint32 key             = 8;                                  //key值,1.绑定,2.时效道具
+    repeated ApplyInfo apply_info = 9;                              //应用信息
+    optional string desc           = 10;                                //描述信息
+    optional EquipInfo equip_info = 11;                         //角色装备信息
+    optional PartnerEquipInfo partner_equip_info = 12; //伙伴装备信息
+    optional TreasureInfoInfo treasure_info = 13;    //挖宝信息
+    optional uint32 power = 14;     //战力评分
+    optional PartnerEquip partner_equip = 15; //伙伴信息
+    optional PartnerSoul partner_soul = 16; //伙伴御灵
+    optional uint32 lock = 17; //1-上锁，0-解锁
+}
+
+message ItemPos {
+    optional uint32 itemid = 1;
+    optional uint32 pos = 2;
+}
+
+message AttrInfo {
+    optional uint32 physique = 1;
+    optional uint32 magic = 2;
+    optional uint32 strength = 3;
+    optional uint32 endurance = 4;
+    optional uint32 agility = 5;
+}
+
+message AptitudeInfo {
+    optional uint32 attack = 1;
+    optional uint32 defense = 2;
+    optional uint32 health = 3;
+    optional uint32 mana = 4;
+    optional uint32 speed = 5;
+}
+
+message SkillInfo {
+    optional uint32 sk = 1;
+    optional uint32 level = 2;
+    optional uint32 cost = 3;
+    optional uint32 needgrade = 4;
+}
+
+message PartnerSkillInfo {
+    optional uint32 sk = 1;         //伙伴技能导表id
+    optional uint32 level = 2;      //技能等级
+}
+
+message PartnerEquipPlan {
+    optional uint32 plan_id = 1;
+    repeated uint32 itemid_list = 2;       //装备服务器id
+}
+
+message PartnerSoulPos {
+    optional uint32 itemid = 1;
+    optional uint32 pos = 2; //穿戴部位
+}
+
+message Partner {
+    optional string mask = 1;
+    optional uint32 partner_type = 2; //导表id
+    optional uint32 parid = 3;
+    optional uint32 star = 4;
+    optional ModelInfo model_info = 5;
+    optional string name = 6;
+    optional uint32 grade = 7;
+    optional uint32 exp = 8;
+    optional uint32 hp = 9;
+    optional uint32 attack = 10;
+    optional uint32 defense = 11;
+    optional uint32 critical_ratio = 12;
+    optional uint32 res_critical_ratio = 13;
+    optional uint32 cure_critical_ratio = 14;
+    optional uint32 abnormal_attr_ratio = 15;
+    optional uint32 res_abnormal_ratio = 16;
+    optional uint32 critical_damage = 17;
+    optional uint32 speed = 18;
+    optional uint32 max_hp = 19;
+    optional uint32 power = 20; //战力
+    optional uint32 lock = 21; // 0-取消锁，1-上锁
+    optional uint32 awake = 22; // 0-未觉醒，1-觉醒
+    repeated PartnerSkillInfo skill = 23;   //技能信息
+    optional uint32 equip_plan_id = 24;   //启用的方案
+    repeated PartnerEquipPlan equip_plan = 25;  //装备方案
+    repeated uint32 equip_list = 26;    //穿戴的装备
+    optional uint32 patahp = 27;        //爬塔血量
+    optional uint32 status = 28;    //伙伴状态
+    optional uint32 power_rank = 29; //战力排行,0-不上榜
+    optional uint32 amount = 30;//
+    repeated PartnerSoulPos souls = 31; //御灵列表
+    optional uint32 soul_type = 32; //御灵核心
+}
+
+message SimplePartner {
+    optional string mask = 1;
+    optional uint32 parid = 2;
+    optional string name = 3;
+    optional uint32 grade = 4;
+    optional uint32 pos = 5;
+    optional base.ModelInfo model_info = 6;
+}
+
+//伙伴出战位置
+message PartnerPosInfo {
+    optional uint32 pos = 1;
+    optional uint32 parid = 2;
+}
+
+//伙伴模型位置
+message PartnerShapePos {
+    optional uint32 x = 1;
+    optional uint32 y = 2;
+    optional uint32 z = 3;
+    optional uint32 shape = 4; //伙伴导表id
+    optional uint32 direction = 5; //方向
+}
+
+message EquipLink {
+    optional uint32 pos =1;
+    optional ItemInfo equip =2;
+}
+
+message ParSoulLink {
+    optional uint32 pos = 1;
+    optional ItemInfo soul = 2;
+}
+
+message PartnerLink{
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional Partner parinfo = 3;
+    repeated EquipLink equip = 4;
+    repeated ParSoulLink soul = 5;
+}
+
+message PlayerLink{
+    optional uint32 pid = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    repeated TitleInfo title_info = 4;
+    optional uint32 max_hp = 5;
+    optional uint32 hp = 6;
+    optional uint32 attack = 7;
+    optional uint32 defense = 8;
+    optional uint32 speed = 9;
+    optional uint32 critical_ratio = 10;
+    optional uint32 res_critical_ratio = 11;
+    optional uint32 critical_damage = 12;
+    optional uint32 cure_critical_ratio = 13;
+    optional uint32 abnormal_attr_ratio = 14;
+    optional uint32 res_abnormal_ratio = 15;
+    optional ModelInfo model_info = 16;
+    optional uint32 school = 17;
+    optional string orgname = 18;
+    optional uint32 warpower = 19;
+    repeated EquipLink equip = 20;
+}
+
+//好友基础信息
+message FriendProfile {
+    optional string mask = 1;
+    optional uint32 pid = 2;
+    optional string name = 3; //名字
+    optional uint32 shape = 4; //造型
+    optional uint32 grade = 5; //等级
+    optional uint32 school = 6; //门派
+    optional uint32 friend_degree = 7; //好友度
+    optional uint32 relation = 8; //关系
+}
+
+//日期 YY-MM-DD
+message DateProto {
+    optional uint32 year =1;
+    optional uint32 month =2;
+    optional uint32 day = 3;
+}
+
+//好友档案
+message FriendDoc {
+    optional uint32 pid = 1;
+    optional uint32 grade = 2;
+    optional uint32 school = 3;
+    optional string orgname = 4;
+    optional uint32 charm = 5; //人气
+    optional uint32 charm_rank = 6 ;//人气排名
+    optional string name = 7;
+    optional uint32 sex = 8; //性别 1 男,2女,3.保密
+    optional string signa = 9; //签名
+    optional string photo = 10; //photo url
+    repeated string labal = 11; //标签
+    optional DateProto birthday = 12 ; // 出生日期
+    optional string addr = 13;// 地址
+    optional uint32 power = 14; //战力
+    optional uint32 power_rank = 15; //战力排行
+    optional uint32 show_equip = 16;//是否展示装备
+    optional uint32 shape = 17; //造型
+    optional uint32 school_branch = 18; //流派
+}
+
+message FriendSetting {
+    optional uint32 notify =1 ; //上线通知
+    optional uint32 strange_chat =2 ; //拒绝陌生人
+    optional uint32 strange_grade =3 ;//陌生人等级
+    optional uint32 apply_switch =4 ; //好友申请限制
+    optional uint32 apply_grade =5 ; //拒绝申请等级
+    optional string auto_response =6 ; //自动回复
+    optional uint32 respond_switch =7;//自动回复开关
+}
+
+message ShowItemInfo {
+    optional uint32 sid = 1;    //道具导表id或者伙伴导表id
+    optional uint32 virtual = 2;   //0-普通道具,其他-虚拟导表id,如:1010伙伴道具
+    optional uint32 amount = 3;     //数量
+    optional uint32 id = 4; //符文id
+}
+
+//当日信息
+message TodayInfo {
+    optional string mask = 1;
+    optional uint32 trapmine_point_bought = 2; //当天已购买探索点
+    optional uint32 energy_buytime = 3;
+    optional uint32 energy_receive = 4;
+    optional uint32 shimen_finish = 5;
+}
+
+message BackUpInfo {
+    optional string key = 1;
+    optional string value = 2;
+}
+
+//淬灵方案名称
+message FuWenName {
+    optional uint32 plan = 1;
+    optional string name = 2;
+}
+
+message ClientResFileVersion {
+    optional string file_name = 1;  //文件名
+    optional uint32 version = 2;    //对应的版本号
+}
+
+message ClientResFileContent {
+    optional string file_name = 1;
+    optional bytes content = 2;
+}
+
+//御灵方案
+message ParSoulPlan {
+    optional uint32 idx = 1; //方案id
+    optional string name = 2; //方案名字
+    optional uint32 soul_type = 3; //核心,不为空
+    repeated PartnerSoulPos souls = 4; //御灵
+}

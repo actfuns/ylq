@@ -1,0 +1,470 @@
+import "base/common.proto";
+
+//排名信息
+message RankInfo {
+    optional uint32 pid = 1; //玩家id
+    optional uint32 rank = 2; //排名
+    optional uint32 shape = 3; //头像
+    optional string name = 4;//名称
+    optional uint32 point = 5; //比武积分
+    optional uint32 praise = 6; //点赞数
+}
+
+
+message PartnerConfigUint {
+    optional uint32 par = 1; //伙伴类型
+    optional uint32 grade = 2; //等级
+    optional uint32 shape = 3; // 造型
+    optional uint32 star = 4;
+}
+
+message PlayerConfigUint {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 shape =3;
+    optional uint32 grade = 4;
+    repeated PartnerConfigUint parlist = 5;
+    optional uint32 leader = 6;
+    optional uint32 camp = 7;
+}
+
+
+message SelectInfo {
+    optional uint32 select =1;//选中的编号
+    optional uint32 pid = 2;
+}
+
+message SelectPlayer {
+    optional RankInfo info = 1;
+    repeated uint32 par_list = 2; // 自带伙伴
+    repeated uint32 selected_partner = 3 ; //已选顺序
+    repeated uint32 selected_fuwen = 4; //已选顺序
+    repeated uint32 awake_list = 5;//觉醒列表
+    repeated uint32 select_par = 6;//光标选择
+    repeated uint32 select_item = 7; //光标
+}
+
+message SelectParnerEquip {
+    optional uint32 partner = 1;//选择伙伴
+    optional uint32 fuwen = 2;
+}
+
+message ConfigEqualArenaPlayerInfo {
+    optional RankInfo info = 1;//个人信息
+    repeated base.Partner select_partner = 2;//提供的的伙伴
+    repeated uint32 select_fuwen = 3; //提供的符文
+    repeated SelectParnerEquip select = 4;
+}
+
+
+//===========比武专用部分==============
+
+
+//获取比武场信息
+message GS2COpenArena {
+    optional uint32 arena_point = 1;//比武积分
+    optional uint32 weeky_medal = 2;//本周已获得的荣誉数
+    repeated RankInfo rank_info =3;//排行榜前20名信息（排名，头像，名字，积分）
+    optional uint32 rank = 4;//玩家当前排名
+    optional bool open_watch = 5;  //0true为开启观战，false为关闭观战
+}
+
+
+//回放战斗记录(对应C2GSArenaReplayByPlayerId,C2GSArenaReplayByRecordId)
+message GS2CArenaReplay{
+	// 回放战斗(待定)
+}
+
+
+//阵容信息
+message ArenaPlayerInfo {
+    optional string name = 1;//名称
+    repeated uint32 partner = 2;//伙伴类型列表
+    optional uint32 point = 3;//比武场分数
+    optional uint32 grade =4 ;// 等级
+    optional uint32 pid =5;
+    optional uint32 shape =6;
+}
+
+//战斗记录
+message HistoryInfo {
+    optional string fid = 1; //战斗记录id
+    optional uint32 win =2;//获胜方
+    repeated ArenaPlayerInfo playerInfo = 3;//玩家信息
+    optional int32 score = 4; //player得分，正为胜，负为输
+    optional uint32 time = 5; //录像时间
+}
+
+//玩家战斗记录
+message GS2CArenaHistory{
+    repeated HistoryInfo history_info = 1;// 72小时内战斗记录，最多30场
+    optional HistoryInfo history_onshow = 2;//玩家当前展示的战斗记录，1场
+}
+
+//设置展示的战斗记录
+message GS2CArenaSetShowing{
+    optional string fid =1;//展示的战斗数据的id
+}
+
+
+//比武场观战段位信息
+message ArenaGradeRecord{
+    optional uint32 stage = 1; //段位id
+    repeated HistoryInfo history_info =2;//5场对战的记录（对战数据id，双方阵容、名字、积分）
+}
+
+//比武场观战信息，最高四个段位，每个段位5场对战（id，双方阵容，名字，积分）
+message GS2CArenaOpenWatch{
+    repeated ArenaGradeRecord grade_record_info = 1;//4个段位的对战记录
+}
+
+
+message GS2CArenaLeftTime {
+    optional uint32 left = 1;//剩余时间
+}
+
+message GS2CShowArenaWarConfig {
+    repeated PlayerConfigUint plist = 1;
+}
+
+
+message GS2CArenaStartMath {
+    optional uint32 result = 1; // 1匹配,0 关闭匹配
+}
+
+//匹配结果
+message GS2CArenaMatch{
+    optional RankInfo rankInfo =1;//对战玩家信息(名字，头像，积分)
+
+}
+
+//开始PK 的信息
+message GS2CArenaFight {
+}
+
+
+message ArenaResultInfo {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 shape = 3;
+    optional uint32 camp = 4;
+    optional uint32 leader = 5;
+}
+
+//比武场战斗结果
+message GS2CArenaFightResult {
+   optional uint32 point = 1; //获得的积分
+   optional uint32 medal = 2;//获得的荣誉
+   optional uint32 result = 3; //胜利阵营 1,2
+   optional uint32 currentpoint = 4; //当前总积分
+   optional uint32 weeky_medal = 5;//本周已获得的荣誉数
+   repeated ArenaResultInfo info = 6;//
+}
+
+
+//=============公平竞技专用=============
+
+//获取比武场信息
+message GS2COpenEqualArena {
+    optional uint32 arena_point = 1;//比武积分
+    optional uint32 weeky_medal = 2;//本周已获得的荣誉数
+    repeated uint32 parid = 3; //出战伙伴配置
+    optional bool open_watch = 4; //开启观战
+}
+
+//配置伙伴成功
+message GS2CSetEqualArenaParner {
+    repeated uint32 partner = 1;
+}
+
+message GS2CEqualArenaStartMath {
+    optional uint32 result = 1; // 1匹配,0 关闭匹配
+}
+
+
+//匹配结果
+message GS2CEqualArenaMatch{
+    optional RankInfo rankInfo =1;//对战玩家信息(名字，头像，积分)
+}
+
+//关闭公平竞技界面
+message GS2CCloseEqualArenaUI {
+
+}
+
+//选取阶段
+message GS2CSelectEqualArena {
+    repeated SelectPlayer info = 1; //玩家信息
+    repeated uint32 fuwen = 2; //提供的符文
+    repeated base.Partner partner = 3;//提供的的伙伴
+    optional uint32 operater = 6; //本轮操作者
+    optional uint32 limit_partner = 7;//选择伙伴数量
+    optional uint32 limit_fuwen = 8;//选择符文数量
+    optional uint32 left_time = 9; //剩余时间
+}
+
+
+message GS2CSyncSelectInfo {
+    optional uint32 operater =1;
+    optional uint32 select_type = 2;//1，伙伴2，符文
+    optional uint32 index = 3;//处理的伙伴/符文序号
+    optional uint32 handle_type = 4;//1.选中 2.取消选中
+}
+
+message GS2CSyncConfig {
+    repeated uint32 select_par = 1; //伙伴顺序编号 1,2,3 对应select_item的1,2,3
+    repeated uint32 select_item = 2;//符文顺序编号
+}
+
+//配置伙伴和符文
+message GS2CConfigEqualArena {
+    repeated ConfigEqualArenaPlayerInfo pinfo = 1;
+    optional uint32 left_time = 2;
+}
+
+//完成配置
+message GS2CEqualArenaConfigDone{
+    optional uint32 pid = 1;
+}
+
+//开始PK 的信息
+message GS2CEqualArenaFight {
+}
+
+message GS2CShowEqualArenaWarConfig {
+    repeated PlayerConfigUint plist = 1;
+}
+
+
+//比武场战斗结果
+message GS2CEqualArenaFightResult {
+   optional uint32 point = 1; //获得的积分
+   optional uint32 medal = 2;//获得的荣誉
+   optional uint32 result = 3; ////胜利阵营 1,2
+   optional uint32 currentpoint = 4; //当前总积分
+   optional uint32 weeky_medal = 5;//本周已获得的荣誉数
+   repeated ArenaResultInfo info = 6;
+
+}
+
+message GS2CEqualArenaLeftTime {
+    optional uint32 left = 1;//剩余时间
+}
+
+//--公平比武录像
+
+//阵容信息
+message EqualArenaPlayerInfo {
+    optional string name = 1;//名称
+    repeated uint32 partner = 2;//伙伴类型列表
+    optional uint32 point = 3;//比武场分数
+    optional uint32 grade =4 ;// 等级
+    optional uint32 pid =5;
+    optional uint32 shape =6;
+}
+
+//战斗记录
+message EqualArenaHistoryInfo {
+    optional string fid = 1; //战斗记录id
+    optional uint32 win =2;//获胜方
+    repeated EqualArenaPlayerInfo playerInfo = 3;//玩家信息
+    optional int32 score = 4; //player得分，正为胜，负为输
+    optional uint32 time = 5; //录像时间
+}
+
+//玩家战斗记录
+message GS2CEqualArenaHistory{
+    repeated EqualArenaHistoryInfo history_info = 1;// 72小时内战斗记录，最多30场
+    optional EqualArenaHistoryInfo history_onshow = 2;//玩家当前展示的战斗记录，1场
+}
+
+//设置展示的战斗记录
+message GS2CEqaulArenaSetShowing{
+    optional string fid =1;//展示的战斗数据的id
+}
+
+//比武场观战段位信息
+message EqualArenaGradeRecord{
+    optional uint32 stage = 1; //段位id
+    repeated EqualArenaHistoryInfo history_info =2;//5场对战的记录（对战数据id，双方阵容、名字、积分）
+}
+
+
+//比武场观战信息，最高四个段位，每个段位5场对战（id，双方阵容，名字，积分）
+message GS2CEqualArenaOpenWatch{
+    repeated ArenaGradeRecord grade_record_info = 1;//4个段位的对战记录
+}
+
+message GS2CEqualArenaStartWarFail{
+    optional string msg = 1;
+}
+
+
+//========== teampvp =========
+
+message GS2CTeamPVPStartMath {
+    optional uint32 result = 1; // 1匹配,0 关闭匹配
+    optional uint32 start_time = 2; //开始匹配的时间
+}
+
+message TeamPVPMatchInfo {
+    optional uint32 pid =1 ;
+    optional string name = 2;
+    optional uint32 score = 3;
+    optional uint32 shape = 4;
+    optional uint32 grade = 5;
+}
+
+
+message GS2CTeamPVPMatch{
+    repeated TeamPVPMatchInfo info1 = 1;
+    repeated TeamPVPMatchInfo info2 = 2;
+}
+
+
+message PVPPlayerInfo{
+    optional uint32 pid = 1;
+    optional uint32 score = 2; //获得积分
+    repeated base.Partner partner = 3;//
+    optional string name = 4;
+    optional uint32 shape = 5;
+    optional uint32 leader = 6;
+    optional uint32 grade = 7;
+}
+
+
+//pvp场景信息
+message GS2CTeamPVPSceneInfo{
+    repeated PVPPlayerInfo player = 1; //队伍信息
+}
+
+message GS2CLeaveTeamPVPScene {
+
+}
+
+
+message TeamPVPRankUnit {
+    optional uint32 rank =1;
+    optional uint32 pid = 2;
+    optional string name = 3;
+    optional uint32 score = 4;
+    optional uint32 win = 5;
+}
+
+//活动排行
+message GS2CTeamPVPRank {
+    repeated TeamPVPRankUnit rank = 1; //排行信息
+    optional uint32 myscore = 2; //我的积分
+    optional uint32 mywin = 3; //我的胜利次数
+    optional uint32 myfail = 4; // 我的失败次数
+    optional uint32 myrank = 5;
+}
+
+message GS2CShowTeamPVPWarConfig {
+    repeated PlayerConfigUint plist1 = 1;
+    repeated PlayerConfigUint plist2 = 2;
+}
+
+
+
+message GS2CTeamPVPFightResult {
+    optional uint32 point = 1; //获得的积分
+    optional uint32 result = 2; //胜利阵营 1,2
+    optional uint32 currentpoint = 3; //当前总积分
+    repeated ArenaResultInfo info1 = 4;//
+    repeated ArenaResultInfo info2 = 5;//
+}
+
+
+
+message TeamPVPInviteInfo {
+    optional TeamPVPMatchInfo info = 1;
+    optional uint32 org = 2; //公会ID
+    optional uint32 fight = 3; //最近战友
+}
+
+message GS2CShowTeamPVPInvite {
+    repeated TeamPVPInviteInfo plist = 1;
+}
+
+message GS2CRefreshTeamArenaLeftTime {
+    optional uint32 start_time = 1;
+    optional uint32 end_time = 2;
+}
+
+//---- ClubArena-----
+
+message ClubArenaMode {
+    optional uint32 pid = 1; //robot:pid = 0
+    optional uint32 club = 2;
+    optional uint32 post =  3;//位置索引
+    optional uint32 power = 4; // 战力
+    optional base.ModelInfo model = 5;
+    optional string name = 6;
+    optional string orgname = 7;
+}
+
+//主界面
+message GS2CClubArenaMainUI {
+    optional uint32 club = 1; // 所属武馆
+    optional uint32 cd_fight = 2; //挑战冷却时间
+    optional uint32 coin_reward = 3; //每次发放奖励数量金币
+    optional uint32 gold_reward = 4; //累计奖励
+    optional uint32 max_times = 5;//最大挑战次数
+    optional uint32 use_times = 6;//已用次数
+    repeated string master = 7; // #白银-王者
+
+}
+
+//武馆界面
+message GS2CClubArenaInfo {
+    optional uint32 club = 1;
+    optional uint32 power = 2;
+    repeated ClubArenaMode enemy = 3; //对手信息
+    optional ClubArenaMode master = 4; //馆主
+    optional uint32 win = 5;  // 胜利次数
+}
+
+//防守阵型
+message GS2CClubArenaDefenseLineUp {
+    repeated uint32 parlist =1;//伙伴ID 对应的位置1-4
+}
+
+message ClubArenaHistory {
+    optional string fid = 1; ////战斗记录id
+    optional uint32 win =2;//是否获胜 0:false,1true
+    optional uint32 time = 3;//录像时间
+    optional uint32 target = 4;
+    optional string name = 5;
+    optional uint32 grade = 6;
+    optional uint32 shape = 7;
+    optional uint32 club = 8;//武馆
+    optional uint32 updown = 9;//排位变化，0没有变化，1升馆，2降馆
+    optional uint32 master = 10 ;//是否成为馆主，默认为0，1为馆主
+
+}
+
+message GS2CClubArenaHistory {
+    repeated ClubArenaHistory info = 1;
+}
+
+message GS2CShowClubArenaWarConfig {
+    repeated PlayerConfigUint plist = 1;
+}
+
+message ClubArenaResultInfo {
+    optional ArenaResultInfo player = 1;
+    optional uint32 club = 2;
+    optional uint32 upordown = 3; // 0没有变化，1升级，2降级
+}
+
+message GS2CClubArenaFightResult {
+    optional uint32 medal = 1;//获得的荣誉
+    optional uint32 result = 2; //胜利阵营 1,2
+    optional ClubArenaResultInfo info1 = 3;
+    optional ClubArenaResultInfo info2 = 4;
+}
+
+
+
+

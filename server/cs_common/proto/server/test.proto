@@ -1,0 +1,44 @@
+
+message GS2CTestBigPacket {
+    optional bool is_change = 1;
+    optional string s = 2;
+}
+
+message GS2CTestOnlineUpdate {
+    optional uint32 a = 1;
+    optional string b = 2;
+    optional uint32 c = 3;
+    optional uint32 d = 4;
+    optional string e = 5;
+}
+
+message GS2CTestOnlineAdd {
+    optional uint32 a = 1;
+}
+
+message GS2CTestEncode {
+    optional uint32 a = 1;
+    optional string b = 2;
+}
+
+message NoticeMsg {
+    optional string title = 1;
+    optional string content = 2;
+    optional uint32 hot = 3;
+}
+
+message GS2CTestNotice {
+    repeated NoticeMsg notices = 1;
+}
+
+message GS2CCheckProxy {
+    optional uint32 record = 1;
+}
+
+message ProxyStruct {
+    optional uint32 record = 1;
+}
+
+message GS2CCheckProxyMerge {
+    repeated ProxyStruct record_list = 1;
+}

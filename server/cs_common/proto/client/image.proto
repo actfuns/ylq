@@ -1,0 +1,8 @@
+//1 获得玩家头像路径
+message C2GSGetImages {
+}
+
+//2 增加图片路径
+message C2GSAddImage {
+    optional string key = 1;
+}

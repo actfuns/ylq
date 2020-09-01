@@ -1,0 +1,46 @@
+testwaifu_cs : 172.18.123.216
+testwaifu_bs : 172.18.123.216
+testwaifu_gs20001 : 172.18.123.216
+
+pro_cs : 172.18.123.208
+pro_bs : 172.18.123.216
+pro_gs20001 : 172.18.123.210
+pro_gs20002 : 172.18.14.122
+pro_gs20003 : 172.18.123.220
+
+cbt_cs : 172.18.205.11
+cbt_bs : 172.18.205.11
+cbt_gs10001 : 172.18.205.11
+
+bus_cs : 127.0.0.1
+bus_bs : 127.0.0.1
+bus_gs10001 : 127.0.0.1
+
+adapt_cs : 106.75.138.9
+adapt_bs : 106.75.138.9
+adapt_gs10001 : 106.75.138.9
+
+pressure_cs : 192.168.8.157
+pressure_bs : 192.168.8.157
+pressure_ks : 192.168.8.131
+pressure_gs10001 : 192.168.8.157
+pressure_gs10002 : 192.168.8.131
+
+shenhe_cs : 172.18.123.213
+shenhe_bs : 172.18.123.213
+shenhe_gs10001 : 172.18.123.213
+shenhe_gs10002 : 172.18.123.208
+shenhe_gs10003 : 172.18.123.216
+shenhe_gs10004 : 172.18.205.7
+
+iosshenhe_cs : 172.18.205.7
+iosshenhe_bs : 172.18.205.7
+iosshenhe_gs10001 : 172.18.205.7
+
+outertest_cs : 172.18.205.8
+outertest_bs : 172.18.205.8
+outertest_gs10001 : 172.18.205.8
+
+branchtest_cs : 192.168.8.138
+branchtest_bs : 192.168.8.138
+branchtest_gs10001 : 192.168.8.138

@@ -1,0 +1,32 @@
+
+//切换仓库
+message C2GSSwitchWareHouse {
+    optional uint32 wid  = 1;                               //仓库id
+}
+
+//购买
+message C2GSBuyWareHouse{
+}
+
+//命名
+message C2GSRenameWareHouse{
+    optional uint32 wid = 1;
+    optional string name = 2;
+}
+
+//存入仓库
+message C2GSWareHouseWithStore{
+    optional uint32 wid = 1;
+    optional uint32 itemid = 2;
+}
+
+//从仓库取出
+message C2GSWareHouseWithDraw{
+    optional uint32 wid = 1;
+    optional uint32 pos = 2;
+}
+
+//仓库整理
+message C2GSWareHouseArrange{
+    optional uint32 wid = 1;
+}

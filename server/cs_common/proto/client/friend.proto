@@ -1,0 +1,124 @@
+import "base/common.proto";
+
+//请求简要信息
+message C2GSQueryFriendProfile {
+    repeated uint32 pid_list = 1;
+}
+
+//请求申请信息
+message C2GSQueryFriendApply {
+    repeated uint32 pid_list =1;
+}
+
+//发送聊天
+message C2GSChatTo {
+    optional uint32 pid = 1;
+    optional string msg = 2;
+    optional string message_id = 3;
+}
+
+//删除信息
+message C2GSAckChatFrom {
+    optional uint32 pid = 1;
+    optional string message_id = 2;
+}
+
+//添加好友
+message C2GSApplyAddFriend {
+    optional uint32 pid = 1;
+}
+
+
+message C2GSAgreeApply {
+    repeated uint32 pidlist = 1;
+}
+
+
+//删除好友申请
+message C2GSDelApply {
+    repeated uint32 pidlist = 1;
+}
+
+
+message C2GSDeleteFriend {
+    optional uint32 pid = 1;
+}
+
+//查找好友
+message C2GSFindFriend {
+    optional uint32 pid = 1;
+    optional string name = 2;
+}
+
+//添加黑名单
+message C2GSFriendShield {
+    optional uint32 pid = 1;
+}
+
+//解除屏蔽
+message C2GSFriendUnshield {
+    optional uint32 pid = 1;
+}
+
+//编辑个人档案
+message C2GSEditDocument {
+    optional base.FriendDoc doc = 1;
+}
+
+message C2GSTakeDocunment {
+    optional uint32 pid = 1;
+}
+
+
+//好友设置
+message C2GSFriendSetting {
+    optional base.FriendSetting setting = 1;
+}
+
+
+//刷新推荐列表
+message C2GSRecommendFriends {
+    repeated uint32 plist =1 ; //排除列表
+}
+
+//广播列表,排除好友列表
+message C2GSBroadcastList {
+    repeated uint32 plist =1 ; 
+}
+
+//请求附近的人
+message C2GSNearByFriend {
+    
+}
+
+//设置头像 
+message C2GSSetPhoto {
+    optional  string url = 1;
+}
+
+message C2GSSetShowPartner  {
+    repeated uint32 parlist =  1; //展示伙伴 列表
+}
+
+message C2GSGetShowPartnerInfo  {
+    optional uint32 parid = 1;// 伙伴ID
+    optional uint32 target =2;//目标玩家
+}
+
+message C2GSSetShowEquip {
+    optional uint32 show = 1;//0默认,1显示
+}
+
+//获取道具描述
+message C2GSGetEquipDesc {
+    optional uint32 pid = 1 ; //人物ID
+    optional uint32 pos = 2;//装备位置
+}
+
+//获取好友简要列表信息
+message C2GSSimpleFriendList {
+    repeated uint32 pidlist = 1;
+}
+
+
+

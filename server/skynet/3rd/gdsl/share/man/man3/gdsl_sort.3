@@ -1,0 +1,42 @@
+.TH "Sort module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Sort module \- 
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgdsl_sort\fP (\fBgdsl_element_t\fP *T, \fBulong\fP N, const \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fISort an array in place\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void \fBgdsl_sort\fP (\fBgdsl_element_t\fP *T, \fBulong\fPN, const \fBgdsl_compare_func_t\fPCOMP_F)"
+.PP
+Sort an array in place\&. Sort the array T in place\&. The function COMP_F is used to compare T's elements and must be user-defined\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( N log( N ) ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+N == |T| & T != NULL & COMP_F != NULL & for all i <= N: sizeof (T[i]) == sizeof (gdsl_element_t) 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIT\fP The array of elements to sort 
+.br
+\fIN\fP The number of elements into T 
+.br
+\fICOMP_F\fP The function pointer used to compare T's elements 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

@@ -1,0 +1,97 @@
+message Direction{
+	optional uint32 id  = 1;			//成就大类id
+	optional uint32 cur = 2;			//成就大类当前进度
+}
+
+message AchInfo{
+	optional uint32 id  = 1;			//成就id
+	optional uint32 cur = 2;			//成就当前进度
+	optional uint32 done = 3;		//成就状态　0-未完成　1-可领取　2-已完成
+}
+
+message RedInfo{
+	optional uint32 id  	= 1;			//成就id
+	repeated uint32 blist  	= 2;			//归属id
+}
+
+//1 打开成就主界面
+message GS2CAchieveMain{
+	repeated Direction directions = 1;		//成就大类信息
+	optional uint32 cur_point        = 2;		//总成就当前进度
+	repeated uint32 already_get   = 3;		//已领取成就点数编号
+}
+
+//2 打开分类界面
+message GS2CAchieveDirection{
+	optional uint32 id 		 = 1;		//成就大类id
+	optional uint32 belong 		 = 2;		//归属id
+	repeated AchInfo achlist 	 = 3;		//成就详细信息
+}
+
+//3 红点信息
+message GS2CAchieveRedDot{
+	repeated RedInfo infolist	 = 1;			//红点信息列表
+}
+
+//4 成就达成推送
+message GS2CAchieveDone{
+	optional uint32 id	           = 1;		//成就id
+	optional bool pop       	           = 2;		//是否弹出Tips
+}
+
+//5 成就进度推送
+message GS2CAchieveDegree{
+	optional AchInfo info	           = 1;		//成就信息
+}
+
+message DegreeInfo{
+	optional string key = 1;
+	optional uint32 targetid = 2;
+	optional uint32 value = 3;
+}
+
+message PictureInfo{
+	optional uint32 id  = 1;			//成就id
+	repeated DegreeInfo cur = 2;			//成就当前进度
+	optional uint32 done = 3;		//成就状态　0-未完成　1-可领取　2-已完成
+}
+
+message GS2CPictureDegree{
+	optional PictureInfo info = 1;
+}
+
+message GS2CPictureRedDot{
+
+}
+
+message GS2CPictureInfo{
+	repeated PictureInfo info = 1;
+	optional uint32 ui_opened = 2;   //1为打开过，0为没打开过
+}
+
+//---------------------------七日目标----------------------------
+//主界面信息
+message GS2CSevenDayMain{
+	optional uint32 cur_point = 1; //总成就点
+	repeated uint32 already_get = 2;  //已领取成就点数编号
+	optional uint32 end_time = 3; //活动结束时间
+	optional uint32 server_day = 4; //开服务天数
+}
+
+message GS2CSevenDayDegree {
+	optional AchInfo info	           = 1;		//成就信息
+}
+
+message GS2CSevenDayRedDot{
+	repeated uint32 days = 1; //有红点天数
+}
+
+message GS2CSevenDayInfo {
+	optional uint32 day = 1; //打开某天成就
+	repeated  AchInfo achlist = 2; //当天成就信息
+}
+
+//每天限购礼拜
+message GS2CSevenDayBuy{
+	repeated uint32 already_buy = 1; //已购买成礼包天数
+}

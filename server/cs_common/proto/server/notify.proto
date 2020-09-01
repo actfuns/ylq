@@ -1,0 +1,4 @@
+
+message GS2CNotify {
+    optional string cmd = 1;
+}

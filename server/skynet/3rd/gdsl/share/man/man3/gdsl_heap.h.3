@@ -1,0 +1,87 @@
+.TH "gdsl_heap.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_heap.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct heap * \fBgdsl_heap_t\fP"
+.br
+.RI "\fIGDSL heap type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_heap_t\fP \fBgdsl_heap_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F, \fBgdsl_compare_func_t\fP COMP_F)"
+.br
+.RI "\fICreate a new heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_heap_free\fP (\fBgdsl_heap_t\fP H)"
+.br
+.RI "\fIDestroy a heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_heap_flush\fP (\fBgdsl_heap_t\fP H)"
+.br
+.RI "\fIFlush a heap\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_heap_get_name\fP (const \fBgdsl_heap_t\fP H)"
+.br
+.RI "\fIGet the name of a heap\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_heap_get_size\fP (const \fBgdsl_heap_t\fP H)"
+.br
+.RI "\fIGet the size of a heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_heap_get_top\fP (const \fBgdsl_heap_t\fP H)"
+.br
+.RI "\fIGet the top of a heap\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_heap_is_empty\fP (const \fBgdsl_heap_t\fP H)"
+.br
+.RI "\fICheck if a heap is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_heap_t\fP \fBgdsl_heap_set_name\fP (\fBgdsl_heap_t\fP H, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_heap_set_top\fP (\fBgdsl_heap_t\fP H, void *VALUE)"
+.br
+.RI "\fISubstitute the top element of a heap by a lesser one\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_heap_insert\fP (\fBgdsl_heap_t\fP H, void *VALUE)"
+.br
+.RI "\fIInsert an element into a heap (PUSH)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_heap_remove_top\fP (\fBgdsl_heap_t\fP H)"
+.br
+.RI "\fIRemove the top element from a heap (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_heap_t\fP \fBgdsl_heap_delete_top\fP (\fBgdsl_heap_t\fP H)"
+.br
+.RI "\fIDelete the top element from a heap\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_heap_map_forward\fP (const \fBgdsl_heap_t\fP H, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a heap\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_heap_write\fP (const \fBgdsl_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a heap to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_heap_write_xml\fP (const \fBgdsl_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a heap to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_heap_dump\fP (const \fBgdsl_heap_t\fP H, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a heap to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

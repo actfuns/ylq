@@ -1,0 +1,178 @@
+import "base/common.proto";
+
+message PartnerChip {
+    optional uint32 partner_chip_type = 1; //导表id
+    optional uint32 chip_amount = 2;    //拥有数量，0-碎片用完
+    optional uint32 latest_add_time = 3;    //最新一次获得碎片时间戳
+}
+
+message AwakeItem {
+    optional uint32 sid = 1; //导表id
+    optional uint32 amount = 2; //数量
+}
+
+message PartnerComment {
+    optional uint32 id = 1;     //评论id
+    optional uint32 pid = 2;    //玩家id
+    optional string name = 3;   //玩家名
+    optional string msg = 4;      //评论内容
+    repeated uint32 vote_list = 5;  //点赞表
+    optional uint32 create_time = 6;    //该条评论创建时间
+}
+
+//技能UI弹窗
+message PartnerSkillUI {
+    optional uint32 id = 1; //技能id
+    optional uint32 old_level = 2; //旧等级
+    optional uint32 new_level = 3; //新等级
+}
+
+message GS2CPartnerPropChange {
+    optional uint32 partnerid = 1;
+    optional base.Partner partner_info = 2;
+}
+
+message GS2CAddPartner {
+    optional base.Partner partner_info = 1;
+}
+
+message GS2CDelPartner {
+    repeated uint32 del_list = 1;
+}
+
+message GS2CLoginPartner {
+    repeated base.PartnerPosInfo fight_info = 1;
+    repeated PartnerChip partner_chip_list = 2;
+    repeated AwakeItem awake_item_list = 3; //觉醒道具
+    repeated uint32 owned_partner_list = 4;  //拥有过伙伴id列表
+    repeated uint32 owned_equip_list = 5;   //拥有过伙伴符文id列表
+}
+
+message GS2CLoginPartnerList {
+    repeated base.Partner partner_list = 1; //伙伴列表
+}
+
+message GS2CRefreshFightPartner {
+    optional base.PartnerPosInfo fight_info = 1;
+}
+
+message GS2CDrawCardUI {
+    optional uint32 par_type = 1; //获得伙伴sid
+    optional string desc = 2; //描述
+    optional uint32 redraw_cost = 3; //0-新伙伴, 其他-重新招募钻石
+}
+
+message GS2CDrawCardResult {
+    optional uint32 type =  1;                  //1.武灵,2:武魂
+    repeated uint32 partner_list = 2;       //伙伴id列表
+}
+
+message GS2CRefreshPartnerChip {
+    optional PartnerChip partner_chip = 1;
+}
+
+//刷新觉醒道具
+message GS2CRefreshAwakeItem {
+    optional AwakeItem awake_item = 1;
+}
+
+//伙伴评论
+message GS2CPartnerCommentInfo {
+    optional uint32 partner_type = 1;       //伙伴导表id
+    repeated PartnerComment list = 2;   //普通评论
+    repeated PartnerComment hot_list = 3;   //热评
+    optional uint32 is_comment = 4; //0-当天未评论,1-已评论
+}
+
+//觉醒成功返回
+message GS2CAwakePartner {
+    optional uint32 partnerid = 1;
+}
+
+//伙伴图鉴上阵信息
+message GS2CPartnerPicturePosList {
+    repeated base.PartnerShapePos pos_list = 1;  //所有位置的图鉴信息
+}
+
+//获得新伙伴列表
+message GS2CAddPartnerList {
+    repeated base.Partner partner_list = 1;
+}
+
+message GS2CShowPartnerSkin {
+    optional uint32 itemid = 1; //皮肤id
+}
+
+
+message NewPartner {
+    optional uint32 par_type = 1; //伙伴导表id
+    optional string desc = 2; //描述
+}
+//展示新伙伴
+message GS2CShowNewPartnerUI {
+    repeated NewPartner par_types = 1;
+}
+
+//升星属性
+message GS2CPartnerStarUpStar {
+    optional uint32 parid = 1; //伙伴id
+    optional uint32 old_star = 2;
+    optional uint32 new_star = 3;
+    repeated base.ApplyInfo old_apply = 4;
+    repeated base.ApplyInfo new_apply = 5;
+    optional uint32 max_grade = 6; //升星后最大等级
+}
+
+//伙伴升级弹窗界面
+message GS2COpenPartnerSkillUI {
+    optional uint32 parid = 1; //伙伴id
+    repeated PartnerSkillUI skills = 2; //技能
+}
+
+//伙伴合成
+message GS2CComposePartner {
+    optional uint32 parid = 1; //合成伙伴id列表
+}
+
+message GS2CUpGradePartner {
+    optional uint32 parid = 1; //伙伴id
+}
+
+message GS2COpenPartnerUI {
+    optional uint32 parid  = 1;
+    optional uint32 type = 2; //1-升级界面，2-升星界面
+    optional uint32 md5 = 3; //
+    repeated base.ApplyInfo applys = 5; //
+}
+
+//伙伴符石合成
+message GS2CComposePartnerStone {
+    optional uint32 stonesid = 1; //符石sid
+}
+
+//御灵方案
+message GS2CLoginParSoulPlan {
+    repeated base.ParSoulPlan plans = 1; //所有御灵方案
+}
+
+//增加方案
+message GS2CAddParSoulPlan {
+    optional base.ParSoulPlan plan = 1; //御灵方案
+}
+
+//删除方案
+message GS2CDelParSoulPlan {
+    optional uint32 idx = 1; //方案id
+}
+
+//修改方案
+message GS2CUpdateParSoulPlan {
+    optional base.ParSoulPlan plan = 1; //方案
+}
+
+//碎片转换
+message GS2CExchangePartnerChip {
+    optional uint32 chip_sid = 1; //消耗碎片导表id
+    optional uint32 amount = 2; //转换数量
+    optional uint32 target_sid = 3; //转换目标sid,目前是万能碎片sid
+}

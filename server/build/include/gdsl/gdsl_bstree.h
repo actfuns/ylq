@@ -1,0 +1,487 @@
+/*
+ * This file is part of the Generic Data Structures Library (GDSL).
+ * Copyright (C) 1998-2006 Nicolas Darnis <ndarnis@free.fr>.
+ *
+ * The GDSL library is free software; you can redistribute it and/or 
+ * modify it under the terms of the GNU General Public License as 
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * The GDSL library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with the GDSL library; see the file COPYING.
+ * If not, write to the Free Software Foundation, Inc., 
+ * 59 Temple Place, Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * $RCSfile: gdsl_bstree.h,v $
+ * $Revision: 1.23 $
+ * $Date: 2006/03/04 16:32:05 $
+ */
+
+
+#ifndef _GDSL_BSTREE_H_
+#define _GDSL_BSTREE_H_
+
+
+#include <stdio.h>
+
+
+#include "gdsl_types.h"
+
+
+#ifdef __cplusplus
+extern "C" 
+{
+#endif /* __cplusplus */
+
+
+/**
+ * @defgroup gdsl_bstree Binary search tree manipulation module
+ * @{
+ */
+
+/**
+ * @brief GDSL binary search tree type.
+ *
+ * This type is voluntary opaque. Variables of this kind could'nt be directly
+ * used, but by the functions of this module.
+ */
+typedef struct gdsl_bstree* gdsl_bstree_t;
+
+/******************************************************************************/
+/* Management functions of binary search trees                                */
+/******************************************************************************/
+
+/**
+ * @brief Create a new binary search tree.
+ *
+ * Allocate a new binary search tree data structure which name is set to a copy
+ * of NAME.
+ * The function pointers ALLOC_F, FREE_F and COMP_F could be used to 
+ * respectively alloc, free and compares elements in the tree. These pointers
+ * could be set to NULL to use the default ones:
+ * - the default ALLOC_F simply returns its argument
+ * - the default FREE_F does nothing
+ * - the default COMP_F always returns 0
+ * 
+ * @note Complexity: O( 1 )
+ * @pre nothing
+ * @param NAME The name of the new binary tree to create
+ * @param ALLOC_F Function to alloc element when inserting it in a binary tree
+ * @param FREE_F Function to free element when removing it from a binary tree
+ * @param COMP_F Function to compare elements into the binary tree
+ * @return the newly allocated binary search tree in case of success.
+ * @return NULL in case of insufficient memory.
+ * @see gdsl_bstree_free()
+ * @see gdsl_bstree_flush()
+ * @see gdsl_alloc_func_t
+ * @see gdsl_free_func_t
+ * @see gdsl_compare_func_t
+ */
+extern gdsl_bstree_t
+gdsl_bstree_alloc (const char* NAME,
+		   gdsl_alloc_func_t ALLOC_F,
+		   gdsl_free_func_t FREE_F,
+		   gdsl_compare_func_t COMP_F
+		   );
+
+/**
+ * @brief Destroy a binary search tree.
+ *
+ * Deallocate all the elements of the binary search tree T by calling T's FREE_F
+ * function passed to gdsl_bstree_alloc(). The name of T is deallocated and T
+ * is deallocated itself too.
+ *
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to deallocate
+ * @see gdsl_bstree_alloc()
+ * @see gdsl_bstree_flush()
+ */
+extern void
+gdsl_bstree_free (gdsl_bstree_t T
+		  );
+
+/**
+ * @brief Flush a binary search tree.
+ *
+ * Deallocate all the elements of the binary search tree T by calling T's 
+ * FREE_F function passed to gdsl_rbtree_alloc().
+ * The binary search tree T is not deallocated itself and its name is not 
+ * modified.
+ *
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to flush
+ * @see gdsl_bstree_alloc()
+ * @see gdsl_bstree_free()
+ */
+extern void
+gdsl_bstree_flush (gdsl_bstree_t T
+		   );
+
+/******************************************************************************/
+/* Consultation functions of binary search trees                              */
+/******************************************************************************/
+
+/**
+ * @brief Get the name of a binary search tree.
+ * @note Complexity: O( 1 )
+ * @pre T must be a valid gdsl_bstree_t
+ * @post The returned string MUST NOT be freed.
+ * @param T The binary search tree to get the name from
+ * @return the name of the binary search tree T.
+ * @see gdsl_bstree_set_name ()
+ */
+extern const char*
+gdsl_bstree_get_name (const gdsl_bstree_t T
+		      );
+
+/**
+ * @brief Check if a binary search tree is empty.
+ * @note Complexity: O( 1 )
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to check
+ * @return TRUE if the binary search tree T is empty.
+ * @return FALSE if the binary search tree T is not empty.
+ */
+extern bool
+gdsl_bstree_is_empty (const gdsl_bstree_t T
+		      );
+
+/**
+ * @brief Get the root of a binary search tree.
+ * @note Complexity: O( 1 )
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to get the root element from
+ * @return the element at the root of the binary search tree T.
+ */
+extern gdsl_element_t
+gdsl_bstree_get_root (const gdsl_bstree_t T
+		      );
+
+/**
+ * @brief Get the size of a binary search tree.
+ * @note Complexity: O( 1 )
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to get the size from
+ * @return the size of the binary search tree T (noted |T|).
+ * @see gdsl_bstree_get_height()
+ */
+extern ulong
+gdsl_bstree_get_size (const gdsl_bstree_t T
+		      );
+
+/**
+ * @brief Get the height of a binary search tree.
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to compute the height from
+ * @return the height of the binary search tree T (noted h(T)).
+ * @see gdsl_bstree_get_size()
+ */
+extern ulong
+gdsl_bstree_get_height (const gdsl_bstree_t T
+			);
+
+/******************************************************************************/
+/* Modification functions of binary search trees                              */
+/******************************************************************************/
+
+/**
+ * @brief Set the name of a binary search tree.
+ *
+ * Change the previous name of the binary search tree T to a copy of NEW_NAME.
+ *
+ * @note Complexity: O( 1 )
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to change the name
+ * @param NEW_NAME The new name of T
+ * @return the modified binary search tree in case of success.
+ * @return NULL in case of insufficient memory.
+ * @see gdsl_bstree_get_name()
+ */
+extern gdsl_bstree_t
+gdsl_bstree_set_name (gdsl_bstree_t T,
+		      const char* NEW_NAME
+		      );
+
+/**
+ * @brief Insert an element into a binary search tree if it's not found or
+ * return it.
+ * 
+ * Search for the first element E equal to VALUE into the binary search tree T, 
+ * by using T's COMP_F function passed to gdsl_bstree_alloc to find it. If E is
+ * found, then it's returned. If E isn't found, then a new element E is 
+ * allocated using T's ALLOC_F function passed to gdsl_bstree_alloc and is 
+ * inserted and then returned.
+ *
+ * @note Complexity: O( h(T) ), where log2(|T|) <= h(T) <= |T|-1
+ * @pre T must be a valid gdsl_bstree_t & RESULT != NULL
+ * @param T The binary search tree to modify
+ * @param VALUE The value used to make the new element to insert into T
+ * @param RESULT The address where the result code will be stored. 
+ * @return the element E and RESULT = GDSL_OK if E is inserted into T.
+ * @return the element E and RESULT = GDSL_ERR_DUPLICATE_ENTRY if E is already 
+ * present in T.
+ * @return NULL and RESULT = GDSL_ERR_MEM_ALLOC in case of insufficient memory.
+ * @see gdsl_bstree_remove()
+ * @see gdsl_bstree_delete()
+ */
+extern gdsl_element_t
+gdsl_bstree_insert (gdsl_bstree_t T,
+		    void* VALUE,
+		    int* RESULT
+		    );
+
+/**
+ * @brief Remove an element from a binary search tree.
+ *
+ * Remove from the binary search tree T the first founded element E equal to 
+ * VALUE, by using T's COMP_F function passed to gdsl_bstree_alloc(). If E is
+ * found, it is removed from T and then returned.
+ *
+ * @note Complexity: O( h(T) ), where log2(|T|) <= h(T) <= |T|-1
+ * @note The resulting T is modified by examinating the left sub-tree from the
+ * founded E.
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to modify
+ * @param VALUE The value used to find the element to remove
+ * @return the first founded element equal to VALUE in T in case is found.
+ * @return NULL in case no element equal to VALUE is found in T.
+ * @see gdsl_bstree_insert()
+ * @see gdsl_bstree_delete()
+ */
+extern gdsl_element_t
+gdsl_bstree_remove (gdsl_bstree_t T,
+		    void* VALUE
+		    );
+
+/**
+ * @brief Delete an element from a binary search tree.
+ *
+ * Remove from the binary search tree the first founded element E equal to 
+ * VALUE, by using T's COMP_F function passed to gdsl_bstree_alloc(). If E is 
+ * found, it is removed from T and E is deallocated using T's FREE_F function 
+ * passed to gdsl_bstree_alloc(), then T is returned.
+ *
+ * @note Complexity: O( h(T) ), where log2(|T|) <= h(T) <= |T|-1
+ * @note the resulting T is modified by examinating the left sub-tree from the
+ * founded E.
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to remove an element from
+ * @param VALUE The value used to find the element to remove
+ * @return the modified binary search tree after removal of E if E was found.
+ * @return NULL if no element equal to VALUE was found.
+ * @see gdsl_bstree_insert()
+ * @see gdsl_bstree_remove()
+ */
+extern gdsl_bstree_t
+gdsl_bstree_delete (gdsl_bstree_t T,
+		    void* VALUE
+		    );
+  
+/******************************************************************************/
+/* Search functions of binary search trees                                    */
+/******************************************************************************/
+
+/**
+ * @brief Search for a particular element into a binary search tree.
+ *
+ * Search the first element E equal to VALUE in the binary seach tree T, by 
+ * using COMP_F function to find it. If COMP_F == NULL, then the COMP_F function
+ * passed to gdsl_bstree_alloc() is used.
+ *
+ * @note Complexity: O( h(T) ), where log2(|T|) <= h(T) <= |T|-1
+ * @pre T must be a valid gdsl_bstree_t
+ * @param T The binary search tree to use.
+ * @param COMP_F The comparison function to use to compare T's element with
+ * VALUE to find the element E (or NULL to use the default T's COMP_F)
+ * @param VALUE The value that must be used by COMP_F to find the element E
+ * @return the first founded element E equal to VALUE.
+ * @return NULL if VALUE is not found in T.
+ * @see gdsl_bstree_insert()
+ * @see gdsl_bstree_remove()
+ * @see gdsl_bstree_delete()
+ */
+extern gdsl_element_t
+gdsl_bstree_search (const gdsl_bstree_t T,
+		    gdsl_compare_func_t COMP_F,
+		    void* VALUE
+		    );
+
+/******************************************************************************/
+/* Parse functions of binary search trees                                     */
+/******************************************************************************/
+
+/**
+ * @brief Parse a binary search tree in prefixed order.
+ *
+ * Parse all nodes of the binary search tree T in prefixed order. The MAP_F 
+ * function is called on the element contained in each node with the USER_DATA
+ * argument. If MAP_F returns GDSL_MAP_STOP, then gdsl_bstree_map_prefix() stops 
+ * and returns its last examinated element.
+ *
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t & MAP_F != NULL
+ * @param T The binary search tree to map.
+ * @param MAP_F The map function.
+ * @param USER_DATA User's datas passed to MAP_F
+ * @return the first element for which MAP_F returns GDSL_MAP_STOP.
+ * @return NULL when the parsing is done.
+ * @see gdsl_bstree_map_infix()
+ * @see gdsl_bstree_map_postfix()
+ */
+extern gdsl_element_t
+gdsl_bstree_map_prefix (const gdsl_bstree_t T,
+			gdsl_map_func_t MAP_F,
+			void* USER_DATA
+			);
+
+/**
+ * @brief Parse a binary search tree in infixed order.
+ *
+ * Parse all nodes of the binary search tree T in infixed order. The MAP_F 
+ * function is called on the element contained in each node with the USER_DATA
+ * argument. If MAP_F returns GDSL_MAP_STOP, then gdsl_bstree_map_infix() stops 
+ * and returns its last examinated element.
+ *
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t & MAP_F != NULL
+ * @param T The binary search tree to map.
+ * @param MAP_F The map function.
+ * @param USER_DATA User's datas passed to MAP_F
+ * @return the first element for which MAP_F returns GDSL_MAP_STOP.
+ * @return NULL when the parsing is done.
+ * @see gdsl_bstree_map_prefix()
+ * @see gdsl_bstree_map_postfix()
+ */
+extern gdsl_element_t
+gdsl_bstree_map_infix (const gdsl_bstree_t T,
+		       gdsl_map_func_t MAP_F,
+		       void* USER_DATA
+		       );
+
+/**
+ * @brief Parse a binary search tree in postfixed order.
+ *
+ * Parse all nodes of the binary search tree T in postfixed order. The MAP_F 
+ * function is called on the element contained in each node with the USER_DATA
+ * argument. If MAP_F returns GDSL_MAP_STOP, then gdsl_bstree_map_postfix() 
+ * stops and returns its last examinated element.
+ *
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t & MAP_F != NULL
+ * @param T The binary search tree to map.
+ * @param MAP_F The map function.
+ * @param USER_DATA User's datas passed to MAP_F
+ * @return the first element for which MAP_F returns GDSL_MAP_STOP.
+ * @return NULL when the parsing is done.
+ * @see gdsl_bstree_map_prefix()
+ * @see gdsl_bstree_map_infix()
+ */
+extern gdsl_element_t
+gdsl_bstree_map_postfix (const gdsl_bstree_t T,
+			 gdsl_map_func_t MAP_F,
+			 void* USER_DATA
+			 );
+
+/******************************************************************************/
+/* Input/output functions of binary search trees                              */
+/******************************************************************************/
+
+/**
+ * @brief Write the element of each node of a binary search tree to a file.
+ *
+ * Write the nodes elements of the binary search tree T to OUTPUT_FILE, using
+ * WRITE_F function.
+ * Additionnal USER_DATA argument could be passed to WRITE_F.
+ *
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t & WRITE_F != NULL & OUTPUT_FILE != NULL
+ * @param T The binary search tree to write.
+ * @param WRITE_F The write function.
+ * @param OUTPUT_FILE The file where to write T's elements.
+ * @param USER_DATA User's datas passed to WRITE_F.
+ * @see gdsl_bstree_write_xml()
+ * @see gdsl_bstree_dump()
+ */
+extern void
+gdsl_bstree_write (const gdsl_bstree_t T,
+		   gdsl_write_func_t WRITE_F,
+		   FILE* OUTPUT_FILE,
+		   void* USER_DATA
+		   );
+
+/**
+ * @brief Write the content of a binary search tree to a file into XML.
+ *
+ * Write the nodes elements of the binary search tree T to OUTPUT_FILE, into
+ * XML language.
+ * If WRITE_F != NULL, then use WRITE_F to write T's nodes elements to 
+ * OUTPUT_FILE.
+ * Additionnal USER_DATA argument could be passed to WRITE_F.
+ *
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t & OUTPUT_FILE != NULL
+ * @param T The binary search tree to write.
+ * @param WRITE_F The write function.
+ * @param OUTPUT_FILE The file where to write T's elements.
+ * @param USER_DATA User's datas passed to WRITE_F.
+ * @see gdsl_bstree_write()
+ * @see gdsl_bstree_dump()
+ */
+extern void
+gdsl_bstree_write_xml (const gdsl_bstree_t T,
+		       gdsl_write_func_t WRITE_F,
+		       FILE* OUTPUT_FILE,
+		       void* USER_DATA
+		       );
+
+/**
+ * @brief Dump the internal structure of a binary search tree to a file.
+ *
+ * Dump the structure of the binary search tree T to OUTPUT_FILE. If 
+ * WRITE_F != NULL, then use WRITE_F to write T's nodes elements to 
+ * OUTPUT_FILE.
+ * Additionnal USER_DATA argument could be passed to WRITE_F.
+ *
+ * @note Complexity: O( |T| )
+ * @pre T must be a valid gdsl_bstree_t & OUTPUT_FILE != NULL
+ * @param T The binary search tree to write.
+ * @param WRITE_F The write function.
+ * @param OUTPUT_FILE The file where to write T's elements.
+ * @param USER_DATA User's datas passed to WRITE_F.
+ * @see gdsl_bstree_write()
+ * @see gdsl_bstree_write_xml()
+ */
+extern void
+gdsl_bstree_dump (const gdsl_bstree_t T,
+		  gdsl_write_func_t WRITE_F,
+		  FILE* OUTPUT_FILE,
+		  void* USER_DATA
+		  );
+
+/*
+ * @}
+ */
+
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+
+#endif /* _GDSL_BSTREE_H_ */
+
+
+/** EMACS **
+ * Local variables:
+ * mode: c
+ * c-basic-offset: 4
+ * End:
+ */

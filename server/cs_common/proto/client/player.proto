@@ -1,0 +1,61 @@
+import "base/common.proto";
+
+message C2GSGetPlayerInfo {
+    optional uint32 pid = 1;
+    optional uint32 style = 2;  //0.默认样式 1.不显示PK
+}
+
+
+//请求玩家道具信息
+message C2GSPlayerItemInfo {
+    optional uint32 pid = 1;    //目标玩家的id
+    optional uint32 itemid = 2;
+}
+
+//切换流派
+message C2GSChangeSchool {
+    optional uint32 school_branch = 1;
+}
+
+//点赞
+message C2GSUpvotePlayer {
+    optional uint32 pid =2;
+}
+
+//改名
+message C2GSRename {
+    optional string rename = 1;
+}
+
+message C2GSPlayerPK {
+    optional uint32 target_id = 1;
+}
+
+message C2GSWatchWar{
+    optional uint32 target_id = 1;
+}
+
+message C2GSLeaveWatchWar{
+}
+
+message C2GSPlayerTop4Partner {
+    optional uint32 target_pid = 1; //目标玩家的id
+}
+
+message C2GSInitRoleName{
+    optional string name = 1;
+}
+
+message C2GSGamePushSetting {
+    optional string type = 1;                   //类型
+    optional uint32 value = 2;                //值,1:设置,0:取消设置
+}
+
+message C2GSGameShare {
+    optional string type = 1;                   //分享类型
+}
+
+//换皮肤
+message C2GSChangeShape {
+    optional uint32 shape = 1; // 造型id
+}

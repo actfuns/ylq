@@ -1,0 +1,320 @@
+import "base/common.proto";
+
+message SkillCD {
+    optional uint32 skill_id = 1;
+    optional uint32 bout = 2;
+}
+
+message ExtraInfo {
+    optional string key            = 1;
+    optional string value         = 2;
+}
+
+message GS2CShowWar {
+    optional uint32 war_id = 1;
+    optional uint32 war_type = 2;                       //战斗类型1:npc,2:pvp,3次元妖兽
+    optional uint32 observer_view = 3;              //观察者视角,1,2:阵营,
+    optional uint32 war_flim = 4;                        //1:录像
+    repeated ExtraInfo extra_info = 5;               //额外信息
+    optional uint32 flim_ver  = 6; //录像版本号
+    optional string lineup = 7;//阵法
+}
+
+message GS2CWarResult {
+    optional uint32 war_id = 1;
+    optional uint32 win_side = 2;
+}
+
+message GS2CWarBoutStart {
+    optional uint32 war_id = 1;
+    optional uint32 bout_id = 2;
+    optional uint32 left_time = 3;
+}
+
+message GS2CWarBoutEnd {
+    optional uint32 war_id = 1;
+    optional uint32 bout_id = 2;
+}
+
+message GS2CWarAddWarrior {
+    optional uint32 war_id = 1;
+    optional uint32 camp_id = 2;
+    optional uint32 type = 3; /*1 player,2 npc,4 partner */
+
+    optional base.PlayerWarrior warrior = 4;
+    optional base.NpcWarrior npcwarrior = 5;
+    optional base.PartnerWarrior partnerwarrior = 6;
+    optional uint32 add_type = 7;       //添加类型,0:正常添加,1:回合中添加
+}
+
+message GS2CWarDelWarrior {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional uint32 del_type = 3;   //删除类型,0:正常删除,1:回合中删除
+}
+
+message GS2CWarNormalAttack {
+    optional uint32 war_id = 1;
+    optional uint32 action_wid = 2;
+    optional uint32 select_wid = 3;
+}
+
+message GS2CWarSkill {
+    optional uint32 war_id = 1;
+    repeated uint32 action_wlist = 2;
+    repeated uint32 select_wlist = 3;
+    optional uint32 skill_id = 4;
+    optional uint32 magic_id = 5;
+}
+
+message GS2CWarProtect {
+    optional uint32 war_id = 1;
+    optional uint32 action_wid = 2; //保护单位
+    optional uint32 select_wid = 3;//被保护单位
+    optional uint32 attack_wid = 4;//
+}
+
+message GS2CWarEscape {
+    optional uint32 war_id = 1;
+    optional uint32 action_wid = 2;
+    optional bool success = 3;
+}
+
+message GS2CWarDamage {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional uint32 type = 3; /* 1 miss 2 defense */
+    optional uint32 iscrit = 4;/* 1 crit */
+    optional int32 damage = 5;
+    optional int32 damage_type = 6; // 0 默认,1加血
+}
+
+message GS2CWarWarriorStatus {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional uint32 type = 3;
+
+    optional base.WarriorStatus status = 4;
+}
+
+message GS2CWarGoback {
+    optional uint32 war_id = 1;
+    optional uint32 action_wid = 2;
+}
+
+message GS2CWarBuffBout {
+    optional uint32 war_id =1;
+    optional uint32 wid = 2;
+    optional uint32 buff_id = 3;
+    optional uint32 bout = 4;
+    optional uint32 level = 5;
+    optional uint32 produce_wid = 6;//引发者
+}
+
+//触发被动技能
+message GS2CWarPasssiveSkill {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional uint32 skill_id = 3;
+}
+
+//玩家战士进入战斗
+message GS2CPlayerWarriorEnter {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    repeated uint32 partner_list = 3;
+    repeated uint32 command_list = 4;   //执行了指令的单位
+    optional uint32 sp = 5;
+}
+
+//进入战斗配置
+message GS2CWarConfig {
+    optional uint32 war_id = 1;
+    optional uint32 secs = 2;       //秒数
+}
+
+//执行了操作指令
+message GS2CWarCommand {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+}
+
+message WarSpeedInfo {
+    optional uint32 wid = 1;
+    optional uint32 speed = 2;
+    optional uint32 camp = 3;
+    optional uint32 action = 4; // 是否行动，1-已行动
+}
+
+//行动列表，最先行动的再队列前，行动过的在未行动的后面
+message GS2CWarSpeed {
+    optional uint32 war_id = 1;
+    repeated WarSpeedInfo speed_list = 2;
+}
+
+message GS2CWarAction{
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+}
+
+message GS2CWarStatus {
+    optional uint32 war_id = 1;
+    optional uint32 status = 2; //1:开始,0:结束
+    optional uint32 left_time = 3;  //当前回合剩余时间
+}
+
+//技能冷却
+message GS2CWarSkillCD {
+    optional uint32 war_id = 1;    //战斗id
+    optional uint32 wid = 2;        //战士id
+    repeated SkillCD skill_cd = 3;  //技能cd信息
+}
+
+//团队怒气值
+message GS2CWarSP {
+    optional uint32 war_id = 1;
+    optional uint32 camp_id = 2;
+    optional uint32 sp = 3;     //怒气值
+    optional uint32 attack = 4;
+    optional uint32 skiller = 6;//技能使用者
+    optional int32 addsp = 7;//本次增减怒气
+}
+
+message  FightPlayerExp{
+    optional uint32 limit_grade = 1;      //最大的等级
+    optional uint32 grade = 2;             //以前的等级
+    optional uint32 exp = 3;    //以前的经验
+    optional uint32 gain_exp = 4;            //获得经验
+    optional bool is_over_grade = 5;            //超出获得经验等级
+}
+
+message FightPartnerExp {
+    optional uint32 parid = 1;
+    optional uint32 limit_grade = 2;  //最大的等级
+    optional uint32 grade = 3;  //以前的等级
+    optional uint32 exp = 4;    //以前经验
+    optional uint32 gain_exp = 5;   //获得经验
+}
+
+//战斗胜利
+message GS2CWarEndUI {
+    optional uint32 war_id = 1;
+    optional FightPlayerExp player_exp  = 2;
+    repeated FightPartnerExp partner_exp = 3;
+    repeated base.ShowItemInfo player_item = 4;     //道具奖励
+    optional uint32 win =5 ; //1:win 0:fail
+    optional string win_tips = 6;
+    optional string fail_tips = 7;
+    repeated base.ApplyInfo apply = 8; //玩法参数
+}
+
+
+message WarTarget {
+    optional uint32 select_wid = 1; //目标
+    optional uint32 type = 2;   //1.选取,0.取消
+}
+
+//集火目标
+message GS2CWarTarget{
+    optional uint32 war_id = 1;
+    repeated WarTarget war_target = 2;
+}
+
+message WarFloatAttack {
+    optional uint32 attack_id = 1;
+    optional uint32 attack_cnt = 2;
+}
+
+//浮空信息
+message WarFloat {
+    repeated WarFloatAttack attack_list = 1;          //攻击者
+    optional uint32 victim_id = 2;          //浮空
+}
+
+message GS2CWarFloat {
+    optional uint32 war_id = 1;
+    repeated WarFloat float_info = 2;
+}
+
+message WarriorPos {
+    optional uint32 wid = 1;
+    optional uint32 pos = 2;
+}
+
+message GS2CSwitchPos {
+    optional uint32 war_id = 1;
+    repeated WarriorPos pos_list = 2;
+}
+
+//战队怪物波数
+message GS2CWarWave {
+    optional uint32 cur_wave = 1;   //当前波数
+    optional uint32 sum_wave = 2;  //总波数
+}
+
+message GS2CConfigFinish {
+    optional uint32  war_id = 1;
+    optional uint32 camp = 2; //阵营1,2
+    optional uint32 wid =3 ;//玩家ID
+}
+
+message GS2CShowWarSkill {
+    optional uint32 wid  = 1;//触发者
+    optional uint32 skill = 2;//技能ID
+    optional uint32 type = 3;//type 1.伙伴,2.门派,3符文,4.装备,5.buff,6.se
+
+}
+
+//战斗中的弹窗信息
+message GS2CWarNotify {
+    optional string cmd = 1; //信息
+}
+
+
+message WarSelectCmd {
+        optional uint32 wid = 1;
+        optional uint32 skill = 2;
+    }
+
+message GS2CSelectCmd {
+    repeated WarSelectCmd cmd = 1; //指令
+}
+
+message GS2CEnterWar {
+}
+
+message GS2CWarSetPlaySpeed {
+    optional uint32 war_id = 1;
+    optional uint32 play_speed = 2;
+}
+
+message WarBattleCmd {
+    optional uint32 wid = 1;
+    optional string cmd = 2;
+}
+
+message GS2CWarBattleCmd {
+    optional uint32 war_id = 1;
+    repeated WarBattleCmd cmd = 2;
+}
+
+
+message GS2CWarChapterInfo{
+    optional uint32 start_time = 1;
+}
+
+
+//战士开始行动
+message GS2CActionStart {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional uint32 action_id = 3;
+    optional uint32 left_time = 4;
+}
+
+//行动结束，演算完毕
+message GS2CActionEnd{
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional uint32 action_id =3;
+}

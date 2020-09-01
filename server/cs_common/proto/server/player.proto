@@ -1,0 +1,102 @@
+import "base/common.proto";
+
+message PropInfo {
+    optional uint32 base = 1;   //基础属性，来自人物初始化、升级
+    optional uint32 extra = 2; //附属属性，来自装备、道具等
+    optional uint32 ratio = 3; //百分比，来自外部加成
+    optional string name = 4;
+}
+
+//改变刷新
+message GS2CPropChange{
+    optional base.Role role = 1;
+}
+
+message GS2CServerGradeInfo {
+    optional uint32 server_grade = 1;
+    optional uint32 days = 2;
+}
+
+message GS2CGetPlayerInfo {
+    optional uint32 grade = 1;
+    optional string name = 2;
+    optional base.ModelInfo model_info = 3;
+    optional uint32 school = 4;
+    optional uint32 team_id = 5;
+    optional uint32 team_size = 6; //队伍成员数量
+    optional uint32 pid = 7;
+    optional uint32 org_id = 8;
+    optional string org_name = 9;
+    optional uint32 org_level = 10;
+    optional uint32 org_pos = 11;
+    optional uint32 in_war = 12;    //1.在战斗,0:不在战斗
+    optional uint32 style = 13;     //0.默认样式 1.不显示PK
+    optional uint32 school_branch = 14;
+    optional uint32 show_id = 15;   //靓号ID
+}
+
+message GS2CGetSecondProp {
+    repeated PropInfo  prop_info = 1;
+}
+
+//玩家的道具
+message GS2CPlayerItemInfo {
+    optional uint32 pid = 1;
+    optional base.ItemInfo itemdata   = 2;
+}
+
+//点赞
+message GS2CUpvotePlayer {
+    optional uint32 succuss = 1; //0-失败，1-成功
+    optional uint32 target_pid = 2;    //目标pid
+}
+
+message SimplePowerInfo {
+    optional uint32 ttype = 1; //0-主角,1-伙伴
+    optional string name = 2; //名称，主角-名,伙伴-改后的名
+    optional string othername = 3; //主角-流派名，伙伴-类型名
+    optional uint32 power = 4;  //战力
+    optional uint32 grade = 5;  //等级
+    optional base.ModelInfo model_info = 6;
+    optional uint32 parsid = 7; //伙伴导表id
+}
+
+message GS2CPlayerTop4Partner {
+    repeated SimplePowerInfo info_list = 1;
+}
+
+//当日信息变动
+message GS2CTodayInfo {
+    optional base.TodayInfo info = 1; //当日信息
+}
+
+message GS2COpenPkTipsWnd{
+
+}
+
+message GS2CInitRoleNameResult{
+    optional uint32 result = 1;
+}
+
+message GamePushSetting {
+    optional string type            = 1;
+    optional uint32 value         = 2;
+}
+
+message GS2CGamePushSetting{
+    repeated GamePushSetting game_push = 1;
+}
+
+message GameShare {
+    optional string type            = 1;
+    optional uint32 value         = 2;
+}
+
+message GS2CGameShare {
+    repeated GameShare game_share = 1;
+}
+
+//已拥有皮肤
+message GS2CShapeList {
+    repeated uint32 shapes = 1; //索引列表
+}

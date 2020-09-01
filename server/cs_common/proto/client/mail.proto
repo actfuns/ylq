@@ -1,0 +1,24 @@
+import "base/common.proto";
+
+//查看邮件
+message C2GSOpenMail{
+    optional uint32 mailid = 1;		//邮件id
+}
+
+//收取附件
+message C2GSAcceptAttach{
+	optional uint32 mailid = 1;		//邮件id
+}
+
+//一键收取附件
+message C2GSAcceptAllAttach{
+}
+
+//删除邮件
+message C2GSDeleteMail{
+	repeated uint32 mailids = 1;
+}
+
+//一键删除邮件
+message C2GSDeleteAllMail{
+}

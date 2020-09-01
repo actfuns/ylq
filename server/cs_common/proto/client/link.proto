@@ -1,0 +1,38 @@
+//点击链接
+message C2GSClickLink {
+    optional uint32 idx  =  1;//索引
+}
+
+//发送名片
+message C2GSLinkName {
+    optional uint32 pid =1;
+}
+
+//发送道具链接
+message C2GSLinkItem {
+    optional uint32 itemid =1 ;//道具ID
+    optional uint32 rand = 2;//校验
+}
+
+//发送伙伴链接
+message C2GSLinkPartner {
+    optional uint32 parid  = 1;//伙伴 ID
+    optional uint32 rand = 2;//校验
+}
+
+//发送玩家链接
+message C2GSLinkPlayer {
+    optional uint32 rand = 1;   //校验
+}
+
+//保存常用消息
+message C2GSEditCommonChat {
+    repeated string chat_list = 1;
+}
+
+//获取常用消息
+message C2GSGetCommonChat {
+    
+}
+
+

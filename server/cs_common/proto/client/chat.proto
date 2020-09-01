@@ -1,0 +1,19 @@
+
+message C2GSChat {
+    optional string cmd = 1;
+    optional uint32 type = 2; /*1 世界 2 队伍 3 帮派 4 当前*/
+    optional uint32 extraargs = 3; /*额外参数，各自频道各自约定用途*/
+}
+
+//红包操作
+message C2GSHongBaoOption {
+    optional string action = 1;                           //“draw”--领取 “look”--查看
+    optional uint32 id = 2;                                //红包id
+}
+
+//举报操作
+message C2GSReportPlayer {
+    optional uint32 target = 1;                         //举报目标
+    optional string reason = 2;                         //举报原因
+    optional string other = 3;                           //其他原因
+}

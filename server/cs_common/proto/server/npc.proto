@@ -1,0 +1,21 @@
+
+message GS2CNpcSay{
+    optional string sessionidx = 1;
+    optional uint32 npcid = 2;
+    optional uint32 shape = 3;
+    optional string  name = 4;
+    optional string  text = 5;
+    optional bool fight = 6;    //是否可挑战
+}
+
+message NpcFightInfo {
+    optional uint32 npc_type = 1; //global_npc导表fight_common_id字段
+    optional uint32 fight = 2; //已挑战次数
+    optional uint32 total = 3; //总共可挑战次数
+    repeated uint32 rewards = 4; //奖励id
+}
+
+//可挑战npc信息
+message GS2CNpcFightInfoList {
+    repeated NpcFightInfo info_list = 1;
+}

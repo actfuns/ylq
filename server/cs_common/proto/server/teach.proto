@@ -1,0 +1,14 @@
+//教学任务进度及奖励状态
+message GS2CTeachProgress{
+	optional uint32 times = 1;
+	optional uint32 reward_status = 2;
+}
+
+message FinishInfo{
+	repeated uint32 key = 1;
+	optional uint32 version = 2;
+}
+//新手指引进度
+message GS2CGuidanceInfo{
+	optional FinishInfo guidanceinfo = 1;
+}

@@ -1,0 +1,53 @@
+
+message RoleInfo{
+    optional uint32 pid = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    optional uint32 shape = 4;
+}
+
+message GS2CChat {
+    optional string cmd = 1;
+    optional uint32 type = 2; /*1-world */
+    optional RoleInfo role_info = 3; /* pid=0, 表示系统发 */
+}
+
+message GS2CSysChat {
+    optional uint32 tag_type = 1;    // 0-公告，1-传闻，2-帮助
+    optional string content = 2;
+    optional uint32 horse_race = 3; // 1-跑马，0-不跑
+    optional uint32 grade = 4;//可见等级,0为默认全部可见,否则为最低可见等级
+}
+
+message GS2CConsumeMsg {
+    optional uint32 type = 1;   //消息-6
+    optional string content = 2;
+}
+
+message DrawInfo{
+    optional uint32 pid = 1;    //玩家id
+    optional string name = 2;   //玩家姓名
+    optional uint32 gold = 3;   //领取金额
+}
+
+message GS2CHongBaoInfo{
+    optional uint32 shape = 1;                          //开启红包玩家shape
+    optional string title = 2;                               //红包标题
+    optional uint32 amount = 3;                        //红包总个数
+    optional uint32 remain_gold = 4;                //剩余金币
+    repeated DrawInfo draw_list = 5;                //领取信息
+    optional uint32 end_time = 6;                     //到期时间
+}
+
+//自身红包情况
+message GS2CPlayerHBInfo{
+    optional uint32 idx = 1;
+    optional uint32 shape = 2;
+    optional uint32 pid = 3;
+    optional uint32 gold = 4;
+    optional string title = 5;
+}
+
+message GS2CReportResult{
+    optional bool bsuc = 1;
+}

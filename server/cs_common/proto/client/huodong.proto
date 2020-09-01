@@ -1,0 +1,566 @@
+
+message C2GSAnswerQuestion {
+    optional uint32 id = 1;     //题目id
+    optional uint32 type = 2;   //题目类型,1-随机,2-积分
+    optional uint32 answer = 3; //答案
+}
+
+//积分答题加入玩家
+message C2GSQuestionEnterMember {
+
+}
+
+//领取积分答题奖励
+message C2GSQuestionEndReward {
+    optional uint32 type = 1;       //1-领取奖励，２-关闭界面
+}
+
+//报名场景答题
+message C2GSApplyQuestionScene {
+}
+
+//进入答题场景
+message C2GSEnterQuestionScene {
+
+}
+
+//退出答题场景
+message C2GSLeaveQuestionScene {
+
+}
+
+//
+
+//世界BOSS
+//打开界面
+message C2GSOpenBossUI {
+}
+
+message C2GSEnterBossWar {
+}
+
+
+message C2GSCloseBossUI {
+}
+
+message C2GSBossRemoveDeadBuff {
+}
+
+message C2GSLeaveWorldBossScene {
+
+}
+
+message C2GSFindWorldBoss {
+}
+
+message C2GSBuyBossBuff{
+    optional uint32 buff = 1;
+}
+
+message C2GSWorldBoossRank {
+
+}
+
+
+
+//爬塔
+message C2GSPataOption {
+    optional uint32 iOp = 1;     //操作类型 1-进入界面 2-重置 3-请求扫荡层数 4-首通预览 5-领取首通
+}
+
+message C2GSPataEnterWar {
+    optional uint32 iLevel = 1;     //第几层
+    optional uint32 iSweep = 2;  //扫荡标记 0-不扫荡 1-扫荡 2-立即扫荡
+}
+
+message C2GSPataInvite {
+    optional uint32 target = 1;    //邀请对象
+    optional uint32 parid = 2;     //伙伴ID
+}
+
+message C2GSPataFrdInfo{
+    optional uint32 target = 1;    //邀请对象
+}
+
+message C2GSPataTgReward {
+    optional uint32 level = 1;
+}
+
+//------------------------好友召唤------------------------------
+//获取伙伴碎片列表
+message C2GSGetEndlessList {
+
+}
+
+//开启无尽副本
+message C2GSEndlessPVEStart {
+    optional uint32 mode = 1;   //1-简单，2-普通，3-困难
+}
+
+//---------------------------END-----------------------------------
+
+//equipfuben
+//打开界面
+message C2GSOpenEquipFBMain {
+}
+
+//进入副本界面
+message C2GSOpenEquipFB{
+ optional uint32 f_id = 1 ;
+}
+
+
+//进入副本关卡
+message C2GSEnterEquiFB {
+    optional uint32 floor = 1; //进入关卡
+}
+
+//退出副本场景
+message C2GSGooutEquipFB{
+}
+
+//请求刷新场景信息
+message C2GSRefreshEquipFBScene {
+}
+
+message C2GSSetAutoEquipFuBen {
+    optional uint32 auto = 1;
+}
+
+message C2GSBuyEquipPlayCnt {
+    optional uint32 buy_cnt = 1; //购买次数
+    optional uint32 cost = 2; //花费,服务器验证
+    optional uint32 fb = 3; //副本
+}
+
+message C2GSGetEquipFBReward{
+    optional uint32 floor = 1;// 领取紫星
+    optional uint32 equip = 2;//
+}
+
+message C2GSSweepEquipFB {
+    optional uint32 floor = 1; //
+    optional uint32 count = 2; //次数
+}
+
+
+//伙伴符文副本
+
+//打开界面
+message C2GSOpenPEMain {
+    optional uint32 fb_id = 1;
+}
+
+// 转盘
+message C2GSPEStartTurn {
+    optional uint32 fb_id = 1;
+}
+
+// 锁定
+message C2GSPELock {
+    optional uint32 fb_id = 1;
+    optional uint32 lock = 2;
+}
+
+//进入游戏
+message C2GSEnterPEFuBen {
+    optional uint32 fb_id = 1;
+    optional uint32 floor= 2;
+    optional uint32 type = 3; //0-普通战斗,1-扫荡
+}
+
+
+//购买次数
+message C2GSBuyPEFuBen {
+    optional uint32 times = 1;
+    optional uint32 fb = 2;//当前打开的副本
+}
+
+
+//打开本周掉落
+message C2GSOpenPEFuBenSchedule{
+
+}
+
+//切换副本,如果收费,则先收费后再切换
+message C2GSCostSelectPEFuBen{
+    optional uint32 fb = 1;
+}
+
+//暗雷玩法
+
+//探索
+message C2GSStartTrapmine {
+    optional uint32 map_id = 1; //暗雷地图场景id
+}
+
+//取消探索
+message C2GSCancelTrapmine {
+    optional uint32 map_id = 1; //暗雷地图场景id
+}
+
+//离线探索
+message C2GSStartOfflineTrapmine{
+    optional uint32 map_id = 1; //暗雷地图场景id
+}
+
+//取消离线探索
+message C2GSCancelOfflineTrapmine{
+    optional uint32 map_id = 1; //暗雷地图场景id
+}
+
+//七天登录
+message C2GSGetLoginReward {
+    optional uint32 day = 1;    //第几天签到
+}
+
+//补充七日活跃
+message C2GSAddFullBreedVal {
+}
+
+//领取七日孵化奖励
+message C2GSGetBreedValRwd {
+
+}
+
+message C2GSBuyMingleiTimes{
+    optional uint32 buy_time = 1;
+}
+
+message MingleiCmdArgs{
+    optional uint32 type = 1;   //难度
+}
+
+message C2GSDoMingleiCmd{
+    optional uint32 npcid = 1;
+    optional string cmd = 2;
+    optional MingleiCmdArgs args = 3;
+}
+
+message C2GSNpcFight {
+    optional uint32 npc_id = 1; //服务器id
+}
+
+
+message C2GSGoToHelpTerra{
+    optional uint32 id = 1;//据点id
+    optional uint32 start_time = 2;
+}
+
+//打开据点攻防战主界面
+message C2GSTerrawarMain {
+
+}
+
+//获取地图据点信息
+message C2GSTerrawarMapInfo {
+    optional uint32 map_id = 1; // 据点地图id
+}
+
+//获取我的据点信息
+message C2GSTerrawarMine {
+    optional uint32 id = 1; //据点id
+}
+
+//获取据点全服排行信息
+message C2GSTerrawarWorldRank {
+
+}
+
+//获取据点公会排行信息
+message C2GSTerrawarOrgRank {
+
+}
+
+//据点操作
+message C2GSTerrawarOperate {
+    optional uint32 id   = 1;     //据点id
+    optional uint32 type = 2;     //1:召回,2:传送,3:观战,4:攻击,5:支援
+    optional uint32 next_cmd =3; //1:GetTerraInfo 2:GetListInfo
+}
+
+message C2GSGetTerraInfo{
+    optional uint32 id = 1;//据点id
+}
+
+message C2GSAttackTerra{
+    optional uint32 id = 1;//据点id
+}
+
+message C2GSSetGuard{
+    optional uint32 id = 1;//据点id
+    repeated uint32 par_id = 2;
+}
+
+message C2GSAutoSetGuard{
+    optional uint32 id = 1;//据点id
+}
+
+message C2GSGetListInfo{
+    optional uint32 id = 1;
+}
+
+message C2GSLeaveQueue{
+    optional uint32 id = 1;//据点ID
+}
+
+message C2GSHelpFirst{
+    optional uint32 id = 1;//据点ID
+}
+
+message C2GSEnterYJFuben{
+    optional uint32 itype = 1;              //副本类型 1 简单 2困难 3地狱
+}
+
+message C2GSBuyYJFuben{
+    optional uint32 amount = 1;              //购买数量
+}
+
+message C2GSYJFubenOp{
+    optional uint32 action = 1;              //1-自动战斗 2-退出副本 3-取消自动战斗4-翻牌开始
+}
+
+message C2GSYJFubenView{
+    optional uint32 npcidx  = 1;
+}
+
+message C2GSYJFindNpc{
+    optional uint32 npcidx  = 1;
+}
+
+message C2GSBuyLingli{
+    optional uint32 buy_time = 1;
+    optional uint32 terra_id = 2;
+}
+
+message C2GSYJGuidanceReward{
+}
+
+message C2GSGuideMingleiWar{
+
+}
+
+message C2GSOpenFieldBossUI{
+
+}
+
+message C2GSFieldBossInfo{
+    optional uint32 bossid = 1;
+}
+
+message C2GSFieldBossPk{
+    optional uint32 target = 1;
+}
+
+message C2GSLeaveBattle{
+}
+
+message C2GSLeaveLegendFB{
+
+}
+//------------------------------------sociality BEGIN---------------------------------------
+message C2GSSocailDisplay {
+    optional uint32 id = 1; //展示id
+    optional uint32 target_pid = 2; //0-单人
+}
+
+//取消社交动作
+message C2GSCancelSocailDisplay {
+
+}
+
+//------------------------------------sociality END---------------------------------------
+
+
+//累计签到
+message C2GSDailySign {
+    optional string key = 1; //导表huodong/dailysign/signtype.xlsx
+}
+
+message C2GSGetOnlineGift{
+    optional uint32 rewardid = 1;
+}
+
+message C2GSGetChapterInfo{
+    optional uint32 chapter = 1;
+    optional uint32 type = 2;
+}
+
+message C2GSFightChapterFb{
+    optional uint32 chapter = 1;
+    optional uint32 level = 2;
+    optional uint32 type = 3;
+}
+
+message C2GSSweepChapterFb{
+    optional uint32 chapter = 1;
+    optional uint32 level = 2;
+    optional uint32 count = 3;
+    optional uint32 type = 4;
+}
+
+message C2GSGetExtraReward{
+    optional uint32 chapter = 1;
+    optional uint32 level = 2;
+    optional uint32 type = 3;
+}
+
+message C2GSGetStarReward{
+    optional uint32 chapter = 1;
+    optional uint32 index = 2;
+    optional uint32 type = 3;
+}
+
+message C2GSStarConvoy{
+}
+
+message C2GSGiveUpConvoy{
+
+}
+
+message C2GSRefreshTarget{
+}
+
+message C2GSChargeRewardGradeGift {     //成长基金
+    optional uint32 grade = 1;          //等级
+}
+
+message C2GSChargeCardReward {
+    optional string type = 1;           //类型yk,zsk
+}
+
+message C2GSFightAttackMoster{
+    optional uint32 npcid = 1;
+}
+
+message C2GSShowConvoy{
+
+}
+
+message C2GSReceiveEnergy{
+    optional uint32 index = 1;
+}
+
+message C2GSContinueTraining{
+
+}
+
+message C2GSSetTrainReward{
+    optional uint32 close = 1;      //1-close    0-open
+}
+
+//----------------------------公会战--------------------------------
+message C2GSOrgWarGuide {
+}
+
+message C2GSOrgWarCanCelState {
+    optional uint32 state = 1;
+}
+
+message C2GSOrgWarOption {
+    optional uint32 cmd = 1;        //1-前往攻击 2-前往防守
+}
+
+message C2GSOrgWarPK {
+    optional uint32 target = 1;         //要攻击的玩家id
+}
+
+message C2GSSetHuntAutoSale{
+    optional uint32 autosale = 1;
+}
+
+message C2GSCallHuntNpc{
+    optional uint32 type = 1;       //0免费 1付费
+}
+
+message C2GSHuntSoul{
+    optional uint32 level = 1;
+}
+
+message C2GSPickUpSoul{
+    optional uint32 createtime = 1;
+    optional uint32 id = 2;
+}
+
+message C2GSPickUpSoulByOneKey{
+
+}
+
+message C2GSSaleSoulByOneKey{
+
+}
+
+message C2GSQuitTrain{
+
+}
+
+message C2GSHirePartner{
+    optional uint32 parid = 1;
+}
+
+//----------------------------情侣系统--------------------------------
+message C2GSSendExpress{
+    optional string content = 1;    //告白内容
+}
+
+message C2GSExpressResponse{
+    optional uint32 result = 1;        //1-接受　2-拒绝
+}
+
+message C2GSChangeLoversTitle{
+    optional string postfix = 1;        //称呼后缀
+}
+
+message C2GSTerrawarsLog{
+
+}
+
+message C2GSTerraAskForHelp{
+    optional uint32 terraid = 1;
+}
+
+message C2GSFindHuodongNpc{
+    optional string huodong_name = 1;
+    optional uint32 npc_type = 2;
+}
+
+message C2GSFinishGetReward{
+    optional string sys_name = 1;
+}
+
+
+//-----------------------------等级礼包------------------------
+message C2GSReceiveFreeGift {
+    optional uint32 grade = 1; //等级
+}
+
+//-------------------------------END---------------------------------
+
+
+//------------------------------充值积分购买物品-----------------
+message C2GSBuyCSItem{
+    optional uint32 id = 1;
+    optional uint32 times = 2;
+}
+
+//------------------------------限时累充-------------------------
+//领取奖励
+message C2GSReceiveAddCharge {
+    optional uint32 id = 1; //导表id
+}
+
+//------------------------------累积充值-------------------------
+//领取奖励
+message C2GSReceiveDayCharge {
+    optional uint32 id = 1; //导表id
+    optional uint32 code = 2; //检验码
+}
+
+message C2GSGetTimeResumeReward{
+    optional uint32 reward = 1;
+}
+
+
+message C2GSGetResumeRestoreReward{
+    
+}

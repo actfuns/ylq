@@ -1,0 +1,12 @@
+
+message C2GSTestBigPacket {
+    optional string s = 1;
+}
+
+message C2GSTestOnlineAdd{
+}
+
+message C2GSCheckProxy {
+    optional uint32 record = 1;
+    optional uint32 type = 2;
+}

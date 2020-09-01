@@ -1,0 +1,671 @@
+.TH "Queue manipulation module" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Queue manipulation module \- 
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _gdsl_queue * \fBgdsl_queue_t\fP"
+.br
+.RI "\fIGDSL queue type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_queue_t\fP \fBgdsl_queue_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fICreate a new queue\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_free\fP (\fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIDestroy a queue\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_flush\fP (\fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIFlush a queue\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_queue_get_name\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIGetsthe name of a queue\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_queue_get_size\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIGet the size of a queue\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_queue_is_empty\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fICheck if a queue is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_get_head\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIGet the head of a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_get_tail\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIGet the tail of a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_queue_t\fP \fBgdsl_queue_set_name\fP (\fBgdsl_queue_t\fP Q, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_insert\fP (\fBgdsl_queue_t\fP Q, void *VALUE)"
+.br
+.RI "\fIInsert an element in a queue (PUT)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_remove\fP (\fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIRemove an element from a queue (GET)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_search\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fISearch for a particular element in a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_search_by_position\fP (const \fBgdsl_queue_t\fP Q, \fBulong\fP POS)"
+.br
+.RI "\fISearch for an element by its position in a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_map_forward\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a queue from head to tail\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_map_backward\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a queue from tail to head\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_write\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a queue to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_write_xml\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a queue to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_dump\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a queue to a file\&. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct _gdsl_queue* \fBgdsl_queue_t\fP"
+.PP
+GDSL queue type\&. This type is voluntary opaque\&. Variables of this kind could'nt be directly used, but by the functions of this module\&. 
+.PP
+Definition at line 54 of file gdsl_queue\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBgdsl_queue_t\fP \fBgdsl_queue_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fPALLOC_F, \fBgdsl_free_func_t\fPFREE_F)"
+.PP
+Create a new queue\&. Allocate a new queue data structure which name is set to a copy of NAME\&. The functions pointers ALLOC_F and FREE_F could be used to respectively, alloc and free elements in the queue\&. These pointers could be set to NULL to use the default ones:
+.IP "\(bu" 2
+the default ALLOC_F simply returns its argument
+.IP "\(bu" 2
+the default FREE_F does nothing
+.PP
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+nothing\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fINAME\fP The name of the new queue to create 
+.br
+\fIALLOC_F\fP Function to alloc element when inserting it in a queue 
+.br
+\fIFREE_F\fP Function to free element when deleting it from a queue 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the newly allocated queue in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_free()\fP 
+.PP
+\fBgdsl_queue_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_queue_free\fP (\fBgdsl_queue_t\fPQ)"
+.PP
+Destroy a queue\&. Deallocate all the elements of the queue Q by calling Q's FREE_F function passed to \fBgdsl_queue_alloc()\fP\&. The name of Q is deallocated and Q is deallocated itself too\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |Q| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to destroy 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_alloc()\fP 
+.PP
+\fBgdsl_queue_flush()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_queue_flush\fP (\fBgdsl_queue_t\fPQ)"
+.PP
+Flush a queue\&. Deallocate all the elements of the queue Q by calling Q's FREE_F function passed to gdsl_queue_allocc()\&. Q is not deallocated itself and Q's name is not modified\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |Q| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to flush 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_alloc()\fP 
+.PP
+\fBgdsl_queue_free()\fP 
+.RE
+.PP
+
+.SS "const char* \fBgdsl_queue_get_name\fP (const \fBgdsl_queue_t\fPQ)"
+.PP
+Getsthe name of a queue\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBPostcondition:\fP
+.RS 4
+The returned string MUST NOT be freed\&. 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to get the name from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the name of the queue Q\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_set_name()\fP 
+.RE
+.PP
+
+.SS "\fBulong\fP \fBgdsl_queue_get_size\fP (const \fBgdsl_queue_t\fPQ)"
+.PP
+Get the size of a queue\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to get the size from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the number of elements of Q (noted |Q|)\&. 
+.RE
+.PP
+
+.SS "\fBbool\fP \fBgdsl_queue_is_empty\fP (const \fBgdsl_queue_t\fPQ)"
+.PP
+Check if a queue is empty\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to check 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+TRUE if the queue Q is empty\&. 
+.PP
+FALSE if the queue Q is not empty\&. 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_queue_get_head\fP (const \fBgdsl_queue_t\fPQ)"
+.PP
+Get the head of a queue\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to get the head from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element contained at the header position of the queue Q if Q is not empty\&. The returned element is not removed from Q\&. 
+.PP
+NULL if the queue Q is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_get_tail()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_queue_get_tail\fP (const \fBgdsl_queue_t\fPQ)"
+.PP
+Get the tail of a queue\&. \fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to get the tail from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element contained at the footer position of the queue Q if Q is not empty\&. The returned element is not removed from Q\&. 
+.PP
+NULL if the queue Q is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_get_head()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_queue_t\fP \fBgdsl_queue_set_name\fP (\fBgdsl_queue_t\fPQ, const char *NEW_NAME)"
+.PP
+Set the name of a queue\&. Change the previous name of the queue Q to a copy of NEW_NAME\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to change the name 
+.br
+\fINEW_NAME\fP The new name of Q 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the modified queue in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_get_name()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_queue_insert\fP (\fBgdsl_queue_t\fPQ, void *VALUE)"
+.PP
+Insert an element in a queue (PUT)\&. Allocate a new element E by calling Q's ALLOC_F function on VALUE\&. ALLOC_F is the function pointer passed to \fBgdsl_queue_alloc()\fP\&. The new element E is then inserted at the header position of the queue Q\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to insert in 
+.br
+\fIVALUE\fP The value used to make the new element to insert into Q 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the inserted element E in case of success\&. 
+.PP
+NULL in case of insufficient memory\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_remove()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_queue_remove\fP (\fBgdsl_queue_t\fPQ)"
+.PP
+Remove an element from a queue (GET)\&. Remove the element at the footer position of the queue Q\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( 1 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to remove the tail from 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the removed element in case of success\&. 
+.PP
+NULL in case of Q is empty\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_insert()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_queue_search\fP (const \fBgdsl_queue_t\fPQ, \fBgdsl_compare_func_t\fPCOMP_F, void *VALUE)"
+.PP
+Search for a particular element in a queue\&. Search for the first element E equal to VALUE in the queue Q, by using COMP_F to compare all Q's element with\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |Q| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t & COMP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to search the element in 
+.br
+\fICOMP_F\fP The comparison function used to compare Q's element with VALUE 
+.br
+\fIVALUE\fP The value to compare Q's elements with 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first founded element E in case of success\&. 
+.PP
+NULL in case the searched element E was not found\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_search_by_position\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_queue_search_by_position\fP (const \fBgdsl_queue_t\fPQ, \fBulong\fPPOS)"
+.PP
+Search for an element by its position in a queue\&. \fBNote:\fP
+.RS 4
+Complexity: O( |Q| / 2 ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t & POS > 0 & POS <= |Q| 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to search the element in 
+.br
+\fIPOS\fP The position where is the element to search 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the element at the POS-th position in the queue Q\&. 
+.PP
+NULL if POS > |L| or POS <= 0\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_search()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_queue_map_forward\fP (const \fBgdsl_queue_t\fPQ, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a queue from head to tail\&. Parse all elements of the queue Q from head to tail\&. The MAP_F function is called on each Q's element with USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fBgdsl_queue_map_forward()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |Q| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to parse 
+.br
+\fIMAP_F\fP The map function to apply on each Q's element 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the first element for which MAP_F returns GDSL_MAP_STOP\&. 
+.PP
+NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_map_backward()\fP 
+.RE
+.PP
+
+.SS "\fBgdsl_element_t\fP \fBgdsl_queue_map_backward\fP (const \fBgdsl_queue_t\fPQ, \fBgdsl_map_func_t\fPMAP_F, void *USER_DATA)"
+.PP
+Parse a queue from tail to head\&. Parse all elements of the queue Q from tail to head\&. The MAP_F function is called on each Q's element with USER_DATA argument\&. If MAP_F returns GDSL_MAP_STOP, then \fBgdsl_queue_map_backward()\fP stops and returns its last examinated element\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |Q| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t & MAP_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to parse 
+.br
+\fIMAP_F\fP The map function to apply on each Q's element 
+.br
+\fIUSER_DATA\fP User's datas passed to MAP_F Returns the first element for which MAP_F returns GDSL_MAP_STOP\&. Returns NULL when the parsing is done\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_map_forward()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_queue_write\fP (const \fBgdsl_queue_t\fPQ, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write all the elements of a queue to a file\&. Write the elements of the queue Q to OUTPUT_FILE, using WRITE_F function\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |Q| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t & OUTPUT_FILE != NULL & WRITE_F != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write Q's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_write_xml()\fP 
+.PP
+\fBgdsl_queue_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_queue_write_xml\fP (const \fBgdsl_queue_t\fPQ, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Write the content of a queue to a file into XML\&. Write the elements of the queue Q to OUTPUT_FILE, into XML language\&. If WRITE_F != NULL, then uses WRITE_F to write Q's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |Q| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write Q's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_write()\fP 
+.PP
+\fBgdsl_queue_dump()\fP 
+.RE
+.PP
+
+.SS "void \fBgdsl_queue_dump\fP (const \fBgdsl_queue_t\fPQ, \fBgdsl_write_func_t\fPWRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.PP
+Dump the internal structure of a queue to a file\&. Dump the structure of the queue Q to OUTPUT_FILE\&. If WRITE_F != NULL, then uses WRITE_F to write Q's elements to OUTPUT_FILE\&. Additionnal USER_DATA argument could be passed to WRITE_F\&.
+.PP
+\fBNote:\fP
+.RS 4
+Complexity: O( |Q| ) 
+.RE
+.PP
+\fBPrecondition:\fP
+.RS 4
+Q must be a valid gdsl_queue_t & OUTPUT_FILE != NULL 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIQ\fP The queue to write\&. 
+.br
+\fIWRITE_F\fP The write function\&. 
+.br
+\fIOUTPUT_FILE\fP The file where to write Q's elements\&. 
+.br
+\fIUSER_DATA\fP User's datas passed to WRITE_F\&. 
+.RE
+.PP
+\fBSee also:\fP
+.RS 4
+\fBgdsl_queue_write()\fP 
+.PP
+\fBgdsl_queue_write_xml()\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

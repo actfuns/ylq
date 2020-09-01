@@ -1,0 +1,60 @@
+import "base/common.proto";
+
+//每封邮件的简略信息
+message MailSimpleInfo{
+	optional uint32 mailid = 1;			//邮件id
+	optional string title = 2;			//邮件title
+	optional uint32 keeptime = 3;		//保存时间
+	optional uint32 hasattach = 4; 		//是否有附件，1.有，0.没有，2.领取过
+	optional uint32 opened = 5;			//是否打开过，1.打开过，0.没有
+	optional uint32 readtodel = 6;		//是否读后即删，1.是，0.否
+	optional uint32 createtime = 7;		//创建时间
+	optional string subject = 8;
+}
+
+//登录时发送邮件
+message GS2CLoginMail{
+    repeated MailSimpleInfo simpleinfo  = 1;
+}
+
+//附件信息
+message AttachInfo{
+	optional uint32 type = 1;			//附件类型
+	optional uint32 sid = 2;			//物品sid
+	optional uint32 val = 3;			//数量
+}
+
+//邮件信息
+message GS2CMailInfo{
+	optional uint32 mailid = 1;			//邮件id
+	optional string title = 2;			//邮件标题
+	optional string context = 3;		//邮件内容
+	optional uint32 keeptime = 4;		//保存时间
+	optional uint32 validtime = 5;		//到期时间
+	optional uint32 pid = 6;			//发件人id
+	optional string name = 7;			//发件人名字
+	optional uint32 opened = 8;			//是否打开过，1.打开过，0.没有
+	optional uint32 hasattach = 9; 		//是否有附件，1.有，0.没有，2.领取过
+	repeated AttachInfo attachs = 10;	//附件
+	optional string subject = 11;
+}
+
+//删除邮件
+message GS2CDelMail{
+	optional uint32 mailid = 1;			//邮件id
+}
+
+//添加邮件
+message GS2CAddMail{
+	optional MailSimpleInfo simpleinfo  = 1;
+}
+
+//成功领取附件
+message GS2CDelAttach{
+	optional uint32 mailid = 1;			//邮件id
+}
+
+//标记为已读
+message GS2CMailOpened{
+	repeated uint32 mailids = 1;			//邮件id
+}

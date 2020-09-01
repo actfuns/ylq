@@ -1,0 +1,95 @@
+.TH "gdsl_queue.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_queue.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _gdsl_queue * \fBgdsl_queue_t\fP"
+.br
+.RI "\fIGDSL queue type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_queue_t\fP \fBgdsl_queue_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fICreate a new queue\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_free\fP (\fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIDestroy a queue\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_flush\fP (\fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIFlush a queue\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_queue_get_name\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIGetsthe name of a queue\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_queue_get_size\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIGet the size of a queue\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_queue_is_empty\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fICheck if a queue is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_get_head\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIGet the head of a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_get_tail\fP (const \fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIGet the tail of a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_queue_t\fP \fBgdsl_queue_set_name\fP (\fBgdsl_queue_t\fP Q, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_insert\fP (\fBgdsl_queue_t\fP Q, void *VALUE)"
+.br
+.RI "\fIInsert an element in a queue (PUT)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_remove\fP (\fBgdsl_queue_t\fP Q)"
+.br
+.RI "\fIRemove an element from a queue (GET)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_search\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fISearch for a particular element in a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_search_by_position\fP (const \fBgdsl_queue_t\fP Q, \fBulong\fP POS)"
+.br
+.RI "\fISearch for an element by its position in a queue\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_map_forward\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a queue from head to tail\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_queue_map_backward\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a queue from tail to head\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_write\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a queue to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_write_xml\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a queue to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_queue_dump\fP (const \fBgdsl_queue_t\fP Q, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a queue to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

@@ -1,0 +1,123 @@
+
+message C2GSWarSkill {
+    optional uint32 war_id = 1;
+    repeated uint32 action_wlist = 2;
+    repeated uint32 select_wlist = 3;
+    optional uint32 skill_id = 4;
+}
+
+message C2GSWarNormalAttack {
+    optional uint32 war_id = 1;
+    optional uint32 action_wid = 2;
+    optional uint32 select_wid = 3;
+}
+
+message C2GSWarProtect {
+    optional uint32 war_id = 1;
+    optional uint32 action_wid = 2;
+    optional uint32 select_wid = 3;
+}
+
+message C2GSWarEscape {
+    optional uint32 war_id = 1;
+    optional uint32 action_wid = 2;
+}
+
+message C2GSWarDefense {
+    optional uint32 war_id = 1;
+    optional uint32 action_wid = 2;
+}
+
+//对应站位的伙伴id
+message WarPartnerInfo {
+    optional uint32 pos = 1;
+    optional uint32 parid = 2;
+}
+
+//战前配置准备完成
+message C2GSWarPrepareCommand {
+    optional uint32 war_id = 1;
+    repeated WarPartnerInfo partner_list = 2;
+}
+
+message C2GSWarPartner {
+    optional uint32 war_id = 1;
+    repeated WarPartnerInfo partner_list = 2;
+}
+
+message C2GSWarStop{
+    optional uint32 war_id = 1;
+}
+
+message C2GSWarStart{
+    optional uint32 war_id = 1;
+}
+
+//战斗集火目标
+message C2GSWarTarget {
+    optional uint32 war_id = 1;
+    optional uint32 select_wid = 2;
+    optional uint32 type = 3;       //1:设置,0:取消
+}
+
+message C2GSWarAutoFight {
+    optional uint32 war_id = 1;
+    optional uint32 type = 2;                       //1.自动战斗,0:取消自动战斗,2:触发自动战斗
+}
+
+message C2GSChangeAutoSkill {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional uint32 auto_skill = 3;
+}
+
+message C2GSSolveKaji{
+    
+}
+
+message C2GSEndFilmBout {
+    optional uint32 war_id = 1;
+    optional uint32 bout = 2;
+}
+
+
+message C2GSSelectCmd {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional uint32 skill = 3;
+}
+
+message C2GSNextBoutStart{
+    optional uint32 war_id = 1;
+    optional uint32 bout = 2;           //下一回合,用来判断对比
+}
+
+message C2GSWarSetPlaySpeed {
+    optional uint32 war_id = 1;
+    optional uint32 play_speed = 2;
+}
+
+
+message C2GSDebugPerform {
+    optional uint32 war_id = 1;
+    optional string debug = 2;
+}
+
+message C2GSWarBattleCommand {
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+    optional string cmd = 3; //指令
+}
+
+message C2GSCleanWarBattleCommand{
+    optional uint32 war_id = 1;
+    optional uint32 wid = 2;
+}
+
+
+//客户端动画播放完毕后发的协议
+message C2GSNextActionEnd {
+    optional uint32 war_id = 1;
+    optional uint32 action_id = 2;
+}
+

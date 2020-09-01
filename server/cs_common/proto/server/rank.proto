@@ -1,0 +1,308 @@
+import "base/common.proto";
+
+message GradeRank {
+    optional uint32 pid = 1;        //玩家ID
+    optional uint32 grade = 2;      //玩家等级
+    optional string name = 3;       //玩家名字
+    optional uint32 school = 4;     //玩家门派
+    optional uint32 rank_shift = 5; //排名偏移,1.大于显示总数表示新晋，2正数表示提升，3负数表示下降
+    optional uint32 shape = 6;       //头像
+}
+
+message WarPowerRank {
+    optional uint32 pid = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    optional uint32 school = 4;
+    optional uint32 rank_shift = 5;
+    optional uint32 shape = 6;
+    optional uint32 warpower = 7;   //综合战力
+    optional uint32 rank = 8;   //名次
+}
+
+message ArenaGameRank {
+    optional uint32 pid = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    optional uint32 school = 4;
+    optional uint32 shape = 5;
+    optional uint32 rank_shift = 6;
+    optional uint32 point = 7;  //比武场积分
+    optional uint32 segment = 8;    //比武场段位
+    optional uint32 rank = 9;   //名次
+}
+
+
+
+
+message PataGameRank {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 shape = 3;
+    optional uint32 rank_shift = 4;
+    optional uint32 rank = 5;
+    optional uint32 level = 6;  //层数
+    optional uint32 school = 7;
+}
+
+message YJGameRank {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 shape = 3;
+    optional uint32 rank_shift = 4;
+    optional uint32 rank = 5;
+    optional uint32 point = 6;
+    optional uint32 school = 7;
+}
+
+message OrgPrestigeRank {
+    optional uint32 orgid = 1;
+    optional uint32 org_level = 2;
+    optional string org_name = 3;
+    optional string flag = 4;
+    optional string leader = 5;
+    optional uint32 prestige = 6;
+    optional uint32 flagbgid = 7;
+    optional uint32 rank_shift = 8;
+    optional uint32 rank = 9;
+}
+
+message PartnerPowerRank {
+    optional uint32 pid= 1; //玩家id
+    optional string name = 2; //玩家名
+    optional uint32 partype = 3; //伙伴导表id
+    optional uint32 parid = 4; //伙伴服务器id
+    optional string parname = 5; //伙伴名称
+    optional uint32 power = 6; //战力
+    optional uint32 star = 7; //伙伴星级
+    optional uint32 pargrade = 8; //伙伴等级
+    optional uint32 awake = 9; //1-已觉醒
+    optional uint32 rank_shift = 10;
+    optional uint32 rank = 11;
+}
+
+message ConsumeRank {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 shape = 3;
+    optional uint32 rank_shift = 4;
+    optional uint32 rank = 5;
+    optional uint32 consume = 6;  //消费水晶数目
+    optional uint32 school = 7;
+}
+
+message MyGradeRank {
+    optional uint32 pid = 1;        //玩家ID
+    optional uint32 grade = 2;    //玩家等级
+    optional string name = 3;   //玩家名字
+    optional uint32 my_rank = 4;    //玩家排名
+}
+
+message MyPowerRank {
+    optional uint32 pid = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    optional uint32 warpower = 4;   //综合战力
+    optional uint32 my_rank = 5;    //玩家排名
+}
+
+message MyArenaRank {
+    optional uint32 pid = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    optional uint32 point = 4;  //比武场积分
+    optional uint32 segment = 5;   //段位
+    optional uint32 my_rank = 6;
+}
+
+message MyPataRank {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 level = 3;
+    optional uint32 my_rank = 4;
+}
+
+message MyYJRank {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 point = 3;
+    optional uint32 my_rank = 4;
+}
+
+message MyTerraWarsOrgRank{
+    optional uint32 personal_points = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    optional uint32 pid = 4;
+    optional uint32 position = 5;
+    optional uint32 warpower = 6;
+    optional uint32 my_rank = 7;
+}
+
+message MyTerraWarsServerRank{
+    optional uint32 org_points = 1;
+    optional uint32 org_level = 2;
+    optional string org_name = 3;
+    optional string flag = 4;
+    optional string leader = 5;
+    optional uint32 my_rank = 6;   //名次
+    optional uint32 orgid = 7;
+}
+
+message MyOrgPrestigeRank {
+    optional uint32 orgid = 1;
+    optional uint32 org_level = 2;
+    optional string org_name = 3;
+    optional string flag = 4;
+    optional string leader = 5;
+    optional uint32 prestige = 6;
+    optional uint32 flagbgid = 7;
+    optional uint32 my_rank = 8;
+}
+
+message MyPartnerRank {
+    optional PartnerPowerRank partner = 1;
+    optional uint32 my_rank = 2; //排名
+}
+
+message MyConsumeRank {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 consume = 3;
+    optional uint32 my_rank = 4;
+}
+
+//点赞信息
+message UpvoteInfo {
+    optional uint32 key = 1;    //排行榜单项id,比如:pid,公会id
+    optional uint32 count = 2;    //点赞数量
+    optional uint32 status = 3;     //1-已点赞,0-未点
+}
+
+message TerraWarsOrgRank{
+    optional uint32 personal_points = 1;
+    optional uint32 grade = 2;
+    optional string name = 3;
+    optional uint32 pid = 4;
+    optional uint32 position = 5;
+    optional uint32 warpower = 6;
+    optional uint32 rank = 7;   //名次
+    optional uint32 rank_shift = 8;
+}
+
+message TerraWarsServerRank{
+    optional uint32 org_points = 1;
+    optional uint32 org_level = 2;
+    optional string org_name = 3;
+    optional string flag = 4;
+    optional string leader = 5;
+    optional uint32 rank = 6;   //名次
+    optional uint32 rank_shift = 7;
+    optional uint32 orgid = 8;
+}
+
+message GS2CGetRankInfo {
+    optional uint32 idx  = 1;               //排行榜索引
+    optional uint32 page = 2;               //排行榜页数
+    optional uint32 first_stub = 3;         //第一次生成的排行榜, 1表示第一次
+    optional uint32 key = 4;        //伙伴榜对应伙伴id,其他-0
+    repeated GradeRank grade_rank = 5;      //等级排行榜
+    repeated WarPowerRank warpower_rank = 6;   //战力排行
+    repeated ArenaGameRank arena_rank = 7;  //比武场排行
+    repeated PataGameRank pata_rank = 8;  //爬塔排行
+    repeated ArenaGameRank equal_rank = 9;//公平比武,内容暂时和排行榜一致
+    repeated YJGameRank yj_rank = 10;  //月见行者排行信息
+    repeated TerraWarsOrgRank terrawars_org_rank = 11;//据点攻防战公会排行榜信息
+    repeated TerraWarsServerRank terrawars_server_rank = 12;//据点战全服排行榜信息
+    repeated OrgPrestigeRank org_prestige_rank = 13; //公会声望排行
+    repeated PartnerPowerRank parpower = 14; //伙伴排行榜
+    optional uint32 subtype = 15; //0-普通榜,1-冲榜
+    repeated ConsumeRank consume_rank = 16; //消费榜
+}
+
+message GS2CMyRank {
+    optional uint32 idx = 1;    //排行榜索引
+    optional uint32 end_time = 2;   //刷新时间
+    optional uint32 rank_count = 3;    //排行榜条总数
+    optional uint32 key =4; //伙伴榜对应伙伴id,其他-0
+    optional MyGradeRank grade_rank= 5; //玩家等级排名信息
+    optional MyPowerRank warpower_rank = 6; //战力排行玩家信息
+    optional MyArenaRank arena_rank = 7;    //玩家比武场排行信息
+    optional MyPataRank pata_rank = 8;  //爬塔排行信息
+    optional MyArenaRank equal_rank = 9;    //玩家公平比武排行信息
+    optional MyYJRank yj_rank = 10;    //月见行者排行信息
+    optional MyTerraWarsOrgRank terrawars_org_rank = 11;//据点攻防战公会排行榜信息
+    optional MyTerraWarsServerRank terrawars_server_rank = 12;
+    optional MyOrgPrestigeRank org_prestige_rank = 13; //公会声望信息
+    optional MyPartnerRank parpower_rank = 14; //伙伴战力
+    optional uint32 subtype = 15; //0-普通榜,1-冲榜
+    optional MyConsumeRank consume_rank = 16; //消费榜
+}
+
+message RankRoleInfo {
+    optional uint32 pid = 1;                //玩家ID
+    optional string name = 2;               //玩家名字
+    optional uint32 upvote = 3;             //赞数
+    optional uint32 school = 4;             //门派
+    optional uint32 value = 5;              //榜单排序数据
+    optional base.ModelInfo model_info = 6; //玩家简明信息
+}
+
+message GS2CGetRankTop3 {
+    optional uint32 idx  = 1;               //排行榜索引
+    optional uint32 my_rank = 2;
+    repeated RankRoleInfo role_info = 3;    //玩家基本信息
+}
+
+message GS2CRankUpvoteInfo {
+    optional uint32 idx = 1;    //排行榜索引
+    optional uint32 page = 2;   //当前分页
+    repeated UpvoteInfo upvote_info = 3; //点赞列表信息
+}
+
+//异常清除数据
+message GS2CClearAllRankData {
+    optional uint32 idx = 1; //排行榜索引
+}
+
+//获取排行榜伙伴信息
+message GS2CRankPartnerInfo {
+    optional uint32 idx = 1; //排行榜索引
+    optional base.PartnerLink parinfo = 2;
+}
+
+message MsattackGameRank {
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 shape = 3;
+    optional uint32 rank = 5;
+    optional uint32 point = 6;
+    optional uint32 school = 7;
+    optional string orgname = 8;
+}
+
+message GS2CMsattackMyInfo {
+    optional MsattackGameRank info = 1;
+}
+
+message GS2CRankMsattackInfo {
+    optional uint32 type = 1;
+    repeated MsattackGameRank list = 2;
+}
+
+message GS2CRankFirstInfoList {
+    optional uint32 idx = 1; //排行榜索引
+    repeated PartnerPowerRank first_list = 2; //第一列表
+}
+
+
+//伙伴排行榜信息
+message PartnerRank {
+    optional uint32 parid = 1; //伙伴服务器id
+    optional uint32 rank = 2; //排名
+    optional uint32 power = 3; //战力
+}
+message GS2CPartnerRank {
+    optional uint32 subtype = 1; //0-普通，1-限时
+    repeated PartnerRank ranks = 2;
+}

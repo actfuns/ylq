@@ -1,0 +1,86 @@
+import "base/common.proto";
+
+//上阵
+message C2GSSetPartnerTravelPos {
+    repeated base.PartnerPosInfo pos_info = 1; //上阵信息
+}
+
+//寄存伙伴
+message C2GSSetFrdPartnerTravel {
+    optional uint32 parid = 1; //
+    optional uint32 frd_pid = 2;//好友pid
+}
+
+//领取游历奖励
+message C2GSAcceptTravelRwd{
+
+}
+
+//领取寄存奖励
+message C2GSAcceptFrdTravelRwd {
+
+}
+
+//获取好友游历信息
+message C2GSGetFrdTravelInfo {
+    optional uint32 frd_pid = 1; //好友pid
+}
+
+//邀请好友列表
+message C2GSInviteTravel {
+    repeated uint32 frd_pids = 1; //好友列表
+}
+
+//取消道具
+message C2GSCancelSpeedTravel {
+
+}
+
+//开始游历
+message C2GSStartTravel {
+    optional uint32 travel_type = 1; //对应不同时长
+}
+
+//停止游历
+message C2GSStopTravel {
+
+}
+
+//清空邀请
+message C2GSClearTravelInvite {
+
+}
+
+//忽略邀请
+message C2GSDelTravelInvite {
+    optional uint32 frd_pid = 1;
+}
+
+//获取邀请列表
+message C2GSQueryTravelInvite {
+
+}
+
+
+
+//--------------------------翻牌-------------------
+//开始
+message C2GSStartTravelCard {
+
+}
+
+//手动结束
+message C2GSStopTravelCard {
+
+}
+
+
+//翻牌
+message C2GSShowTravelCard {
+    optional uint32 pos = 1; //格子位置
+}
+
+//第一次游历商人，打开游历界面
+message C2GSFirstOpenTraderUI {
+
+}

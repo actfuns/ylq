@@ -1,0 +1,282 @@
+import "base/common.proto";
+
+message OrgWish {
+    optional uint32 partner_chip = 1;   //伙伴碎片类型
+    optional uint32 partner_type = 2;   //伙伴碎片对应的伙伴
+    optional uint32 sum_cnt = 3;          //需要的总数目
+    optional uint32 gain_cnt = 4;          //已经获取的数目
+}
+
+message EquipWish {
+    optional uint32 sid = 1;                    //装备编号
+    optional uint32 sum_cnt = 2;          //需要的总数目
+    optional uint32 gain_cnt = 3;          //已经获取的数目
+}
+
+//成员信息
+message OrgMemberInfo {
+    optional uint32 pid = 1;//成员ID
+    optional string name = 2;//成员名字
+    optional uint32 grade = 3;//成员等级
+    optional uint32 school = 4;//成员门派
+    optional uint32 position = 5;//成员职称
+    optional uint32 power = 6;//成员战力
+    optional uint32 honor = 7;//声望
+    optional uint32 offline = 8;//0代表在线，否则是离线时间戳
+    optional uint32 shape = 9;//头像
+    optional OrgWish org_wish = 10; //许愿信息
+    optional uint32 active_point = 11;//活跃度
+    optional uint32 org_offer = 12;//公会历史贡献
+    optional uint32 has_team = 13;
+    optional bool inbanchat = 14;//是否禁言
+    optional EquipWish org_wish_equip = 15; //装备许愿信息
+    optional uint32 school_branch = 16;//成员流派
+}
+
+//公会信息
+message OrgInfo {
+    optional string mask = 1;
+    optional uint32 orgid = 2;//公会ID
+    optional string name = 3;//公会名字
+    optional uint32 level = 4;//公会等级
+    optional string leadername = 5;//会长名字
+    optional uint32 memcnt = 6;//成员人数
+    optional string sflag = 7;//会徽id
+    optional uint32 flagbgid = 8;//会徽背景id
+    optional string aim = 9;//公告
+    optional uint32 cash = 10;//公会币
+    optional uint32 exp = 11;//经验
+    optional uint32 rank = 12;//排名
+    optional uint32 prestige = 13;//声望
+    optional uint32 sign_degree = 14;//签到进度
+    optional uint32 red_packet = 15;//开启的红包数目
+    optional uint32 active_point = 16;//帮派活跃度
+    optional uint32 apply_count = 17;//申请入帮的人数
+    optional uint32 online_count = 18;//在线人数
+    optional uint32 is_open_red_packet = 19;//是否开启过红包玩法
+    optional uint32 red_packet_rest = 20;//公会可抢红包剩余数量
+    optional uint32 mail_rest = 21;//公会邮件发送剩余次数
+    optional uint32 spread_endtime = 22;//招募结束时间
+}
+
+//公会列表信息
+message OrgListInfo {
+    optional OrgInfo info           = 1;
+    optional uint32 hasapply    = 2;//0代表未申请，1代表已申请
+    optional uint32 powerlimit = 3;//战力限制
+    optional uint32 needallow  = 4;//是否需要审批
+}
+
+//单个领取信息
+message OrgRedPacket{
+    optional uint32 pid = 1;    //玩家id
+    optional string name = 2;   //玩家姓名
+    optional uint32 gold = 3;   //领取金额
+}
+
+message OrgLog {
+    optional uint32 position = 1;   //职位,0:系统
+    optional uint32 time = 2;         //时间
+    optional string text = 3;           //文本
+}
+
+//1.公会列表
+message GS2COrgList {
+    repeated OrgListInfo infos = 1;
+}
+
+//2.公会搜索结果
+message GS2CSearchOrg {
+    repeated OrgListInfo infos = 1;
+}
+
+//3.申请加入公会结果
+message GS2CApplyJoinOrg {
+    optional uint32 flag = 1;//0代表申请失败，1代表申请成功
+    optional uint32 orgid = 2;//公会ID
+}
+
+//4.公会详情
+message GS2CGetOrgInfo {
+    optional OrgListInfo info = 1;                //公会基本信息
+    repeated OrgMemberInfo meminfo = 2;   //成员信息
+}
+
+//5.自己公会的信息
+message GS2COrgMainInfo {
+    optional OrgInfo info = 1;
+}
+
+//6.公会成员列表
+message GS2COrgMemberInfo {
+    repeated OrgMemberInfo infos = 1;
+    optional uint32 handle_type = 2;//回调处理类型
+}
+
+//申请信息
+message OrgApplyInfo {
+    optional uint32 pid = 1;//成员ID
+    optional string name = 2;//成员名字
+    optional uint32 grade = 3;//成员等级
+    optional uint32 school = 4;//成员门派
+    optional uint32 power = 5;//成员战力
+    optional uint32 apply_time = 6;//申请时间
+}
+
+//7.申请加入公会列表
+message GS2COrgApplyList {
+    repeated OrgApplyInfo infos = 1;
+    optional uint32 powerlimit = 2;//战力限制
+    optional uint32 needallow  = 3;//是否需要审批
+}
+
+//8.公会申请审批结果(发给审批玩家)
+message GS2COrgDealApply {
+    optional uint32 pid = 1;
+    optional uint32 deal = 2;//1.同意,0.不同意
+}
+
+//9.修改宣言
+message GS2CUpdateAimResult {
+    optional uint32 result = 1;//1.成功,0.失败
+}
+
+//10.拒绝全部申请
+message GS2CRejectAllApplyResult {
+    optional uint32 result = 1;//1.成功,0.失败
+}
+
+//11.设置职位
+message GS2CSetPositionResult {
+    optional uint32 pid = 1;
+    optional uint32 position = 2;
+}
+
+//12.删除成员
+message GS2CDelMember {
+    optional uint32 pid = 1;
+}
+
+//13.世界宣传结果
+message GS2CSpreadOrgResult {
+   optional uint32 orgid = 1;
+   optional uint32 spread_cd = 2;//世界宣传cd
+}
+
+//14.被邀请加入公会
+message GS2CInvited2Org {
+    optional uint32 pid = 1;// 邀请者id
+    optional string pname = 2;// 邀请者名字
+    optional string org_name = 3;// 公会名字
+    optional string org_level = 4;// 公会lv
+    optional uint32 orgid = 5;  //公会ID
+}
+
+//15.设置申请需求返回结果
+message GS2CSetApplyLimitResult {
+    optional uint32 result = 1;//1.成功,0.失败
+}
+
+//16.发送公会宗旨
+message GS2COrgAim {
+    optional uint32 orgid = 1;
+    optional string aim = 2;
+}
+
+//17.修改公会会徽
+message GS2CUpdateFlagID{
+    optional uint32 result = 1;     //1.成功,0.失败
+}
+
+//18.刷新公会的信息
+message GS2CUpdateOrgInfo {
+    optional OrgInfo info = 1;
+}
+
+//19.刷新成员信息
+message GS2CRefreshOrgMember {
+    optional OrgMemberInfo mem_info = 1;
+}
+
+message GS2COrgWishList {
+    repeated OrgMemberInfo mem_list = 1;
+}
+
+message GS2COrgRedPacket{
+    optional uint32 shape = 1;  //开启红包玩家shape
+    optional string title = 2;  //红包标题
+    optional uint32 amount = 3; //红包总个数
+    optional uint32 remain_gold = 4;//剩余金币
+    repeated OrgRedPacket draw_list = 5;//领取信息
+    optional uint32 add_ratio = 6;//加成概率
+}
+
+//自己领取的红包情况
+message GS2CDrawOrgRedPacket{
+    optional uint32 idx = 1;
+    optional uint32 shape = 2;
+    optional uint32 pid = 3;
+    optional uint32 gold = 4;
+    optional string title = 5;
+}
+
+//是否开启红包UI
+message GS2CControlRedPacketUI{
+    repeated bool redlist = 1;
+}
+
+message GS2COrgLog {
+    repeated OrgLog log_info = 1;
+}
+
+
+//公会副本
+
+message OrgFBBoss {
+    optional uint32 bid = 1; //boss类型
+    optional uint32 hp = 2; //血量百分比 =0%代表死亡
+    optional uint32 status = 3; //状态 1在战斗中,2未解锁,0死亡
+}
+
+//界面信息
+message GS2COrgFBBossList {
+    repeated OrgFBBoss boss_list = 1; //boss列表
+    optional uint32 left = 2;//参加剩余次数
+    optional uint32 rest =3;//剩余重置次数
+    optional uint32 cost =4;//重置花费
+}
+
+//boss血量变化
+message GS2COrgFBBossHpNotify {
+    optional uint32 boss_id = 1 ;
+    optional uint32 hp_max = 2;
+    optional uint32 hp = 3;
+}
+
+message GS2COrgOnlineCount {
+    optional uint32 online_count = 1;
+}
+
+//公会副本结束界面
+message GS2COrgFuBenWarEnd {
+    optional uint32 boss_hit =1;
+}
+
+//公会最终提示
+message GS2CLeaveOrgTips {
+    optional string stip = 1;
+}
+
+//返回邮件发送结果
+message GS2CMailResult {
+    optional uint32 result = 1;//1.成功,0.失败
+}
+
+message GS2COpenOrgMainUI {
+}
+
+//工会玩家qq群行为
+message GS2COrgQQAction {
+    optional uint32 pid = 1;
+    optional uint32 action = 2; //1:加入qq群,0:退出
+}

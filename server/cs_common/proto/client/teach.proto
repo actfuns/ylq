@@ -1,0 +1,17 @@
+//2 领取任务奖励
+message C2GSGetTaskReward {
+	optional uint32 id = 1; //任务id
+}
+
+//3 领取总进度奖励
+message C2GSGetProgressReward {
+	optional uint32 progress = 1; //进度奖励id
+}
+
+message C2GSFinishGuidance{
+	repeated uint32 key = 1;
+}
+
+message C2GSClearGuidance{
+	repeated uint32 key = 1;
+}

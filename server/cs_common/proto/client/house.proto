@@ -1,0 +1,98 @@
+
+//进入宅邸
+message C2GSEnterHouse {
+    optional uint32 target = 1;             //进入目标
+}
+
+message C2GSLeaveHouse {
+}
+
+//宅邸家具升级
+message C2GSHousePromoteFurniture{
+    optional uint32 type = 1;   //升级家具类型
+}
+
+//使用金币加快升级
+message C2GSHouseSpeedFurniture {
+    optional uint32 type = 1;
+}
+
+//打开工作台茶艺道界面
+message C2GSOpenWorkDesk {
+    optional uint32 target_pid = 1;
+}
+
+//进行才艺展示
+message C2GSTalentShow {
+    optional uint32 pos = 1;                //展示台位置
+}
+
+//收取展示台礼物
+message C2GSTalentDrawGift {
+    optional uint32 pos = 1;            //展示台位置
+}
+
+//加速好友工作台
+message C2GSHelpFriendWorkDesk {
+}
+
+//使用好友的工作台
+message C2GSUseFriendWorkDesk {
+    optional uint32 target = 1;
+}
+
+//打开交流界面
+message C2GSOpenExchangeUI {
+
+}
+
+//爱抚伙伴
+message C2GSLovePartner {
+    optional uint32 type = 1;               //伙伴类型
+    optional uint32 body_part = 2;     //伙伴身体部位,1:头部,2:胸部,3:黄金点,4:手,5:腿
+}
+
+//送伙伴礼物
+message C2GSGivePartnerGift {
+    optional uint32 type = 1;               //伙伴类型
+    optional uint32 itemid = 2;
+}
+
+//训练伙伴
+message C2GSTrainPartner{
+    optional uint32 type = 1;
+    optional uint32 train_type = 2;   //训练类型
+}
+
+//领取训练奖励
+message C2GSRecievePartnerTrain {
+    optional uint32 train_type = 1;
+}
+
+//解锁等级伙伴奖励
+message C2GSUnChainPartnerReward {
+    optional uint32 type = 1;   //伙伴类型
+    optional uint32 level = 2;  //解锁对应伙伴等级
+}
+
+//获取宅邸好友列表
+message C2GSFriendHouseProfile {
+
+}
+
+//领取宅邸随机金币
+message C2GSRecieveHouseCoin {
+    optional uint32 frd_pid = 1; //好友pid
+}
+
+//增加送礼次数
+message C2GSAddPartnerGift {
+    optional uint32 cnt = 1; //增加次数
+    optional uint32 cost = 2; //消耗水晶数量
+}
+
+//工作台加速完成
+message C2GSWorkDeskSpeedFinish {
+    optional uint32 pos = 1; //工作台位置
+    optional uint32 cost = 2; //消耗水晶数量
+}

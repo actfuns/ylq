@@ -1,0 +1,48 @@
+import "base/common.proto";
+
+message ChapterInfo {
+    optional uint32 id = 1; //章节id
+    optional uint32 unlock = 2;//0-未解锁，其他解锁
+    optional uint32 read = 3; //0-未读，其他已读
+    repeated uint32 condition = 4; //已解锁条件
+}
+
+message BookInfo {
+    optional uint32 id = 1; //导表id
+    optional uint32 entry_name = 2; //0-未录入，其他-已录入
+    optional uint32 show = 3; //0-未显示，其他-已解封
+    optional uint32 repair = 4; //0-未修复，其他-修复
+    optional uint32 unlock = 5; //0-未解锁，其他-已解锁
+    optional uint32 progress = 6; //图鉴进度
+    repeated uint32 condition = 7; //已解锁条件
+    repeated ChapterInfo chapter = 8; //章节信息
+    optional uint32 red_point = 9; //0-无红点,1-书改变，2-章节改变
+}
+
+message HandBookRedPoint {
+    optional uint32 book_type = 1;  //图鉴类型,1-伙伴,2-符文,3-人物
+    optional uint32 red_point = 2; //0-无红点,其他-红点
+}
+
+message GS2CLoginBookList {
+    repeated BookInfo book_list = 1;
+    repeated HandBookRedPoint red_points = 2; //红点
+}
+
+message GS2CBookInfoChange {
+    optional BookInfo book_info = 1;
+}
+
+//收集总进度
+message GS2CPartnerProgress {
+    optional uint32 progress = 1;
+}
+
+message GS2CPartnerEquipProgress {
+    optional uint32 progress = 1;
+}
+
+//主界面红点
+message GS2CHandBookRedPoint {
+    optional HandBookRedPoint red_point = 1;
+}

@@ -1,0 +1,24 @@
+
+  GDSL - Generic Data Structures Library                 
+  $Id: TODO,v 1.51 2006/06/21 14:19:19 ndarnis Exp $
+  ______________________________________________________________________________
+
+  This is a list of things left to do at this time (2006.06.21)
+  (you can help if you want, see README file to see how contacting authors):
+
+  *) Add gdsl_heap_remove method.
+
+  *) Add a dichotomical search function for gdsl_list module.
+
+  *) In all modules, replace recursvives functions by iteratives ones
+     in case of HAVE_OPT_TIME is defined.
+
+  *) Write the _gdsl_bintree_level_parse() function.
+
+  *) Write the _gdsl_bstree_level_parse() function.
+
+  *) Write a very complete english TeXinfo documentation including
+     theoretical algorithmics and data structures aspects.
+
+
+                                                                  The GDSL Team.

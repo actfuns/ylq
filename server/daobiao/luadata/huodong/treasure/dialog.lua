@@ -1,0 +1,95 @@
+-- ./excel/huodong/treasure/dialog.xlsx
+return {
+
+    [100] = {
+        content = "叶子叶子，我们来玩个小游戏吧",
+        dialog_id = 100,
+        last_action = {{["content"] = "开始吧", ["event"] = "PLAYBOY"}, {["content"] = "没兴趣"}},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [101] = {
+        content = "嘎嘎嘎，我们来玩场高智商游戏，娱乐娱乐吧。\n规则介绍\n根据参与的人数在幻境中会出现对应数量的幻象。\n在规定时间消灭所有幻象则获取通关奖励，未完成则获取参与奖励。",
+        dialog_id = 101,
+        last_action = {{["content"] = "进入幻境", ["event"] = "ENTER"}, {["content"] = "呼朋唤友", ["event"] = "CP"}, {["content"] = "不感兴趣"}},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [102] = {
+        content = "队伍人员未满，是否进入幻境？",
+        dialog_id = 102,
+        last_action = {{["content"] = "确定", ["event"] = "CONFIRM"}, {["content"] = "考虑一下", ["event"] = "DI101"}},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [103] = {
+        content = "根据参与的人数在幻境中会出现对应数量的幻象。\n在规定时间消灭所有幻象则获取通关奖励，未完成则获取参与奖励。",
+        dialog_id = 103,
+        last_action = {{["content"] = "进入幻境", ["event"] = "ENTER"}, {["content"] = "呼朋唤友", ["event"] = "CP"}, {["content"] = "玩法规则", ["event"] = "DI103"}},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [300] = {
+        content = "嘎嘎嘎，我们可以开始游戏了。",
+        dialog_id = 300,
+        last_action = {{["content"] = "开战", ["event"] = "PLAY"}, {["content"] = "考虑一下"}},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [400] = {
+        content = "嘎嘎嘎，我们可以开始游戏了。",
+        dialog_id = 400,
+        last_action = {{["content"] = "开战", ["event"] = "PLAY"}, {["content"] = "考虑一下"}},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+    [500] = {
+        content = "你来晚了，刚才那位兄台已经把我身上的钱全赢走了...",
+        dialog_id = 500,
+        last_action = {},
+        next = "0",
+        pre_id_list = "0",
+        status = 2,
+        subid = 1,
+        type = 2,
+        ui_mode = 2,
+        voice = 0,
+    },
+
+}

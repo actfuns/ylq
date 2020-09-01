@@ -1,0 +1,103 @@
+.TH "gdsl_stack.h" 3 "Wed Jun 12 2013" "Version 1.7" "gdsl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gdsl_stack.h \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _gdsl_stack * \fBgdsl_stack_t\fP"
+.br
+.RI "\fIGDSL stack type\&. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBgdsl_stack_t\fP \fBgdsl_stack_alloc\fP (const char *NAME, \fBgdsl_alloc_func_t\fP ALLOC_F, \fBgdsl_free_func_t\fP FREE_F)"
+.br
+.RI "\fICreate a new stack\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_free\fP (\fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIDestroy a stack\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_flush\fP (\fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIFlush a stack\&. \fP"
+.ti -1c
+.RI "const char * \fBgdsl_stack_get_name\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGetsthe name of a stack\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_stack_get_size\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGet the size of a stack\&. \fP"
+.ti -1c
+.RI "\fBulong\fP \fBgdsl_stack_get_growing_factor\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGet the growing factor of a stack\&. \fP"
+.ti -1c
+.RI "\fBbool\fP \fBgdsl_stack_is_empty\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fICheck if a stack is empty\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_get_top\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGet the top of a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_get_bottom\fP (const \fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIGet the bottom of a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_stack_t\fP \fBgdsl_stack_set_name\fP (\fBgdsl_stack_t\fP S, const char *NEW_NAME)"
+.br
+.RI "\fISet the name of a stack\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_set_growing_factor\fP (\fBgdsl_stack_t\fP S, \fBulong\fP G)"
+.br
+.RI "\fISet the growing factor of a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_insert\fP (\fBgdsl_stack_t\fP S, void *VALUE)"
+.br
+.RI "\fIInsert an element in a stack (PUSH)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_remove\fP (\fBgdsl_stack_t\fP S)"
+.br
+.RI "\fIRemove an element from a stack (POP)\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_search\fP (const \fBgdsl_stack_t\fP S, \fBgdsl_compare_func_t\fP COMP_F, void *VALUE)"
+.br
+.RI "\fISearch for a particular element in a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_search_by_position\fP (const \fBgdsl_stack_t\fP S, \fBulong\fP POS)"
+.br
+.RI "\fISearch for an element by its position in a stack\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_map_forward\fP (const \fBgdsl_stack_t\fP S, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a stack from bottom to top\&. \fP"
+.ti -1c
+.RI "\fBgdsl_element_t\fP \fBgdsl_stack_map_backward\fP (const \fBgdsl_stack_t\fP S, \fBgdsl_map_func_t\fP MAP_F, void *USER_DATA)"
+.br
+.RI "\fIParse a stack from top to bottom\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_write\fP (const \fBgdsl_stack_t\fP S, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite all the elements of a stack to a file\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_write_xml\fP (\fBgdsl_stack_t\fP S, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIWrite the content of a stack to a file into XML\&. \fP"
+.ti -1c
+.RI "void \fBgdsl_stack_dump\fP (\fBgdsl_stack_t\fP S, \fBgdsl_write_func_t\fP WRITE_F, FILE *OUTPUT_FILE, void *USER_DATA)"
+.br
+.RI "\fIDump the internal structure of a stack to a file\&. \fP"
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for gdsl from the source code\&.

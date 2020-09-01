@@ -1,0 +1,11 @@
+
+local M = {}
+
+M.ZINC_CLIENT = 13
+M.ZINC_CLIENT_MERGE = 14
+M.ZINC = 3
+
+M.LOGIC_TYPE = 100
+M.ROUTER_TYPE = 101
+
+return M

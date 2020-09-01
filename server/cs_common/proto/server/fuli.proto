@@ -1,0 +1,95 @@
+
+message GS2CFuliReddot {
+    optional uint32 flag = 1;
+    optional uint32 cday = 2;
+}
+
+message GS2CHistoryCharge {
+    optional uint32 degree = 1;
+    repeated uint32 getlist = 2;
+}
+
+message PartnerSetInfo {
+    optional uint32 sid = 1;
+    optional uint32 star = 2;
+}
+
+message GS2CBackPartnerInfo {
+    optional uint32 sid = 1;            //当前返回
+    optional uint32 star = 2;            //星级
+    repeated PartnerSetInfo list = 3;           //可设置列表
+}
+
+message GS2CSetBackResult {
+}
+
+message GS2CFirstChargeUI {
+    optional bool bOpen = 1;        //false-关闭 true-打开
+    optional bool bReceive = 2;        //false-不可领取 true-可领取
+}
+
+
+message RewardBack {
+    optional uint32 sid =1;
+    optional uint32 free = 2; //
+    optional uint32 vip = 3; // 水晶花费,=0是表示已经领取
+    optional uint32 left = 4; // 昨天没完成的次数
+}
+
+message GS2CRefreshRewardBack {
+    repeated  RewardBack info = 1;
+}
+
+message PointItem{
+    optional uint32 id =1;
+    optional uint32 rest =2;    //剩余
+}
+
+message GS2CFuliPointUI {
+    optional uint32 point =1;   //  福利积分
+    repeated  PointItem info = 2;
+    optional uint32 version = 3;
+    optional uint32 plan = 4;
+    optional uint32 starttime = 5;
+    optional uint32 endtime = 6;
+}
+
+message GS2CLuckDrawUI {
+    optional uint32 cnt =1;   //  可抽奖次数
+    repeated  uint32 idxlist = 2;
+    optional uint32 cost = 3;
+}
+
+message GS2CLuckDrawPos {
+    optional uint32 pos =1;
+    optional uint32 cnt =2;     // 可抽奖次数
+    optional uint32 cost = 3;
+}
+
+message GS2CCrazyHappyUI {
+    optional bool bOpen = 1;        //false-关闭 true-打开
+}
+
+message GS2CFuliPoint {
+    optional uint32 point =1;
+}
+
+message GS2CFuliTime {
+    optional uint32 starttime =1;
+    optional uint32 endtime =2;
+}
+
+
+message GS2CLuckDrawCnt {
+    optional uint32 cnt =1;     // 可抽奖次数
+}
+
+message GS2CChargeBackUI {
+    optional uint32 rmb = 1;
+    optional uint32 month = 2;     // 月卡数量
+    optional bool zsk =3;     // 是否终身卡
+    optional bool fund =4;     // 是否购买成长基金
+    optional bool gradegift = 5;     // 是否购买等级礼包
+    optional bool onermb = 6;     // 是否购买一元礼包
+    optional bool special = 7;     // 是否购买每日特权礼包
+}

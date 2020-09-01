@@ -1,0 +1,32 @@
+message C2GSUnlockBook {
+    optional uint32 book_id = 1;
+}
+
+message C2GSUnlockChapter {
+    optional uint32 chapter_id = 1;
+}
+
+//录入名字
+message C2GSEnterName {
+    optional uint32 book_id = 1;
+}
+
+//修复绘像
+message C2GSRepairDraw {
+    optional uint32 book_id = 1;
+}
+
+//阅读章节
+message C2GSReadChapter {
+    optional uint32 chapter_id = 1;
+}
+
+//关闭图鉴
+message C2GSCloseHandBookUI {
+    optional uint32 book_type = 1; //图鉴类型,1-伙伴,2-符文,3-人物
+}
+
+//打开书
+message C2GSOpenBookChapter {
+    optional uint32 book_id = 1;
+}

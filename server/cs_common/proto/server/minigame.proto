@@ -1,0 +1,35 @@
+message MemInfo{
+    optional uint32 pid = 1;
+    optional string name = 2;
+    optional uint32 shape = 3;
+}
+
+message GS2CGameCardStart{
+    optional uint32 num = 1;                            //卡牌数量
+    optional uint32 endtime= 2;                    //剩余时间
+    repeated MemInfo memlist = 3;                    //成员信息列表
+}
+
+message GameCardInfo{
+    optional uint32 idx = 1;                    //第几张卡牌
+    optional string sItem = 2;                 //物品信息
+    optional uint32 amount = 3;            //数量
+    optional uint32 gold = 4;                  //价格
+    optional uint32 mul = 5;                  //奖励倍数
+}
+
+message GS2COpenCardInfo{
+    repeated GameCardInfo cardlist = 1;
+}
+
+//其他人奖励信息
+message GS2CMemCardInfo{
+    optional MemInfo info = 1;
+    repeated GameCardInfo cardlist = 2;
+}
+
+//结束时其他人奖励信息
+message GS2CFinalMemCardInfo{
+    optional MemInfo info = 1;
+    repeated GameCardInfo cardlist = 2;
+}

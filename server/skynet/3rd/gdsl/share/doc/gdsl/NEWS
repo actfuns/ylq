@@ -1,0 +1,91 @@
+
+  GDSL - Generic Data Structures Library 
+  $Id: NEWS,v 1.46 2013/06/12 16:36:13 ndarnis Exp $        
+  ______________________________________________________________________________
+
+  v1.8: 2015.02.12
+	- FIX: warning compilation on OSX.
+	- FIX: gdsl_rbtree_map_[in|pre|post]fix functions.
+
+  v1.7: 2013.06.12
+	- FIX: memory leak in interval_heap module.
+
+  v1.6: 2012.08.21
+        - ADD: interval heap module.
+
+  v1.5: 2011.06.15
+        - FIX: GDSL now compiles under Android OS.
+	- FIX: memory leak removed in gdsl_heap_free.
+
+  v1.4-pl1: 2006.07.06
+	- FIX: gdsl_hash_insert: a bug was introduced in this method in
+	       previous release.
+	- FIX: gdsl.h: an include was missing.
+
+  v1.4: 2006.06.22
+	- !!!: Sorry, this version is *not* fully-source-compatible with 
+	       previous ones (see below).
+
+	- FIX: gdsl_perm_canonical_cycles_count returned wrong number of cycles.
+	- FIX: compiles now under OSX with the patch from Martin Pichlmair.
+	- FIX: compilation warning removed.
+	- FIX: gdsl_stack_insert was wrong.
+	- FIX: types fixed in bstree & rbtree modules.
+	- FIX: a '>' was missing in list xml output.
+
+	- ADD: heap module added.
+
+	- CHG: GDSL project has moved from savannah to gna!
+	- CHG: all high-level modules are now using same gdsl_map_func_t and 
+	       gdsl_write_func_t, for mapping and writing data structures. 
+	       These functions types have now an additional gdsl_location_t argument
+	       that make this version not fully compatible with previous version.
+
+  v1.3: 2004.04.10 
+        - !!!: Sorry, this version is *not* fully-source-compatible with 
+	       previous ones (see below).
+
+        - FIX: search functions in hash module. 
+        - FIX: backward parse function in list module.
+	- FIX: removed usefull comparison in list module's search function.
+	- FIX: XML output formats of tree modules.
+	- FIX: incorrect proto in list module.
+	- FIX: incorrect proto in hash module.
+	- FIX: insert function in bstree module.
+	- FIX: set_name function in rbtree module.
+
+        - ADD: general hash function.
+        - ADD: general sort function.
+	- ADD: function to get the cardinality of a low-level list.
+        - ADD: function for sorting lists.
+	- ADD: enable/disable asserts directives in configure script.
+	- ADD: functions into the perm module.
+ 	- ADD: functions to insert not found searched elements in trees modules.
+	- ADD: function to search next element in a bstree.
+        - ADD: gdsl.spec file to generate RPM package.
+	- ADD: new functions into some modules.
+        - ADD: THANKS file.
+
+        - CHG: removed usefull internal memory module.
+        - CHG: some recursive functions has been rewritten in iteratives 
+               forms to improve speed.
+	- CHG: canonical functions in permutation module are now in D. Knuth's
+               canonical form.
+	- CHG: a lot of protos and functions names has been modified in almost 
+               all modules to improve acuracy and homogeneousness of symbol 
+               names, so THIS VERSION IS *NOT* COMPATIBLE WHITH PREVIOUS ONE.
+	- CHG: the heap module was removed and may be reintroduced in a future 
+               version with a lot of functions. The sort function has been 
+               moved to the new gdsl_sort module.
+	- CHG: the _list_node module has been renamed _node and so, all its 
+               symbol names have been changed.
+	- CHG: man and html doxygen-generated documentation
+
+  v1.2: 2004.05.13 - private release.
+
+  v1.1: 2002.??.?? - private release.
+
+  v1.0: 2002.02.21 - initial release on savannah.
+
+
+                                                                  The GDSL Team.

@@ -1,0 +1,23 @@
+
+message StateInfo {
+    optional uint32 state_id = 1;          //状态id
+    optional uint32 time = 2;               //剩余时间
+    optional string name = 3;            
+    optional string desc = 4;
+}
+
+message GS2CLoginState {
+    repeated StateInfo state_info = 1;
+}
+
+message GS2CAddState {
+    optional StateInfo state_info = 1;
+}
+
+message GS2CRemoveState {
+    optional uint32 state_id = 1;
+}
+
+message GS2CRefreshState {
+    optional StateInfo state_info = 1;
+}
